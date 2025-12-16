@@ -1,0 +1,73 @@
+{
+  "extension": {
+    "name": "vocabulary-extension",
+    "displayName": "ML Vocabulary Extension",
+    "version": "1.0.0",
+    "description": "Provides controlled vocabulary for ML/DL metadata based on JS_Pionera_Ontology. Serves vocabulary options for tasks, algorithms, frameworks, libraries, and software.",
+    "provider": "IA EDC Connector",
+    "category": "metadata",
+    "type": "ServiceExtension"
+  },
+  "provides": [
+    {
+      "service": "VocabularyService",
+      "description": "ML vocabulary provider",
+      "implementation": "extensions/vocabulary/vocabulary-service.js"
+    }
+  ],
+  "requires": [],
+  "configuration": {
+    "vocabulary.source": {
+      "type": "string",
+      "description": "Path to vocabulary JSON-LD file",
+      "default": "vocabularies/js-pionera-ontology.json"
+    },
+    "vocabulary.cache.enabled": {
+      "type": "boolean",
+      "description": "Enable vocabulary caching",
+      "default": true
+    }
+  },
+  "endpoints": {
+    "management": [
+      {
+        "path": "/vocabularies/js-pionera-ontology",
+        "method": "GET",
+        "description": "Get complete ML vocabulary",
+        "public": true
+      },
+      {
+        "path": "/vocabularies/tasks",
+        "method": "GET",
+        "description": "Get ML tasks vocabulary",
+        "public": true
+      },
+      {
+        "path": "/vocabularies/algorithms",
+        "method": "GET",
+        "description": "Get ML algorithms vocabulary",
+        "public": true
+      },
+      {
+        "path": "/vocabularies/frameworks",
+        "method": "GET",
+        "description": "Get ML frameworks vocabulary",
+        "public": true
+      }
+    ]
+  },
+  "vocabularies": {
+    "task": ["Classification", "Regression", "Clustering", "Dimensionality Reduction", "Anomaly Detection", "Time Series Forecasting", "Natural Language Processing", "Computer Vision", "Reinforcement Learning", "Recommendation Systems"],
+    "algorithm": ["Linear Regression", "Logistic Regression", "Decision Tree", "Random Forest", "Gradient Boosting", "SVM", "K-Means", "Neural Network", "CNN", "RNN", "LSTM", "GRU", "Transformer", "BERT", "GPT", "ResNet", "YOLO", "U-Net", "GAN", "VAE", "Q-Learning", "DQN", "A3C", "DDPG", "PPO", "SAC"],
+    "framework": ["TensorFlow", "PyTorch", "Keras", "Scikit-learn", "XGBoost", "LightGBM", "CatBoost", "JAX", "MXNet", "Caffe", "Theano", "ONNX"],
+    "library": ["NumPy", "Pandas", "SciPy", "Matplotlib", "Seaborn", "Plotly", "NLTK", "spaCy", "Gensim", "OpenCV", "PIL", "scikit-image", "librosa", "transformers", "fastai", "lightning"],
+    "software": ["Python 3.8", "Python 3.9", "Python 3.10", "Python 3.11", "Python 3.12", "R 4.x", "Julia 1.x", "MATLAB R2023", "Jupyter Notebook", "JupyterLab", "Google Colab", "AWS SageMaker", "Azure ML", "Google Vertex AI", "MLflow", "Kubeflow", "TensorBoard", "Weights & Biases", "Neptune.ai", "DVC"]
+  },
+  "compatibility": {
+    "edc": {
+      "version": ">=0.5.0",
+      "javaEquivalent": "org.iaspace.connector.vocabulary.VocabularyExtension",
+      "ontology": "https://github.com/oeg-upm/inesdata-connector/ontology/js-pionera-ml.ttl"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "extension": {
+    "name": "ml-metadata-extension",
+    "displayName": "ML Metadata Extension",
+    "version": "1.0.0",
+    "description": "Manages Machine Learning and Deep Learning asset metadata including task, algorithm, framework, and other ML-specific properties",
+    "provider": "IA EDC Connector",
+    "category": "asset-management",
+    "type": "ServiceExtension"
+  },
+  "provides": [
+    {
+      "service": "MLMetadataService",
+      "interface": "spi/asset/ml-metadata-spi.js",
+      "implementation": "extensions/ml-metadata/ml-metadata-service.js"
+    },
+    {
+      "service": "MLMetadataStore",
+      "interface": "spi/asset/ml-metadata-spi.js",
+      "implementation": "extensions/ml-metadata/ml-metadata-store.js"
+    }
+  ],
+  "requires": [
+    {
+      "service": "DataSource",
+      "description": "PostgreSQL connection pool for metadata persistence"
+    }
+  ],
+  "configuration": {
+    "ml.metadata.vocabulary.path": {
+      "type": "string",
+      "description": "Path to ML vocabulary JSON-LD file",
+      "default": "vocabularies/js-pionera-ontology.json"
+    },
+    "ml.metadata.validation.enabled": {
+      "type": "boolean",
+      "description": "Enable ML metadata validation against vocabulary",
+      "default": true
+    }
+  },
+  "endpoints": {
+    "management": [
+      {
+        "path": "/ml-metadata/:assetId",
+        "method": "GET",
+        "description": "Get ML metadata for an asset"
+      },
+      {
+        "path": "/ml-metadata/:assetId",
+        "method": "PUT",
+        "description": "Update ML metadata for an asset"
+      }
+    ]
+  },
+  "database": {
+    "tables": [
+      {
+        "name": "ml_metadata",
+        "description": "Stores ML/DL asset metadata",
+        "schema": "database/migrations/ml_metadata_schema.sql"
+      }
+    ]
+  },
+  "compatibility": {
+    "edc": {
+      "version": ">=0.5.0",
+      "javaEquivalent": "org.iaspace.connector.ml.MLMetadataExtension",
+      "spi": "org.eclipse.edc.spi.asset.AssetIndex"
+    }
+  }
+}

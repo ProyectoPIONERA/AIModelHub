@@ -1,0 +1,90 @@
+{
+  "extension": {
+    "name": "identity-multitenancy-extension",
+    "displayName": "Identity & Multi-tenancy Extension",
+    "version": "1.0.0",
+    "description": "Provides JWT-based authentication and multi-tenant isolation for assets. Each connector/tenant sees only their own resources.",
+    "provider": "IA EDC Connector",
+    "category": "security",
+    "type": "ServiceExtension"
+  },
+  "provides": [
+    {
+      "service": "IdentityService",
+      "interface": "spi/auth/identity-spi.js",
+      "implementation": "extensions/identity-multitenancy/identity-service.js"
+    },
+    {
+      "service": "UserStore",
+      "interface": "spi/auth/identity-spi.js",
+      "implementation": "extensions/identity-multitenancy/postgres-user-store.js"
+    },
+    {
+      "service": "AuthenticationMiddleware",
+      "description": "JWT token validation middleware",
+      "implementation": "middleware/auth.js"
+    }
+  ],
+  "requires": [
+    {
+      "service": "DataSource",
+      "description": "PostgreSQL connection for user storage"
+    }
+  ],
+  "configuration": {
+    "identity.jwt.secret": {
+      "type": "string",
+      "description": "JWT signing secret (256-bit minimum)",
+      "required": true,
+      "env": "JWT_SECRET"
+    },
+    "identity.jwt.expiration": {
+      "type": "number",
+      "description": "JWT token expiration in seconds",
+      "default": 86400
+    },
+    "identity.multitenancy.enabled": {
+      "type": "boolean",
+      "description": "Enable multi-tenant isolation",
+      "default": true
+    }
+  },
+  "endpoints": {
+    "management": [
+      {
+        "path": "/auth/login",
+        "method": "POST",
+        "description": "Authenticate user and obtain JWT token",
+        "public": true
+      },
+      {
+        "path": "/auth/me",
+        "method": "GET",
+        "description": "Get current user information",
+        "requiresAuth": true
+      },
+      {
+        "path": "/auth/logout",
+        "method": "POST",
+        "description": "Logout (client-side token removal)",
+        "requiresAuth": true
+      }
+    ]
+  },
+  "database": {
+    "tables": [
+      {
+        "name": "users",
+        "description": "User accounts and connector associations",
+        "schema": "database/migrations/users_schema.sql"
+      }
+    ]
+  },
+  "compatibility": {
+    "edc": {
+      "version": ">=0.5.0",
+      "javaEquivalent": "org.iaspace.connector.identity.IdentityExtension",
+      "spi": "org.eclipse.edc.spi.iam.IdentityService"
+    }
+  }
+}

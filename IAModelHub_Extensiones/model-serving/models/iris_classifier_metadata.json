@@ -1,0 +1,80 @@
+{
+  "model_name": "Iris Random Forest Classifier",
+  "model_type": "RandomForestClassifier",
+  "version": "1.0",
+  "algorithm": "Random Forest",
+  "library": "scikit-learn",
+  "framework": "scikit-learn",
+  "task": "Classification",
+  "subtask": "Multi-class Classification",
+  "programming_language": "Python",
+  "accuracy": 1.0,
+  "num_classes": 3,
+  "classes": [
+    "setosa",
+    "versicolor",
+    "virginica"
+  ],
+  "input_features": [
+    {
+      "name": "sepal length (cm)",
+      "position": 0,
+      "type": "float",
+      "description": "Sepal length in centimeters",
+      "example_value": 5.1,
+      "min": 4.3,
+      "max": 7.9,
+      "mean": 5.843333333333334
+    },
+    {
+      "name": "sepal width (cm)",
+      "position": 1,
+      "type": "float",
+      "description": "Sepal width in centimeters",
+      "example_value": 3.5,
+      "min": 2.0,
+      "max": 4.4,
+      "mean": 3.0573333333333337
+    },
+    {
+      "name": "petal length (cm)",
+      "position": 2,
+      "type": "float",
+      "description": "Petal length in centimeters",
+      "example_value": 1.4,
+      "min": 1.0,
+      "max": 6.9,
+      "mean": 3.7580000000000005
+    },
+    {
+      "name": "petal width (cm)",
+      "position": 3,
+      "type": "float",
+      "description": "Petal width in centimeters",
+      "example_value": 0.2,
+      "min": 0.1,
+      "max": 2.5,
+      "mean": 1.1993333333333336
+    }
+  ],
+  "example_input": [
+    6.1,
+    2.8,
+    4.7,
+    1.2
+  ],
+  "example_output": {
+    "predicted_class": "versicolor",
+    "predicted_class_index": 1,
+    "probabilities": [
+      0.0,
+      0.99,
+      0.01
+    ]
+  },
+  "training_info": {
+    "training_samples": 120,
+    "test_samples": 30,
+    "random_state": 42
+  }
+}

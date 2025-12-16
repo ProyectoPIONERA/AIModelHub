@@ -1,0 +1,125 @@
+version: '3.9'
+
+services:
+  # PostgreSQL Database for ML Asset Metadata
+  postgres:
+    image: postgres:16-alpine
+    container_name: ml-assets-postgres
+    environment:
+      POSTGRES_USER: ml_assets_user
+      POSTGRES_PASSWORD: ml_assets_password
+      POSTGRES_DB: ml_assets_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ml_assets_user -d ml_assets_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ml-assets-network
+
+  # MinIO S3-Compatible Object Storage
+  minio:
+    image: minio/minio:latest
+    container_name: ml-assets-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    ports:
+      - "9000:9000"  # API
+      - "9001:9001"  # Console
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - ml-assets-network
+
+  # MinIO Client - Create buckets on startup
+  minio-setup:
+    image: minio/mc:latest
+    container_name: ml-assets-minio-setup
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://minio:9000 minioadmin minioadmin123;
+      /usr/bin/mc mb myminio/ml-assets --ignore-existing;
+      /usr/bin/mc anonymous set download myminio/ml-assets;
+      echo 'MinIO bucket ml-assets created successfully';
+      exit 0;
+      "
+    networks:
+      - ml-assets-network
+
+  # Backend API Server for ML Assets
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ml-assets-backend
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      # PostgreSQL Configuration
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ml_assets_db
+      DB_USER: ml_assets_user
+      DB_PASSWORD: ml_assets_password
+      # MinIO S3 Configuration
+      S3_ENDPOINT: http://minio:9000
+      S3_ACCESS_KEY: minioadmin
+      S3_SECRET_KEY: minioadmin123
+      S3_BUCKET: ml-assets
+      S3_REGION: us-east-1
+      # CORS Configuration
+      CORS_ORIGIN: http://localhost:4200
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    networks:
+      - ml-assets-network
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  # pgAdmin for PostgreSQL Management (Optional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: ml-assets-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@ml-assets.local
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - ml-assets-network
+    profiles:
+      - tools
+
+networks:
+  ml-assets-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  minio_data:
+    driver: local
