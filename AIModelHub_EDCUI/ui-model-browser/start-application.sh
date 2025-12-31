@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###############################################################################
-# IA EDC Connector - Application Startup Script
+# AI EDC Connector - Application Startup Script
 ###############################################################################
 
 set -e
@@ -14,7 +14,7 @@ COMPOSE_FILE="$EXT_DIR/docker-compose.yml"
 FRONTEND_DIR="$SCRIPT_DIR"
 
 echo "╔══════════════════════════════════════════════════════════════════════╗"
-echo "║         IA EDC CONNECTOR - STARTUP SCRIPT                            ║"
+echo "║         AI EDC CONNECTOR - STARTUP SCRIPT                            ║"
 echo "╚══════════════════════════════════════════════════════════════════════╝"
 echo ""
 

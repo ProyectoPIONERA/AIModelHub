@@ -23,7 +23,7 @@ export interface MLAsset {
   fileName?: string;
   
   // Multi-tenancy: owner and local/external indicator
-  owner?: string; // Connector ID of the owner (e.g., 'conn-oeg-demo')
+  owner?: string; // Connector ID of the owner (e.g., 'conn-user1-demo')
   isLocal?: boolean; // true if the asset belongs to the authenticated user
   
   // Contract information

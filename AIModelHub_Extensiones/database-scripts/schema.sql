@@ -53,7 +53,7 @@ CREATE TABLE public.assets (
     asset_type character varying(100) DEFAULT 'MLModel'::character varying,
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    owner character varying(100) DEFAULT 'conn-oeg-demo'::character varying
+    owner character varying(100) DEFAULT 'conn-user1-demo'::character varying
 );
 
 
@@ -68,7 +68,7 @@ COMMENT ON TABLE public.assets IS 'Main table for IA assets metadata';
 -- Name: COLUMN assets.owner; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON COLUMN public.assets.owner IS 'Connector ID of the user who owns this asset (e.g., conn-oeg-demo)';
+COMMENT ON COLUMN public.assets.owner IS 'Connector ID of the user who owns this asset (e.g., conn-user1-demo)';
 
 
 --
@@ -352,7 +352,7 @@ CREATE TABLE public.upload_sessions (
     status character varying(50) DEFAULT 'in_progress'::character varying,
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    owner character varying(100) DEFAULT 'conn-oeg-demo'::character varying
+    owner character varying(100) DEFAULT 'conn-user1-demo'::character varying
 );
 
 

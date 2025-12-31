@@ -115,7 +115,7 @@ CREATE TABLE public.assets (
     asset_type character varying(100) DEFAULT 'MLModel'::character varying,
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    owner character varying(100) DEFAULT 'conn-oeg-demo'::character varying
+    owner character varying(100) DEFAULT 'conn-user1-demo'::character varying
 );
 
 
@@ -132,7 +132,7 @@ COMMENT ON TABLE public.assets IS 'Main table for IA assets metadata';
 -- Name: COLUMN assets.owner; Type: COMMENT; Schema: public; Owner: ml_assets_user
 --
 
-COMMENT ON COLUMN public.assets.owner IS 'Connector ID of the user who owns this asset (e.g., conn-oeg-demo)';
+COMMENT ON COLUMN public.assets.owner IS 'Connector ID of the user who owns this asset (e.g., conn-user1-demo)';
 
 
 --
@@ -438,7 +438,7 @@ CREATE TABLE public.upload_sessions (
     status character varying(50) DEFAULT 'in_progress'::character varying,
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    owner character varying(100) DEFAULT 'conn-oeg-demo'::character varying
+    owner character varying(100) DEFAULT 'conn-user1-demo'::character varying
 );
 
 
@@ -534,19 +534,19 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: assets; Type: TABLE DATA; Schema: public; Owner: ml_assets_user
 --
 
-INSERT INTO public.assets VALUES ('ML_Model_001', 'ML_Model_001', '1.0', 'ml model', 'LightGBM classifier model for image classification tasks', 'ML_Model_001', 'classification,lgbm,computer-vision', 0, '', 'machineLearning', '2025-12-11 12:58:04.495868', '2025-12-11 14:35:26.036037', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('ML_Model_002', 'ML_Model_002', '1.0', 'ml model', 'LightGBM regression model for time series prediction', 'ML_Model_002', 'regression,lgbm,time-series,forecasting', 0, 'pkl', 'machineLearning', '2025-12-11 13:07:56.696001', '2025-12-11 14:35:33.604023', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('ML_Model_003', 'ML_Model_003', '1.0', 'ml model', '', 'ML_Model_003', '', 0, '', 'machineLearning', '2025-12-11 17:31:14.772751', '2025-12-11 17:31:14.772751', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('ML_model_004', 'ML_model_004', '1.0', 'ml model', '', 'ML_model_004', '', 0, '', 'machineLearning', '2025-12-11 17:44:08.454517', '2025-12-11 17:44:08.454517', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('DL_Model_001', 'Deep Learning CNN Model', '1.0', 'deep learning model', 'Convolutional Neural Network for image classification', 'CNN Image Classifier', 'cnn,deep-learning,image-classification', 0, 'h5', 'deepLearning', '2025-12-11 18:01:27.738228', '2025-12-11 18:01:27.738228', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('ML_model_005', 'ML_model_005', '1.0', 'ml model', '', 'ML_model_005', 'machine learning, regression, time series, forecasting, prediction', 0, '', 'deepLearning', '2025-12-11 17:53:43.153938', '2025-12-11 18:13:51.671636', 'conn-oeg-demo');
+INSERT INTO public.assets VALUES ('ML_Model_001', 'ML_Model_001', '1.0', 'ml model', 'LightGBM classifier model for image classification tasks', 'ML_Model_001', 'classification,lgbm,computer-vision', 0, '', 'machineLearning', '2025-12-11 12:58:04.495868', '2025-12-11 14:35:26.036037', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('ML_Model_002', 'ML_Model_002', '1.0', 'ml model', 'LightGBM regression model for time series prediction', 'ML_Model_002', 'regression,lgbm,time-series,forecasting', 0, 'pkl', 'machineLearning', '2025-12-11 13:07:56.696001', '2025-12-11 14:35:33.604023', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('ML_Model_003', 'ML_Model_003', '1.0', 'ml model', '', 'ML_Model_003', '', 0, '', 'machineLearning', '2025-12-11 17:31:14.772751', '2025-12-11 17:31:14.772751', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('ML_model_004', 'ML_model_004', '1.0', 'ml model', '', 'ML_model_004', '', 0, '', 'machineLearning', '2025-12-11 17:44:08.454517', '2025-12-11 17:44:08.454517', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('DL_Model_001', 'Deep Learning CNN Model', '1.0', 'deep learning model', 'Convolutional Neural Network for image classification', 'CNN Image Classifier', 'cnn,deep-learning,image-classification', 0, 'h5', 'deepLearning', '2025-12-11 18:01:27.738228', '2025-12-11 18:01:27.738228', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('ML_model_005', 'ML_model_005', '1.0', 'ml model', '', 'ML_model_005', 'machine learning, regression, time series, forecasting, prediction', 0, '', 'deepLearning', '2025-12-11 17:53:43.153938', '2025-12-11 18:13:51.671636', 'conn-user1-demo');
 INSERT INTO public.assets VALUES ('external-model-1', 'External ML Model No Contract', '1.0', 'application/octet-stream', 'External model without contract', 'External no contract', 'ml,external,test', 1048576, 'h5', 'Model', '2025-12-12 00:55:52.753265', '2025-12-12 00:55:52.753265', 'conn-external-provider');
-INSERT INTO public.assets VALUES ('iris-http-1765537190', 'Iris Random Forest Classifier (HTTP)', '1.0', 'application/octet-stream', 'Random Forest classifier trained on Iris dataset. Requires 4 input features: sepal length, sepal width, petal length, petal width.', 'Iris flower species classifier', 'iris,classification,random-forest,sklearn,flowers', 0, 'pickle', 'machineLearning', '2025-12-12 10:59:50.678751', '2025-12-12 10:59:50.678751', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('4dfe6d9e-c47d-4a5b-921a-32b762a3f564', 'Untitled Asset', '1.0', 'application/octet-stream', '', '', '', 0, '', 'MLModel', '2025-12-12 12:33:00.148425', '2025-12-12 12:33:00.148425', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('fdff25b6-66e4-40dd-9df1-6b6b6a8ebbb7', 'Untitled Asset', '1.0', 'application/octet-stream', '', '', '', 0, '', 'MLModel', '2025-12-12 12:33:31.393474', '2025-12-12 12:33:31.393474', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('af0c592f-4d11-4890-9d43-3627ab1b9218', 'Untitled Asset', '1.0', 'application/octet-stream', '', '', '', 0, '', 'MLModel', '2025-12-12 12:37:26.187712', '2025-12-12 12:37:26.187712', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('ml_model_010', 'ml_model_010', '1.0', 'ml model', 'ml_model_010', 'ml_model_010', 'ml, model, finances', 1200, 'pkl', 'machineLearning', '2025-12-12 13:00:48.412292', '2025-12-12 13:00:48.412292', 'conn-oeg-demo');
-INSERT INTO public.assets VALUES ('ml_model_11', 'ml_model_11', '1.0', 'ml model', 'ml_model_11', 'ml_model_11', 'dp, logistc', 1200, 'pkl', 'deepLearning', '2025-12-12 13:27:38.621622', '2025-12-12 13:27:38.621622', 'conn-edmundo-demo');
+INSERT INTO public.assets VALUES ('iris-http-1765537190', 'Iris Random Forest Classifier (HTTP)', '1.0', 'application/octet-stream', 'Random Forest classifier trained on Iris dataset. Requires 4 input features: sepal length, sepal width, petal length, petal width.', 'Iris flower species classifier', 'iris,classification,random-forest,sklearn,flowers', 0, 'pickle', 'machineLearning', '2025-12-12 10:59:50.678751', '2025-12-12 10:59:50.678751', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('4dfe6d9e-c47d-4a5b-921a-32b762a3f564', 'Untitled Asset', '1.0', 'application/octet-stream', '', '', '', 0, '', 'MLModel', '2025-12-12 12:33:00.148425', '2025-12-12 12:33:00.148425', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('fdff25b6-66e4-40dd-9df1-6b6b6a8ebbb7', 'Untitled Asset', '1.0', 'application/octet-stream', '', '', '', 0, '', 'MLModel', '2025-12-12 12:33:31.393474', '2025-12-12 12:33:31.393474', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('af0c592f-4d11-4890-9d43-3627ab1b9218', 'Untitled Asset', '1.0', 'application/octet-stream', '', '', '', 0, '', 'MLModel', '2025-12-12 12:37:26.187712', '2025-12-12 12:37:26.187712', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('ml_model_010', 'ml_model_010', '1.0', 'ml model', 'ml_model_010', 'ml_model_010', 'ml, model, finances', 1200, 'pkl', 'machineLearning', '2025-12-12 13:00:48.412292', '2025-12-12 13:00:48.412292', 'conn-user1-demo');
+INSERT INTO public.assets VALUES ('ml_model_11', 'ml_model_11', '1.0', 'ml model', 'ml_model_11', 'ml_model_11', 'dp, logistc', 1200, 'pkl', 'deepLearning', '2025-12-12 13:27:38.621622', '2025-12-12 13:27:38.621622', 'conn-user2-demo');
 
 
 --
@@ -640,20 +640,20 @@ INSERT INTO public.upload_chunks VALUES (6, 6, 0, '"af38fa28cece05b54fe88e44977d
 -- Data for Name: upload_sessions; Type: TABLE DATA; Schema: public; Owner: ml_assets_user
 --
 
-INSERT INTO public.upload_sessions VALUES (1, 'ML_Model_001', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLmNiODY5MTVmLTUzNjktNGM4YS1hMTExLTg3YjVjYTI1ZDViOXgxNzY1NDU3ODg0Mjc1OTYwNTU3', 'completed', '2025-12-11 12:58:04.306624', '2025-12-11 12:58:04.495868', 'conn-oeg-demo');
-INSERT INTO public.upload_sessions VALUES (2, 'ML_Model_001', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLmExNWRhYjQ4LTJhZjEtNGFiMy04ZGU1LWMzYzUwYjRhZDJjY3gxNzY1NDU4NDE1MzkzOTkxNDgy', 'in_progress', '2025-12-11 13:06:55.408128', '2025-12-11 13:06:55.462571', 'conn-oeg-demo');
-INSERT INTO public.upload_sessions VALUES (3, 'ML_Model_002', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLjJmMTAzZjdhLWVlYmEtNGU3NS1iYjVlLWIzYjI0YjY1NjRiNngxNzY1NDU4NDc2NDc3MTU4NDE2', 'completed', '2025-12-11 13:07:56.492198', '2025-12-11 13:07:56.696001', 'conn-oeg-demo');
-INSERT INTO public.upload_sessions VALUES (4, 'ML_Model_003', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLmI1MjZlZjlhLTI0MDEtNDkzMS1hMjhhLWQyMWIwM2U0ODE4YXgxNzY1NDc0Mjc0NDYwOTExODA4', 'completed', '2025-12-11 17:31:14.495391', '2025-12-11 17:31:14.772751', 'conn-oeg-demo');
-INSERT INTO public.upload_sessions VALUES (5, 'ML_model_004', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLjdiYjk0YjhkLTJkMmYtNDIzYi04Mjk3LTQyYzMxYzY2NWE5MHgxNzY1NDc1MDQ4MTg4MDI4Mjcw', 'completed', '2025-12-11 17:44:08.222285', '2025-12-11 17:44:08.454517', 'conn-oeg-demo');
-INSERT INTO public.upload_sessions VALUES (6, 'ML_model_005', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLjAxMTE1Y2ExLWRlNDYtNDA5Yy05OWQ3LTJiOWM4NDVhNGU3ZngxNzY1NDc1NjIyODgxNzE3NTk1', 'completed', '2025-12-11 17:53:42.917684', '2025-12-11 17:53:43.153938', 'conn-oeg-demo');
+INSERT INTO public.upload_sessions VALUES (1, 'ML_Model_001', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLmNiODY5MTVmLTUzNjktNGM4YS1hMTExLTg3YjVjYTI1ZDViOXgxNzY1NDU3ODg0Mjc1OTYwNTU3', 'completed', '2025-12-11 12:58:04.306624', '2025-12-11 12:58:04.495868', 'conn-user1-demo');
+INSERT INTO public.upload_sessions VALUES (2, 'ML_Model_001', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLmExNWRhYjQ4LTJhZjEtNGFiMy04ZGU1LWMzYzUwYjRhZDJjY3gxNzY1NDU4NDE1MzkzOTkxNDgy', 'in_progress', '2025-12-11 13:06:55.408128', '2025-12-11 13:06:55.462571', 'conn-user1-demo');
+INSERT INTO public.upload_sessions VALUES (3, 'ML_Model_002', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLjJmMTAzZjdhLWVlYmEtNGU3NS1iYjVlLWIzYjI0YjY1NjRiNngxNzY1NDU4NDc2NDc3MTU4NDE2', 'completed', '2025-12-11 13:07:56.492198', '2025-12-11 13:07:56.696001', 'conn-user1-demo');
+INSERT INTO public.upload_sessions VALUES (4, 'ML_Model_003', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLmI1MjZlZjlhLTI0MDEtNDkzMS1hMjhhLWQyMWIwM2U0ODE4YXgxNzY1NDc0Mjc0NDYwOTExODA4', 'completed', '2025-12-11 17:31:14.495391', '2025-12-11 17:31:14.772751', 'conn-user1-demo');
+INSERT INTO public.upload_sessions VALUES (5, 'ML_model_004', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLjdiYjk0YjhkLTJkMmYtNDIzYi04Mjk3LTQyYzMxYzY2NWE5MHgxNzY1NDc1MDQ4MTg4MDI4Mjcw', 'completed', '2025-12-11 17:44:08.222285', '2025-12-11 17:44:08.454517', 'conn-user1-demo');
+INSERT INTO public.upload_sessions VALUES (6, 'ML_model_005', 'LGBM_Classifier_1.pkl', 1, 1, 'OGFhMWExNWEtMmJmMS00ZDU4LTkzMjQtYTk3MjNmZjRlYWMzLjAxMTE1Y2ExLWRlNDYtNDA5Yy05OWQ3LTJiOWM4NDVhNGU3ZngxNzY1NDc1NjIyODgxNzE3NTk1', 'completed', '2025-12-11 17:53:42.917684', '2025-12-11 17:53:43.153938', 'conn-user1-demo');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: ml_assets_user
 --
 
-INSERT INTO public.users VALUES (3, 'user-conn-user1-demo', '$2a$10$I/m17k0PieyAy2M71CT9De3uVqv0mNft/yz.DmvGYrEZKAYc5qA1C', 'conn-oeg-demo', 'OEG Demo User', 'demo@oeg.fi.upm.es', true, '2025-12-12 16:41:21.765511', '2025-12-12 16:41:21.765511');
-INSERT INTO public.users VALUES (4, 'user-conn-user2-demo', '$2a$10$4V9w.aXdEAcxU/ln6M7MHue25m6yjTeeJM1E3bkvEPj2XaSOa8M5.', 'conn-edmundo-demo', 'Edmundo Demo User', 'edmundo@demo.com', true, '2025-12-12 16:41:21.765511', '2025-12-12 16:41:21.765511');
+INSERT INTO public.users VALUES (3, 'user-conn-user1-demo', '$2a$10$I/m17k0PieyAy2M71CT9De3uVqv0mNft/yz.DmvGYrEZKAYc5qA1C', 'conn-user1-demo', 'User1 Demo', 'demo@oeg.fi.upm.es', true, '2025-12-12 16:41:21.765511', '2025-12-12 16:41:21.765511');
+INSERT INTO public.users VALUES (4, 'user-conn-user2-demo', '$2a$10$4V9w.aXdEAcxU/ln6M7MHue25m6yjTeeJM1E3bkvEPj2XaSOa8M5.', 'conn-user2-demo', 'User2 Demo', 'edmundo@demo.com', true, '2025-12-12 16:41:21.765511', '2025-12-12 16:41:21.765511');
 
 
 --

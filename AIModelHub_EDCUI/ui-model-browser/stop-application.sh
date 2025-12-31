@@ -1,11 +1,11 @@
 #!/bin/bash
 
 ###############################################################################
-# IA EDC Connector - Application Shutdown Script
+# AI EDC Connector - Application Shutdown Script
 ###############################################################################
 
 echo "╔══════════════════════════════════════════════════════════════════════╗"
-echo "║         IA EDC CONNECTOR - SHUTDOWN SCRIPT                           ║"
+echo "║         AI EDC CONNECTOR - SHUTDOWN SCRIPT                           ║"
 echo "╚══════════════════════════════════════════════════════════════════════╝"
 echo ""
 

@@ -1,18 +1,18 @@
-# Access Credentials - IA EDC Connector
+# Access Credentials - AI EDC Connector
 
 ## System Users
 
-### User 1: OEG Demo Connector
+### User 1: User1 Demo Connector
 - **Username:** `user-conn-user1-demo`
 - **Password:** `user1123`
-- **Connector ID:** `conn-oeg-demo`
-- **Display Name:** OEG Demo Connector
+- **Connector ID:** `conn-user1-demo`
+- **Display Name:** User1 Demo Connector
 
-### User 2: Edmundo Demo Connector  
+### User 2: User2 Demo Connector  
 - **Username:** `user-conn-user2-demo`
 - **Password:** `user2123`
-- **Connector ID:** `conn-edmundo-demo`
-- **Display Name:** Edmundo Demo Connector
+- **Connector ID:** `conn-user2-demo`
+- **Display Name:** User2 Demo Connector
 
 ## Access URLs
 

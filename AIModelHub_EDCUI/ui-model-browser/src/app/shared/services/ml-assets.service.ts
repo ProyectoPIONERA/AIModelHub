@@ -24,22 +24,22 @@ export class MlAssetsService {
   private readonly mlBrowserService = inject(MlBrowserService);
 
   /**
-   * Retrieves all IA assets from the federated catalog
+   * Retrieves all AI assets from the federated catalog
    */
   getMachinelearningAssets(): Observable<MLAsset[]> {
-    console.log('[IA Assets Service] Calling mlBrowserService.getPaginatedMLAssets()...');
+    console.log('[AI Assets Service] Calling mlBrowserService.getPaginatedMLAssets()...');
     return this.mlBrowserService.getPaginatedMLAssets();
   }
 
   /**
-   * Counts total IA assets
+   * Counts total AI assets
    */
   count(): Observable<number> {
     return this.mlBrowserService.count();
   }
 
   /**
-   * Filters IA assets according to specific criteria
+   * Filters AI assets according to specific criteria
    */
   filterAssets(assets: MLAsset[], filters: MLAssetFilter): MLAsset[] {
     let filtered = [...assets];

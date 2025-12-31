@@ -17,8 +17,8 @@ Standalone Angular 17 component to explore, manage, and create Machine Learning 
 ## ✨ Features
 
 ### ML Asset Management
-- **IA Assets Browser**: Grid/list view of Machine Learning models
-- **Asset Creation**: Full form with validation to create new IA assets
+- **AI Assets Browser**: Grid/list view of Machine Learning models
+- **Asset Creation**: Full form with validation to create new AI assets
 - **Asset Details**: Detailed view of each asset with all metadata
 - **Advanced Filters**: By storage type, format, ML task, etc.
 
@@ -35,7 +35,7 @@ Standalone Angular 17 component to explore, manage, and create Machine Learning 
 
 ### Navigation and UI
 - **Responsive Layout**: Sidebar menu, top toolbar
-- **4 Sections**: IA Assets Browser, Create ML Asset, Catalog, Contracts
+- **4 Sections**: AI Assets Browser, Create ML Asset, Catalog, Contracts
 - **Material Design**: Angular Material 17 with custom theme
 
 ## 📦 Prerequisites

@@ -76,7 +76,7 @@ export class MlAssetsBrowserComponent implements OnInit {
   }
 
   loadMachinelearningAssets(): void {
-    console.log('[ML Browser Component] Starting to load IA assets...');
+    console.log('[ML Browser Component] Starting to load AI assets...');
     this.isLoading = true;
     this.isError = false;
 
@@ -92,7 +92,7 @@ export class MlAssetsBrowserComponent implements OnInit {
           this.allAssets = assets;
           this.updateAvailableFilters();
           this.applyFilters();
-          this.notificationService.showInfo(`Loaded ${this.allAssets.length} IA models`);
+          this.notificationService.showInfo(`Loaded ${this.allAssets.length} AI models`);
         },
         error: (error: unknown) => {
           console.error('[ML Browser Component] Error loading assets:', error);

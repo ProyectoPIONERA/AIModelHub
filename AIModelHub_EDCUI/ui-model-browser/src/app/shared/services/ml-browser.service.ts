@@ -15,7 +15,7 @@ export class MlBrowserService {
   private readonly CATALOG_URL = `${environment.runtime.catalogUrl}`;
 
   /**
-   * Retrieves IA assets from Management API /assets/request and from the federated catalog.
+   * Retrieves AI assets from Management API /assets/request and from the federated catalog.
    * Combines both results, removing duplicates by @id.
    * Local assets come from this connector; catalog assets come from other connectors.
    */
@@ -49,7 +49,7 @@ export class MlBrowserService {
         });
         
         const uniqueAssets = Array.from(assetMap.values());
-        console.log('[ML Browser Service] Unique IA assets:', uniqueAssets.length);
+        console.log('[ML Browser Service] Unique AI assets:', uniqueAssets.length);
         
         return uniqueAssets;
       })
@@ -57,7 +57,7 @@ export class MlBrowserService {
   }
 
   /**
-   * Retrieves local IA assets from Management API /assets/request
+   * Retrieves local AI assets from Management API /assets/request
    */
   private getLocalMLAssets(): Observable<MLAsset[]> {
     const url = `${this.BASE_URL}/v3/assets/request`;
@@ -98,7 +98,7 @@ export class MlBrowserService {
   }
 
   /**
-   * Retrieves IA assets from federated catalog.
+   * Retrieves AI assets from federated catalog.
    * NOTE: Currently uses the same endpoint as local assets.
    * Future: connect to a real federated catalog service.
    */
@@ -113,7 +113,7 @@ export class MlBrowserService {
   }
 
   /**
-   * Cuenta el total de IA Assets
+   * Cuenta el total de AI Assets
    */
   count(): Observable<number> {
     return this.getPaginatedMLAssets().pipe(
@@ -179,7 +179,7 @@ export class MlBrowserService {
         'N/A'
       );
       
-      // Look for assetType - CRITICAL to filter IA assets
+      // Look for assetType - CRITICAL to filter AI assets
       const assetType = String(
         properties['asset:prop:type'] ||
         properties['assetType'] || 

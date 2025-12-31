@@ -1,4 +1,4 @@
-# IA EDC Connector - Quick Start Guide
+# AI EDC Connector - Quick Start Guide
 
 ## 🚀 Start the application
 

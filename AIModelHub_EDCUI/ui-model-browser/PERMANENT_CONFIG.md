@@ -1,4 +1,4 @@
-# Permanent Configuration - IA EDC Connector
+# Permanent Configuration - AI EDC Connector
 
 ## ⚠️ Critical changes - do not revert
 These settings **must remain** to avoid CORS and runtime issues.

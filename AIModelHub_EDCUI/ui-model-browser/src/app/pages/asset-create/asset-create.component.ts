@@ -37,7 +37,7 @@ import {
 /**
  * Asset Create Component
  * 
- * Allows users to create new IA assets with:
+ * Allows users to create new AI assets with:
  * - Basic asset information (id, name, version, description)
  * - ML metadata from JS_Pionera_Ontology
  * - Storage configuration (HTTP, S3, or DataSpacePrototypeStore)

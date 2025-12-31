@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  appName: 'CatalogModelIA DS',
+  appName: 'CatalogModelAI DS',
   version: '1.0.0',
   
   // EDC Connector endpoints - will be overridden by runtime config

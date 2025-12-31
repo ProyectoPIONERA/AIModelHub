@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 COMMENT ON TABLE users IS 'User authentication table for multi-tenant connector system';
-COMMENT ON COLUMN users.connector_id IS 'Unique connector identifier (e.g., conn-oeg-demo)';
+COMMENT ON COLUMN users.connector_id IS 'Unique connector identifier (e.g., conn-user1-demo)';
 COMMENT ON COLUMN users.password_hash IS 'bcrypt hashed password';
 
 -- ============================================================
@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS assets (
     asset_type VARCHAR(100) DEFAULT 'MLModel',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    owner VARCHAR(100) DEFAULT 'conn-oeg-demo'
+    owner VARCHAR(100) DEFAULT 'conn-user1-demo'
 );
 
 COMMENT ON TABLE assets IS 'Main table for IA assets metadata';
-COMMENT ON COLUMN assets.owner IS 'Connector ID of the user who owns this asset (e.g., conn-oeg-demo)';
+COMMENT ON COLUMN assets.owner IS 'Connector ID of the user who owns this asset (e.g., conn-user1-demo)';
 
 -- ============================================================
 -- TABLE: data_addresses
@@ -299,8 +299,8 @@ COMMENT ON VIEW assets_with_owner IS 'Assets with owner user information';
 
 INSERT INTO users (username, password_hash, connector_id, display_name, email)
 VALUES 
-    ('user-conn-user1-demo', '$2a$10$I/m17k0PieyAy2M71CT9De3uVqv0mNft/yz.DmvGYrEZKAYc5qA1C', 'conn-oeg-demo', 'OEG Demo User', 'demo@oeg.fi.upm.es'),
-    ('user-conn-user2-demo', '$2a$10$4V9w.aXdEAcxU/ln6M7MHue25m6yjTeeJM1E3bkvEPj2XaSOa8M5.', 'conn-edmundo-demo', 'Edmundo Demo User', 'edmundo@demo.com')
+    ('user-conn-user1-demo', '$2a$10$I/m17k0PieyAy2M71CT9De3uVqv0mNft/yz.DmvGYrEZKAYc5qA1C', 'conn-user1-demo', 'User1 Demo', 'demo@oeg.fi.upm.es'),
+    ('user-conn-user2-demo', '$2a$10$4V9w.aXdEAcxU/ln6M7MHue25m6yjTeeJM1E3bkvEPj2XaSOa8M5.', 'conn-user2-demo', 'User2 Demo', 'edmundo@demo.com')
 ON CONFLICT (username) DO NOTHING;
 
 -- ============================================================

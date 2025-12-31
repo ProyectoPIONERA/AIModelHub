@@ -5,7 +5,7 @@
 
 /**
  * Machine Learning metadata structure
- * These fields are specific to IA assets and follow the JS_Pionera_Ontology
+ * These fields are specific to AI assets and follow the JS_Pionera_Ontology
  */
 export interface MLMetadata {
   // ML Task and Classification
@@ -38,7 +38,7 @@ export const ASSET_TYPES = {
 } as const;
 
 /**
- * Default asset type for IA assets
+ * Default asset type for AI assets
  */
 export const DEFAULT_ASSET_TYPE = ASSET_TYPES.machineLearning;
 

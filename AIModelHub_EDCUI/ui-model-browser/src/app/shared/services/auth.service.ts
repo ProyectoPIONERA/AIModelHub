@@ -22,7 +22,7 @@ export interface LoginResponse {
  * Authentication Service
  * 
  * Handles user authentication using JWT tokens
- * Supports multi-tenant connector system (conn-oeg-demo, conn-edmundo-demo, etc.)
+ * Supports multi-tenant connector system (conn-user1-demo, conn-user2-demo, etc.)
  */
 @Injectable({
   providedIn: 'root'

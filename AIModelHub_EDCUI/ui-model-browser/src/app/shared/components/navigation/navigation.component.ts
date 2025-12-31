@@ -55,12 +55,12 @@ export class NavigationComponent {
   menuItems = [
     {
       path: '/ml-assets',
-      label: 'IA Assets Browser',
+      label: 'AI Assets Browser',
       icon: 'model_training'
     },
     {
       path: '/assets/create',
-      label: 'Create IA Asset',
+      label: 'Create AI Asset',
       icon: 'add_circle'
     },
     {
@@ -75,7 +75,7 @@ export class NavigationComponent {
     }
   ];
 
-  appTitle = 'IA Models Browser';
+  appTitle = 'AI Models Browser';
 
   /**
    * Logout user

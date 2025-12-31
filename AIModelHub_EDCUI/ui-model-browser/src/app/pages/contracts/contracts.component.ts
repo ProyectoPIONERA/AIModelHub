@@ -180,7 +180,7 @@ import { NotificationService } from '../../shared/services/notification.service'
           <mat-card-content>
             <mat-icon>policy</mat-icon>
             <h3>No contract definitions found</h3>
-            <p>You haven't created any contract definitions yet. Start by creating one for your IA assets.</p>
+            <p>You haven't created any contract definitions yet. Start by creating one for your AI assets.</p>
             <button mat-raised-button color="accent" (click)="createContract()">
               <mat-icon>add_circle_outline</mat-icon>
               Create Contract Definition
