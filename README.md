@@ -173,7 +173,9 @@ Common issues and solutions in [GUIDE.md](GUIDE.md) - Troubleshooting section:
 
 ## 📝 License
 
-Code licensed under Apache 2.0. See `LICENSE` in the original repository.
+## 📝 License
+
+AIModelHub is available under the **[Apache License 2.0](https://github.com/ProyectoPIONERA/AIModelHub/blob/main/LICENSE)**.
 
 ---
 
@@ -201,5 +203,5 @@ This work has received funding from the **PIONERA project** (Enhancing interoper
 
 ---
 
-**Last Updated:** January 22, 2026  
+**Last Updated:** January 26, 2026  
 **Version:** 2.0.0
