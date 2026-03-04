@@ -1,1151 +1,424 @@
-# 🚀 AIModelHub - Complete Guide
+# 🚀 AIModelHub — Complete Technical Guide
 
 **AI Model Management Platform for Data Spaces**
 
-Complete platform for managing AI models with EDC-compatible runtime in Node.js and Angular frontend for exploring, registering, and executing IA assets with S3 storage, rich metadata, and model execution capabilities.
+AIModelHub is a complete implementation of a data-space-ready platform for AI model registration, discovery, HTTP execution, and comparative benchmarking.
 
 ---
 
 ## 📋 Table of Contents
 
-1. [Features](#features)
-2. [Architecture](#architecture)
-3. [Prerequisites](#prerequisites)
-4. [Quick Start](#quick-start)
-5. [Project Structure](#project-structure)
-6. [Services](#services)
-7. [Model Execution & Benchmarking Feature](#model-execution--benchmarking-feature)
-8. [Testing Guide](#testing-guide)
-9. [Advanced Configuration](#advanced-configuration)
-10. [Troubleshooting](#troubleshooting)
-11. [Contributing](#contributing)
+1. [Executive Summary](#executive-summary)
+2. [Core Contributions](#core-contributions)
+3. [System Architecture](#system-architecture)
+4. [Design Schemas](#design-schemas)
+5. [Repository Structure](#repository-structure)
+6. [System Requirements](#system-requirements)
+7. [Installation and Deployment](#installation-and-deployment)
+8. [Ontology and Metadata Model](#ontology-and-metadata-model)
+9. [Catalog and Discovery](#catalog-and-discovery)
+10. [HTTP Model Execution](#http-model-execution)
+11. [Model Benchmarking](#model-benchmarking)
+12. [Validation Dataset Formats](#validation-dataset-formats)
+13. [API Endpoints](#api-endpoints)
+14. [Operations and Monitoring](#operations-and-monitoring)
+15. [Troubleshooting](#troubleshooting)
+16. [Contributing](#contributing)
+17. [License](#license)
 
 ---
 
-## 🎯 Features
+## ✅ Executive Summary
 
-### Core Features
-- ✅ **EDC-Compatible Backend** - Node.js runtime with modular extensions
-- ✅ **Asset Management** - Register, browse, and manage AI models
-- ✅ **ML Metadata** - Rich metadata for models (algorithm, framework, metrics)
-- ✅ **S3 Storage** - MinIO integration for artifact storage
-- ✅ **Authentication** - User management and access control
-- ✅ **Angular UI** - Modern, responsive interface for asset exploration
-- ✅ **Contract Definitions** - EDC-style policies and contracts
-- ✅ **Catalog Federation** - Discover assets from multiple connectors
+**Current release:** 2.6.0  
+**Status:** Functionally complete for the scoped project goals.
 
-### Model Execution & Benchmarking
-- ✅ **HTTP Model Invocation** - Execute models through REST API endpoints
-- ✅ **Execution Dashboard** - Visual interface for model execution
-- ✅ **Schema-Driven Validation** - Type, required fields, and min/max checks from model metadata
-- ✅ **Result Visualization** - View execution results and errors
-- ✅ **Execution History** - Track all model executions
-- ✅ **Benchmarking (25 Models)** - Comparative evaluation across 5 compatible groups
-- ✅ **Obtain Outputs Flow** - Single and dataset execution outputs with CSV/JSON download
-- ✅ **Mock Server** - Test environment with grouped benchmark-ready endpoints
-- ✅ **Real-time Monitoring** - Dashboard showing live execution logs
+AIModelHub delivers four major contributions:
+
+1. Ontology-driven model metadata registration in the data space
+2. Metadata/keyword-based model catalog and discovery
+3. HTTP model execution via connector-to-provider API invocation
+4. Comparative model benchmarking with schema validation and manual validation datasets
 
 ---
 
-## 🏗️ Architecture
+## 🧩 Core Contributions
 
+### 1) Ontology for descriptive model metadata
+
+The platform defines and operationalizes a metadata model aligned with the project ontology approach (`JS_Pionera_Ontology` aligned representation), allowing rich model descriptions in the catalog.
+
+Metadata coverage includes:
+- Task/subtask
+- Algorithm and framework
+- Storage and execution information
+- Input schema (`input_features`) for validation, execution, and benchmark compatibility
+
+### 2) Model catalog for data-space discovery
+
+The catalog enables model discovery using:
+- Metadata-based filtering
+- Keyword search
+- Type and capability narrowing
+
+This supports model shortlisting before negotiation and access workflows in the data space.
+
+### 3) Connector-based HTTP model execution
+
+For models registered as `HttpData`, the connector:
+- Reads provider endpoint metadata from catalog records
+- Sends inference input to provider-hosted local model APIs
+- Receives response payloads and returns structured outputs to consumers
+
+### 4) Model comparison and benchmarking
+
+Benchmarking supports:
+- Compatible model selection by input schema
+- Manual validation dataset upload (`JSON`, `CSV`, `JSONL`)
+- Batch processing in 300-row steps
+- Comparative metrics and ranking output
+
+---
+
+## 🏗️ System Architecture
+
+### Logical architecture
+
+```text
+Angular Frontend (UI)
+        │
+        ▼
+Node.js Runtime EDC API
+        │
+  ┌─────┴───────────────┐
+  ▼                     ▼
+PostgreSQL Catalog      MinIO S3 Storage
+        │
+        ▼
+Provider HTTP Model Endpoints (Mock/Real)
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                         AIModelHub                              │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌──────────────────┐         ┌──────────────────┐            │
-│  │  Angular Frontend│◄────────┤  Backend EDC API │            │
-│  │  (Port 4200)     │  HTTP   │  (Port 3000)     │            │
-│  └──────────────────┘         └─────────┬────────┘            │
-│           │                              │                      │
-│           │                              │                      │
-│           │                    ┌─────────▼────────┐            │
-│           │                    │   PostgreSQL     │            │
-│           │                    │   (Port 5432)    │            │
-│           │                    └──────────────────┘            │
-│           │                                                     │
-│           │                    ┌──────────────────┐            │
-│           └────────────────────┤  MinIO S3        │            │
-│                                │  (Port 9000/9001)│            │
-│                                └──────────────────┘            │
-│                                                                 │
-│  ┌──────────────────┐         ┌──────────────────┐            │
-│  │  Mock AI Server  │◄────────┤ Model Execution  │            │
-│  │  (Port 8080)     │  HTTP   │  Extension       │            │
-│  └──────────────────┘         └──────────────────┘            │
-└─────────────────────────────────────────────────────────────────┘
-```
 
-### Components
+### Main technology stack
 
-1. **Frontend (Angular 18+)**
-   - Asset browser and catalog
-   - Asset creation forms
-   - Model execution interface
-  - Model benchmarking interface
-   - Contract management
-
-2. **Backend (Node.js + Express)**
-   - EDC-compatible runtime
-   - Extension-based architecture
-   - REST API endpoints
-   - Model execution orchestrator
-
-3. **Database (PostgreSQL 16)**
-   - Assets, users, contracts
-   - ML metadata
-   - Execution history
-
-4. **Storage (MinIO)**
-   - Model artifacts
-   - Training data
-   - Documentation files
-
-5. **Mock Server (Python + Flask)**
-  - 25 HTTP benchmark models in 5 compatible groups
-   - Real-time dashboard
-   - Execution logging
+- Frontend: Angular 18
+- Backend runtime/API: Node.js + Express
+- Data store: PostgreSQL
+- Object storage: MinIO
+- Model serving (test/demo): Python mock server
 
 ---
 
-## 📋 Prerequisites
+## 🧠 Design Schemas
 
-| Component | Minimum Version | Check Command |
-|-----------|-----------------|---------------|
-| **Docker** | 20.10+ | `docker --version` |
-| **Node.js** | 18+ | `node --version` |
-| **npm** | 9+ | `npm --version` |
-| **Python** | 3.8+ | `python3 --version` |
-| **Git** | 2.0+ | `git --version` |
+### A) Metadata registration design
 
-**Recommended Resources:**
+```text
+Create Asset UI
+   └─> ML Metadata + Input Schema
+         └─> Catalog persistence (assets, ml_metadata, data_addresses)
+               └─> Discoverable + executable model record
+```
+
+### B) Discovery and selection design
+
+```text
+Catalog Query
+   ├─ metadata filters
+   ├─ keyword filters
+   └─ ownership/access constraints
+         └─> candidate models for negotiation/execution
+```
+
+### C) Execution design
+
+```text
+Consumer input
+   └─> Connector /v3/models/execute
+         └─> Provider model HTTP endpoint
+               └─> Output payload
+                     └─> UI response + execution history
+```
+
+### D) Benchmark design
+
+```text
+Select first model (free)
+   └─> derive reference input schema
+Select next models
+   └─> enforce schema equivalence
+Upload manual validation dataset
+   └─> validate against selected models
+Run Benchmark
+   └─> execute in 300-row batches
+         └─> aggregate metrics + rank models
+```
+
+---
+
+## 📁 Repository Structure
+
+```text
+AIModelHub/
+├── README.md
+├── GUIDE.md
+├── 25_MODELS_BENCHMARKING_GUIDE.md
+├── deploy.sh
+├── cleanup-project.sh
+├── manual_validation_datasets/
+│   ├── group_1_medical_imaging/
+│   ├── group_2_sentiment_analysis/
+│   ├── group_3_health_metrics/
+│   ├── group_4_flora_classification/
+│   └── group_5_fraud_detection/
+│
+├── AIModelHub_Extensiones/
+│   ├── runtime-edc-backend/
+│   │   ├── src/
+│   │   │   ├── server.js
+│   │   │   ├── server-edc.js
+│   │   │   └── extensions/
+│   │   └── edc-extensions/
+│   ├── database-scripts/
+│   ├── model-serving/
+│   └── docker-compose.yml
+│
+└── AIModelHub_EDCUI/
+    └── ui-model-browser/
+        └── src/app/pages/
+            ├── ml-assets-browser/
+            ├── model-execution/
+            ├── model-benchmarking/
+            ├── catalog/
+            └── contracts/
+```
+
+---
+
+## 🔧 System Requirements
+
+| Component | Minimum Version | Verification |
+|-----------|------------------|--------------|
+| Docker | 20.10+ | `docker --version` |
+| Node.js | 18+ | `node --version` |
+| npm | 9+ | `npm --version` |
+| Python | 3.8+ | `python3 --version` |
+| Git | 2.0+ | `git --version` |
+
+Recommended resources:
 - CPU: 2 cores
 - RAM: 4 GB
-- Disk: 10 GB free space
+- Disk: 10 GB free
 
 ---
 
-## ⚡ Quick Start
+## ⚙️ Installation and Deployment
 
-### 1. Clone and Navigate
+### 1) Clone
 
 ```bash
 git clone <repository-url>
 cd AIModelHub
 ```
 
-### 2. Deploy Everything (Recommended)
+### 2) Full deployment
 
 ```bash
 ./deploy.sh
 ```
 
-This script automatically:
-- ✅ Checks prerequisites
-- ✅ Stops existing services
-- ✅ Starts PostgreSQL + MinIO containers
-- ✅ Restores database with sample data
-- ✅ Installs all dependencies (Node.js + Python)
-- ✅ Starts backend, frontend, and mock server
-- ✅ Verifies all services are running
+The script initializes infrastructure, dependencies, and services.
 
-**Estimated time:** 3-5 minutes
+### 3) Access
 
-### 3. Access the Application
+- Frontend: `http://localhost:4200`
+- Backend API: `http://localhost:3000`
+- Mock server: `http://localhost:8080`
 
-Once deployment completes:
-
-1. **Open Frontend**: http://localhost:4200 (**Important: Use `localhost`, NOT `127.0.0.1`**)
-2. **Login**: `user-conn-user1-demo` / `user1123`
-3. **Explore the interface**
-
-> ⚠️ **Important**: Always access the application using `http://localhost:4200`. Do NOT use `http://127.0.0.1:4200` as this will cause CORS errors due to origin mismatch.
+> Use `localhost`, not `127.0.0.1`, to avoid origin/CORS mismatches.
 
 ---
 
-## 📁 Project Structure
+## 🧬 Ontology and Metadata Model
 
-```
-AIModelHub/
-├── deploy.sh                           # Automated deployment script
-├── GUIDE.md                            # This file
-├── .gitignore                          # Git ignore rules
-│
-├── AIModelHub_Extensiones/             # Backend logic
-│   ├── backend/                        # Main backend (symlink → runtime-edc-backend)
-│   │   ├── src/                        # Source code
-│   │   │   ├── server-edc.js          # Main server
-│   │   │   └── routes/                # API routes
-│   │   ├── edc-extensions/            # EDC extensions
-│   │   │   ├── asset-management/      # Asset CRUD
-│   │   │   ├── ml-metadata/           # ML-specific metadata
-│   │   │   └── model-execution/       # Model execution
-│   │   └── package.json               # Backend dependencies
-│   │
-│   ├── database-scripts/               # Database initialization scripts
-│   │   ├── 000_init_database_complete.sql  # Complete DB dump (PRIMARY)
-│   │   ├── init-database.sql          # Schema initialization (FALLBACK)
-│   │   ├── full-backup.sql            # Sample data (FALLBACK)
-│   │   ├── deploy_system.sh           # Standalone deployment
-│   │   └── generate-password-hash.js  # Password utility
-│   │
-│   ├── database/                       # Database (symlink → database-scripts)
-│   │
-│   ├── model-server/                   # Mock server (symlink → model-serving)
-│   │   ├── mock_server.py             # Flask server
-│   │   ├── requirements.txt           # Python dependencies
-│   │   ├── start-mock-server.sh       # Startup script
-│   │   └── venv/                      # Python virtual environment
-│   │
-│   └── docker-compose.yml              # PostgreSQL + MinIO
-│
-└── AIModelHub_EDCUI/                   # Frontend
-    └── ml-browser-app/                 # Angular app (symlink → ui-model-browser)
-        ├── src/
-        │   ├── app/
-        │   │   ├── pages/             # Page components
-        │   │   │   ├── ml-assets-browser/
-        │   │   │   ├── asset-detail/
-        │   │   │   ├── asset-create/
-        │   │   │   ├── model-execution/
-        │   │   │   ├── model-benchmarking/
-        │   │   │   ├── catalog/
-        │   │   │   └── contracts/
-        │   │   ├── shared/
-        │   │   │   ├── components/    # Navigation, etc.
-        │   │   │   └── services/      # API services
-        │   │   └── app.routes.ts      # Routing configuration
-        │   └── environments/
-        └── package.json                # Frontend dependencies
-```
+### Metadata persistence model
 
----
+Core catalog tables:
+- `assets`
+- `ml_metadata`
+- `data_addresses`
+- `execution_history`
 
-## 🌐 Services
+Input schema is persisted in `ml_metadata.input_features` (JSONB), enabling:
+- Runtime input validation
+- Dynamic form generation
+- Benchmark compatibility checks
 
-### Service URLs
+### Example input schema object
 
-| Service | URL | Description |
-|---------|-----|-------------|
-| **Frontend** | http://localhost:4200 | Angular application (⚠️ Use `localhost` only) |
-| **Backend API** | http://localhost:3000 | EDC + Management API |
-| **Mock Server** | http://localhost:8080 | Model execution dashboard |
-| **MinIO Console** | http://localhost:9001 | S3 web interface |
-| **PostgreSQL** | localhost:5432 | Database |
-
-> ⚠️ **Important**: The frontend is configured to run on `localhost:4200` specifically. Using `127.0.0.1:4200` will cause CORS authentication errors.
-
-### Default Credentials
-
-**Application Login:**
-```
-User: user-conn-user1-demo
-Password: user1123
-
-User: user-conn-user2-demo  
-Password: user2123
-```
-
-**MinIO Console:**
-```
-User: minioadmin
-Password: minioadmin123
-```
-
-**PostgreSQL:**
-```
-User: ml_assets_user
-Password: ml_assets_password
-Database: ml_assets_db
-```
-
----
-
-## 🚀 Model Execution & Benchmarking Feature
-
-The platform includes model execution and comparative benchmarking for HTTP models directly from the AIModelHub interface.
-
-### Key Components
-
-#### 1. Backend Extension (`edc-extensions/model-execution/`)
-- **extension.manifest.js** - Main extension with REST endpoints
-- **ExecutionService.js** - HTTP invocation service
-
-**REST API Endpoints:**
-```
-POST   /v3/models/execute              # Execute a model
-GET    /v3/models/executions/:id       # Get execution status
-GET    /v3/models/executions           # Get execution history
-GET    /v3/models/executable           # List executable models
-GET    /v3/assets/:id/executable       # Check if asset is executable
-```
-
-#### 2. Frontend Component (`pages/model-execution/`)
-- **model-execution.component.ts** - Main execution logic
-- **model-execution.component.html** - UI with tabs
-- **model-execution.component.scss** - Styled interface
-
-**Features:**
-- Model selection dropdown
-- Schema-aware input validation
-- Result visualization (success/error/timeout)
-- Execution history per model
-- Direct access from asset detail page
-- Benchmark inputs with unified schema form for compatible selected models
-- Obtain Outputs flow with output tables and dataset export (CSV/JSON)
-
-#### 3. Database Schema
-- **model_executions** table - Execution tracking
-- **executable_assets** view - Quick access to executable models
-- **data_addresses** extensions - Execution endpoint, method, timeout
-
-#### 4. Mock Server (`model-server/`)
-- **25 HTTP Benchmark Models:**
-  - Medical Imaging (5)
-  - Sentiment Analysis (5)
-  - Health Metrics (5)
-  - Flora Classification (5)
-  - Fraud Detection (5)
-
-- **Visual Dashboard** (http://localhost:8080):
-  - Real-time execution logs
-  - Model cards with grouped endpoints
-  - Statistics (total requests, available models/groups)
-  - Auto-refresh every 5 seconds
-
-### How to Use
-
-#### Option A: From Asset Browser
-1. Go to "AI Assets Browser"
-2. Find an executable asset (e.g., "Iris Classifier Demo API")
-3. Click on the asset to open details
-4. Click the purple "▶ Execute Model" button
-
-#### Option B: Direct Access
-1. Click "IA Execution" in the navigation menu
-2. Or navigate to: http://localhost:4200/models/execute
-3. Select a model from the dropdown
-4. Provide input (JSON or schema-driven form depending on model configuration)
-5. Click "Execute Model"
-
-#### Option C: Comparative Benchmarking
-1. Open "Model Benchmarking" from the navigation menu
-2. Select compatible models (same input schema)
-3. Configure metrics and choose input mode (single/dataset)
-4. Click **Validate Input** to verify schema compliance
-5. Click **Obtain Outputs** to run selected models
-6. Review outputs and export dataset results in CSV/JSON
-
-#### Example: Execute Iris Classifier
-
-1. Select "Iris Classifier Demo API"
-2. Input JSON (pre-filled):
-```json
-{
-  "sepal_length": 5.1,
-  "sepal_width": 3.5,
-  "petal_length": 1.4,
-  "petal_width": 0.2
-}
-```
-3. Click "Execute Model"
-4. View result:
-```json
-{
-  "model": "Iris Classifier",
-  "prediction": "setosa",
-  "confidence": 0.95,
-  "execution_time_ms": 1234
-}
-```
-5. Check execution in history tab
-6. See real-time log on http://localhost:8080
-
-### API Usage Example
-
-```bash
-# Get executable models
-curl http://localhost:3000/v3/models/executable
-
-# Execute a model
-curl -X POST http://localhost:3000/v3/models/execute \
-  -H "Content-Type: application/json" \
-  -d '{
-    "assetId": "asset-executable-demo-iris-classifier",
-    "input": {
-      "sepal_length": 5.1,
-      "sepal_width": 3.5,
-      "petal_length": 1.4,
-      "petal_width": 0.2
-    }
-  }'
-
-# Get execution status
-curl http://localhost:3000/v3/models/executions/{execution_id}
-
-# Get execution history
-curl http://localhost:3000/v3/models/executions?assetId=asset-executable-demo-iris-classifier
-```
-
----
-
-## 📝 HTTP Model Registration with Input Schema
-
-### Overview
-
-When registering HTTP models in the Create AI Asset interface, you can define the input schema that the model expects. This enables:
-- **Dynamic Form Generation**: The IA Execution interface automatically generates input forms based on the schema
-- **Type Validation**: Input types (string, int, float, boolean) with min/max constraints
-- **Ontology Integration**: Input schemas are stored as part of Daimo/JS_Pionera_Ontology metadata
-- **Model Cards & Benchmarking Compatibility**: Input requirements are displayed and used to validate comparative selection
-
-### Registration Workflow
-
-#### Step 1: Complete Basic Information
-Navigate to **Create AI Asset** and fill in the **Asset Information** tab:
-- ID, Name, Version
-- Description and keywords
-- Asset Type: MLModel
-
-#### Step 2: Add ML Metadata
-In the **ML Metadata** tab, configure:
-- Task, Subtask, Algorithm
-- Library, Framework, Software
-- Model Format
-
-#### Step 3: Configure HTTP Storage
-
-In the **Storage Information** tab:
-1. Select **Storage Destination**: `HttpData`
-2. Fill **all required fields**:
-   - Name *
-   - Base URL * (e.g., `https://ml-api.example.com`)
-   - Path * (e.g., `/models/predict`)
-   - Content Type * (e.g., `application/json`)
-   - Auth Key * (if authentication required)
-   - Auth Code * (if authentication required)
-   - Secret Name * (if using secret manager)
-3. Select **at least one Proxy Setting**:
-   - ☑️ Proxy Body (recommended for ML models)
-   - ☑️ Proxy Method (recommended for POST requests)
-   - Proxy Path (optional)
-   - Proxy Query Params (optional)
-
-**Important**: Once all HTTP fields are complete, the system will:
-- Display a **warning notification** (8 seconds)
-- **Automatically redirect** to the ML Metadata tab
-- Prompt you to configure the **Model Input Schema** (REQUIRED)
-
-#### Step 4: Define Model Input Schema
-
-Back in the **ML Metadata** tab (after auto-redirect), you'll see a new section: **Model Input Schema (REQUIRED for HTTP Models)**.
-
-**Option A: Use a Template** (Quick Start)
-```
-Select from dropdown:
-- Tabular Data (4 numeric features)
-- Text Input (single string field)
-- Image Input (base64 + format)
-- Custom Configuration
-```
-
-**Option B: Manual Configuration**
-1. Click **"Add Input Field"**
-2. For each field, configure:
-   - **Field Name*** (use snake_case, e.g., `sepal_length`)
-   - **Data Type*** (string, int, float, number, boolean)
-   - **Description** (shown as hint in execution interface)
-   - **Required** (checkbox)
-   - **Min/Max Value** (for numeric types)
-
-**Example: House Price Predictor**
 ```json
 {
   "fields": [
     {
-      "name": "superficie_m2",
+      "name": "sepal_length",
       "type": "float",
-      "description": "Superficie total en metros cuadrados",
-      "required": true,
-      "min": 30,
-      "max": 500
-    },
-    {
-      "name": "habitaciones",
-      "type": "int",
-      "description": "Número de habitaciones",
-      "required": true,
-      "min": 1,
-      "max": 10
-    },
-    {
-      "name": "banos",
-      "type": "int",
-      "description": "Número de baños",
-      "required": true,
-      "min": 1,
-      "max": 5
-    },
-    {
-      "name": "antiguedad_anos",
-      "type": "int",
-      "description": "Antigüedad en años",
       "required": true,
       "min": 0,
-      "max": 100
+      "max": 10,
+      "description": "Sepal length in centimeters"
     }
   ]
 }
 ```
 
-**JSON Preview**: The system shows a real-time preview of your schema in JSON format.
+---
 
-#### Step 5: Save Asset
+## 🔎 Catalog and Discovery
 
-Click **"Create Asset"** to save. The system will:
-- Validate all required fields
-- Store the input schema in `ml_metadata.input_features` (JSONB column)
-- Save as part of Daimo/JS_Pionera_Ontology
-- Make it available in the Asset Browser
+The catalog UI supports model discovery through:
+- Task/subtask filters
+- Algorithm/framework metadata filters
+- Keyword-based search
+- User/access-aware model visibility
+
+This enables efficient model selection before negotiation and execution.
 
 ---
 
-### Using the Registered Model
+## ⚡ HTTP Model Execution
 
-#### In Asset Browser (Model Card)
-When viewing an HTTP model in the Asset Browser:
-1. Navigate to **AI Assets Browser**
-2. Select your HTTP model
-3. View the **Model Input Schema** card
-4. See all required inputs with their types, descriptions, and constraints
+### Execution contract
 
-#### In IA Execution (Dynamic Form)
-When executing the model:
-1. Go to **IA Execution**
-2. Select your HTTP model from dropdown
-3. **Dynamic form is automatically generated** with:
-   - Input fields for each defined parameter
-   - Type-specific controls (number inputs, text fields, checkboxes)
-   - Min/Max validation
-   - Required field indicators
-   - Description hints
-4. Fill the form and execute
-
-**Example Generated Form for House Price Predictor:**
-```
-┌─────────────────────────────────────┐
-│ Superficie M2 *                      │
-│ [________] (30 - 500)               │
-│ Superficie total en metros cuadrados│
-├─────────────────────────────────────┤
-│ Habitaciones *                       │
-│ [__] (1 - 10)                       │
-│ Número de habitaciones              │
-├─────────────────────────────────────┤
-│ Baños *                             │
-│ [__] (1 - 5)                        │
-│ Número de baños                     │
-├─────────────────────────────────────┤
-│ Antiguedad Anos *                   │
-│ [__] (0 - 100)                      │
-│ Antigüedad en años                  │
-└─────────────────────────────────────┘
+```http
+POST /v3/models/execute
 ```
 
----
+Request:
 
-### Ontology Integration (Daimo/JS_Pionera_Ontology)
-
-The input schema is stored as part of the ML Metadata and follows the Daimo ontology structure:
-
-**Database Storage:**
-```sql
--- ml_metadata table
+```json
 {
-  "task": "Regression",
-  "algorithm": "RandomForest",
-  "library": "scikit-learn",
-  "input_features": {  -- JSONB column
-    "fields": [
-      {
-        "name": "feature_name",
-        "type": "float",
-        "required": true,
-        "description": "Feature description",
-        "min": 0,
-        "max": 100
-      }
-    ]
+  "assetId": "asset-http-model-id",
+  "input": {
+    "feature": 123
+  },
+  "options": {
+    "timeout": 10000
   }
 }
 ```
 
-**Ontology Mapping:**
-- `input_features` → Daimo property for model input specification
-- Stored as JSONB for flexible schema evolution
-- Compatible with ML execution pipelines
-- Queryable for schema discovery
+Runtime behavior:
+1. Resolve executable endpoint from `data_addresses`.
+2. Call provider-hosted model API.
+3. Store execution history.
+4. Return output/status to UI.
 
 ---
 
-### Best Practices
+## 📊 Model Benchmarking
 
-1. **Use Descriptive Field Names**
-   - ✅ `sepal_length_cm`, `user_age_years`
-   - ❌ `x1`, `var`, `input`
+### Selection policy
 
-2. **Add Meaningful Descriptions**
-   - Help users understand what each input represents
-   - Include units (cm, kg, %, etc.)
+- First model: no restriction.
+- Next models: must match the first model input schema.
+- Incompatible models are blocked with a user-facing message.
 
-3. **Set Realistic Min/Max Values**
-   - Prevent invalid inputs
-   - Reflect actual model training range
+### Benchmark data policy
 
-4. **Mark Required Fields Appropriately**
-   - Only mark as required if model cannot run without it
+- `Run Benchmark` requires manual validation dataset upload.
+- Supported formats: `JSON`, `CSV`, `JSONL`.
+- Dataset is validated against selected model schema before execution.
 
-5. **Choose the Right Data Type**
-   - `int` for counts, IDs
-   - `float` for measurements, percentages
-   - `string` for text, categories
-   - `boolean` for yes/no flags
+### Execution policy
 
-6. **Start with Templates**
-   - Modify templates rather than building from scratch
-   - Templates cover common patterns
+- Benchmark executes by model.
+- Each model processes dataset in **300-row batches**.
+- Progress and ranking are updated after execution completion.
 
----
+### Output
 
-## 🧪 Testing Guide
-
-### Complete Testing Workflow
-
-#### 1. Verify All Services
-
-```bash
-# Check running processes
-ps aux | grep -E "server-edc|ng serve|mock_server"
-
-# Check Docker containers
-docker ps | grep ml-assets
-
-# Test backend health
-curl http://localhost:3000/health
-
-# Test mock server
-curl http://localhost:8080
-```
-
-#### 2. Test Model Execution UI
-
-**Step-by-step:**
-
-1. **Open Frontend**: http://localhost:4200
-2. **Login**: user-conn-user1-demo / user1123
-3. **Navigate**: Click "IA Execution" in menu
-4. **Select Model**: Choose "Iris Classifier Demo API"
-5. **Execute**: Click "Execute Model"
-6. **View Results**: Check Output tab
-7. **View History**: Check History tab
-8. **Monitor**: Open http://localhost:8080 in another tab
-
-#### 2.1 Test Benchmarking UI
-
-1. **Open Benchmarking**: Navigate to "Model Benchmarking"
-2. **Select Compatible Models**: Pick models with the same input schema
-3. **Choose Input Mode**: Single input or dataset batch
-4. **Validate**: Click "Validate Input"
-5. **Execute**: Click "Obtain Outputs"
-6. **Review**: Check output status and normalized output table
-7. **Export**: Download dataset results in CSV/JSON
-
-#### 3. Test All Models
-
-Use grouped model sets for fair comparison in benchmarking:
-
-- Medical Imaging (Vision)
-- Sentiment Analysis (NLP)
-- Health Metrics (Regression)
-- Flora Classification (Tabular)
-- Fraud Detection (Classification)
-
-**Iris Classifier (fastest):**
-```json
-{
-  "sepal_length": 5.1,
-  "sepal_width": 3.5,
-  "petal_length": 1.4,
-  "petal_width": 0.2
-}
-```
-
-**Sentiment Analyzer:**
-```json
-{
-  "text": "I love this amazing product! It's wonderful!"
-}
-```
-
-**Image Classifier:**
-```json
-{
-  "image_url": "https://example.com/image.jpg",
-  "image_size": "1920x1080"
-}
-```
-
-#### 4. Test Error Handling
-
-**Simulate Timeout:**
-1. Stop mock server: Press Ctrl+C in mock server terminal
-2. Try to execute a model
-3. Should see timeout error
-4. Restart mock server: `cd AIModelHub_Extensiones/model-server && ./start-mock-server.sh`
-
-**Invalid JSON:**
-1. Enter malformed JSON in IA Execution (when JSON mode is active)
-2. In Benchmarking, provide invalid field types or out-of-range values
-3. Click "Validate Input" and verify schema error feedback
-4. Fix input and retry
+- Metric matrix for selected metrics
+- Comparative ranking and top model identification
+- CSV export of benchmark results
 
 ---
 
-## 🔧 Advanced Configuration
+## 📦 Validation Dataset Formats
 
-### Manual Deployment
+### JSON
+Array of objects, each object matching model input schema.
 
-If you prefer manual control over deployment:
+### CSV
+Header row must match input field names; each row is one input sample.
 
-#### 1. Start Infrastructure
+### JSONL
+One JSON object per line, each object matching input schema.
 
-```bash
-cd AIModelHub
+### Included dataset package
 
-# Start PostgreSQL
-docker run -d \
-  --name ml-assets-postgres \
-  -e POSTGRES_USER=ml_assets_user \
-  -e POSTGRES_PASSWORD=ml_assets_password \
-  -e POSTGRES_DB=ml_assets_db \
-  -p 5432:5432 \
-  -v ml-assets-postgres-data:/var/lib/postgresql/data \
-  postgres:16-alpine
+`manual_validation_datasets/` provides grouped benchmark datasets in all three formats.
 
-# Start MinIO
-docker run -d \
-  --name ml-assets-minio \
-  -e MINIO_ROOT_USER=minioadmin \
-  -e MINIO_ROOT_PASSWORD=minioadmin123 \
-  -p 9000:9000 -p 9001:9001 \
-  -v ml-assets-minio-data:/data \
-  minio/minio:latest server /data --console-address ":9001"
+---
+
+## 🔌 API Endpoints
+
+Core model endpoints:
+
+```text
+GET  /v3/models/executable
+POST /v3/models/execute
+GET  /v3/models/executions/:id
+GET  /v3/models/executions
+GET  /v3/assets/:id/executable
 ```
 
-#### 2. Initialize Database
+---
 
-```bash
-# Option 1: Complete database with all data (RECOMMENDED)
-docker exec -i ml-assets-postgres psql -U ml_assets_user -d ml_assets_db \
-  < AIModelHub_Extensiones/database-scripts/000_init_database_complete.sql
+## 📈 Operations and Monitoring
 
-# Option 2: Sample data only (fallback)
-docker exec -i ml-assets-postgres psql -U ml_assets_user -d ml_assets_db \
-  < AIModelHub_Extensiones/database-scripts/full-backup.sql
-
-# Option 3: Minimal schema (fallback)
-docker exec -i ml-assets-postgres psql -U ml_assets_user -d ml_assets_db \
-  < AIModelHub_Extensiones/database-scripts/init-database.sql
-```
-
-**Note**: The `000_init_database_complete.sql` includes:
-- Complete schema with all tables, indexes, and constraints
-- 2 demo users (user1-demo, user2-demo)
-- 25+ executable HTTP models for benchmarking plus existing catalog assets
-- 8+ contracts with policies
-- All metadata and data addresses
-
-#### 3. Install Dependencies
-
-```bash
-# Backend
-cd AIModelHub_Extensiones/backend
-npm install
-
-# Frontend
-cd ../../AIModelHub_EDCUI/ml-browser-app
-npm install
-
-# Mock Server
-cd ../../AIModelHub_Extensiones/model-server
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-deactivate
-```
-
-#### 4. Start Services
-
-**Terminal 1 - Backend:**
-```bash
-cd AIModelHub_Extensiones/backend
-node src/server-edc.js
-```
-
-**Terminal 2 - Frontend:**
-```bash
-cd AIModelHub_EDCUI/ml-browser-app
-npm run start
-```
-
-**Terminal 3 - Mock Server:**
-```bash
-cd AIModelHub_Extensiones/model-server
-./start-mock-server.sh
-```
-
-### Environment Variables
-
-Create `.env` files for custom configuration:
-
-**Backend (.env):**
-```bash
-PORT=3000
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=ml_assets_db
-DB_USER=ml_assets_user
-DB_PASSWORD=ml_assets_password
-
-S3_ENDPOINT=http://localhost:9000
-S3_ACCESS_KEY=minioadmin
-S3_SECRET_KEY=minioadmin123
-S3_BUCKET=ml-assets
-
-MODEL_EXECUTION_TIMEOUT=30000
-```
-
-**Frontend (environment.ts):**
-```typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:3000',
-  // ... other config
-};
-```
-
-### Database Regeneration
-
-To regenerate the complete database dump after making changes:
-
-```bash
-# Generate new complete dump
-docker exec ml-assets-postgres pg_dump -U ml_assets_user -d ml_assets_db \
-  --clean --if-exists --no-owner --no-acl \
-  > AIModelHub_Extensiones/database-scripts/000_init_database_complete.sql
-
-# Verify the dump
-wc -l AIModelHub_Extensiones/database-scripts/000_init_database_complete.sql
-```
-
-**Note**: The complete init script (`000_init_database_complete.sql`) replaces the need for incremental migrations. After any database changes, regenerate this file to maintain a single source of truth.
+- Frontend monitoring via benchmark/execution UI states
+- Runtime logs via backend service logs
+- Mock server dashboard at `http://localhost:8080`
+- DB integrity checks through SQL scripts and maintenance utilities
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Benchmark appears slow on large datasets
 
-#### Port Already in Use
+- Confirm provider endpoints are responsive.
+- Check backend logs for endpoint-level latency.
+- Ensure selected models belong to the same schema-compatible group.
 
-**Problem:** Port 5432, 3000, 4200, or 8080 already in use
+### Validation dataset rejected
 
-**Solution:**
-```bash
-# Find process using port
-sudo lsof -i :5432
+- Verify field names exactly match schema.
+- Verify data types and range constraints.
+- Verify file format and encoding.
 
-# Kill process
-kill -9 <PID>
+### Execution request failures
 
-# Or change port in configuration
-```
-
-#### Database Connection Failed
-
-**Problem:** Backend can't connect to PostgreSQL
-
-**Solution:**
-```bash
-# Check if PostgreSQL is running
-docker ps | grep postgres
-
-# Check logs
-docker logs ml-assets-postgres
-
-# Test connection
-docker exec -it ml-assets-postgres psql -U ml_assets_user -d ml_assets_db
-
-# Restart container
-docker restart ml-assets-postgres
-```
-
-#### Frontend Compilation Errors
-
-**Problem:** Angular build fails
-
-**Solution:**
-```bash
-cd AIModelHub_EDCUI/ml-browser-app
-
-# Clean install
-rm -rf node_modules package-lock.json
-npm install
-
-# Check Node version (must be 18+)
-node --version
-
-# Clear Angular cache
-rm -rf .angular/cache
-```
-
-#### CORS Authentication Errors
-
-**Problem:** "Invalid username or password" despite correct credentials, or OPTIONS preflight fails
-
-**Solution:**
-```bash
-# CRITICAL: Use localhost, NOT 127.0.0.1
-# Open browser with: http://localhost:4200
-# NOT: http://127.0.0.1:4200
-
-# The system is configured for localhost origin only
-# Check that Angular is serving on localhost
-ps aux | grep "ng serve"
-
-# Verify CORS configuration in backend logs
-grep "CORS" backend.log
-
-# If needed, restart frontend
-pkill -f "ng serve"
-cd AIModelHub_EDCUI/ml-browser-app
-npm run start
-```
-
-#### Model Execution Fails
-
-**Problem:** "Cannot connect to model endpoint"
-
-**Solution:**
-```bash
-# Check if mock server is running
-curl http://localhost:8080
-
-# Check logs
-tail -f model-server.log
-
-# Restart mock server
-cd AIModelHub_Extensiones/model-server
-./start-mock-server.sh
-
-# Verify executable assets in database
-docker exec ml-assets-postgres psql -U ml_assets_user -d ml_assets_db \
-  -c "SELECT * FROM executable_assets;"
-
-# Verify validation datasets (for benchmarking)
-docker exec ml-assets-postgres psql -U ml_assets_user -d ml_assets_db \
-  -c "SELECT id, name, task_type FROM validation_datasets ORDER BY created_at DESC LIMIT 20;"
-```
-
-#### Backend Extension Not Loading
-
-**Problem:** Model execution extension doesn't load
-
-**Solution:**
-```bash
-# Check backend logs
-tail -f backend.log
-
-# Look for extension initialization
-grep "Model Execution Extension" backend.log
-
-# Verify extension file exists
-ls -la AIModelHub_Extensiones/backend/edc-extensions/model-execution/
-
-# Restart backend
-pkill -f "server-edc.js"
-cd AIModelHub_Extensiones/backend
-node src/server-edc.js
-```
-
-### Log Files
-
-```bash
-# Backend
-tail -f backend.log
-
-# Frontend
-tail -f frontend.log
-
-# Mock Server
-tail -f model-server.log
-
-# Deployment
-tail -f deploy-output.log
-
-# PostgreSQL
-docker logs ml-assets-postgres
-
-# MinIO
-docker logs ml-assets-minio
-```
-
-### Stop All Services
-
-```bash
-# Stop Node processes
-pkill -f "server-edc.js"
-pkill -f "ng serve"
-pkill -f "mock_server.py"
-
-# Stop Docker containers
-docker stop ml-assets-postgres ml-assets-minio
-
-# Remove containers (keeps data)
-docker rm ml-assets-postgres ml-assets-minio
-
-# Remove everything including data (CAUTION!)
-docker rm -f ml-assets-postgres ml-assets-minio
-docker volume rm ml-assets-postgres-data ml-assets-minio-data
-```
+- Confirm executable endpoint is reachable from backend.
+- Validate auth/session state.
+- Check timeout and provider API availability.
 
 ---
 
 ## 🤝 Contributing
 
-### Development Workflow
-
-1. **Create Feature Branch**
-```bash
-git checkout -b feature/my-new-feature
-```
-
-2. **Make Changes**
-- Follow existing code structure
-- Add comments for complex logic
-- Update documentation
-
-3. **Test Changes**
-```bash
-# Run backend tests (if available)
-cd AIModelHub_Extensiones/backend
-npm test
-
-# Run frontend tests
-cd AIModelHub_EDCUI/ml-browser-app
-npm test
-```
-
-4. **Commit and Push**
-```bash
-git add .
-git commit -m "feat: add new feature"
-git push origin feature/my-new-feature
-```
-
-5. **Create Pull Request**
-
-### Code Style
-
-- **Backend (Node.js)**: ESLint + Prettier
-- **Frontend (Angular)**: Angular style guide
-- **Python**: PEP 8
-
-### Adding New Features
-
-#### New Backend Extension
-
-1. Create extension directory:
-```bash
-mkdir -p AIModelHub_Extensiones/backend/edc-extensions/my-extension
-```
-
-2. Create manifest file:
-```javascript
-// extension.manifest.js
-module.exports = {
-  name: 'MyExtension',
-  version: '1.0.0',
-  initialize: (context) => {
-    // Extension initialization
-  }
-};
-```
-
-3. Register in bootstrap:
-```javascript
-// src/bootstrap.js
-const MyExtension = require('./edc-extensions/my-extension/extension.manifest');
-```
-
-#### New Frontend Page
-
-1. Generate component:
-```bash
-cd AIModelHub_EDCUI/ml-browser-app
-ng generate component pages/my-page
-```
-
-2. Add route:
-```typescript
-// app.routes.ts
-{
-  path: 'my-page',
-  component: MyPageComponent,
-  canActivate: [authGuard]
-}
-```
-
-3. Add menu item:
-```typescript
-// shared/components/navigation/navigation.component.ts
-menuItems = [
-  // ... existing items
-  {
-    path: '/my-page',
-    label: 'My Page',
-    icon: 'star'
-  }
-];
-```
+1. Create a focused branch.
+2. Implement scoped changes.
+3. Validate impacted flows.
+4. Update docs if behavior changes.
+5. Open pull request.
 
 ---
 
 ## 📝 License
 
-AIModelHub is available under the **Apache License 2.0**.
+AIModelHub is available under **Apache License 2.0**.
 
 ---
 
-## 🙏 Acknowledgments
-
-This project was developed as part of the PIONERA project initiative for interoperability in data spaces through AI.
-
-**Funding:**
-- PRTR framework funded by the European Union (NextGenerationEU)
-- Ministry for Digital Transformation and Public Administration
-
----
-
-## 📞 Support
-
-For issues, questions, or contributions:
-- **Issues**: Project repository issue tracker
-- **Discussions**: Project communication channels
-- **Email**: edmundo.mori.orrillo@upm.es / jiayun.liu@alumnos.upm.es
-
----
-
-**Last Updated:** February 18, 2026
-**Version:** 2.4.0
+**Last Updated:** March 4, 2026  
+**Version:** 2.6.0

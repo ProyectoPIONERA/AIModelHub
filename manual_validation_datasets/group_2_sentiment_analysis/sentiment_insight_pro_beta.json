@@ -1,0 +1,4502 @@
+[
+  {
+    "text": "Opinión 1: El monitor comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 2: El auriculares comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 3: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 4: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 5: El cafetera comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 6: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 7: El tablet comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 8: El monitor comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 9: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 10: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 11: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 12: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 13: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 14: El tablet comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 15: El monitor comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 16: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 17: El portátil comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 18: El smartwatch comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 19: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 20: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 21: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 22: El monitor comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 23: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 24: El portátil comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 25: El smartwatch comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 26: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 27: El aspiradora comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 28: El tablet comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 29: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 30: El auriculares comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 31: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 32: El smartwatch comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 33: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 34: El aspiradora comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 35: El tablet comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 36: El monitor comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 37: El auriculares comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 38: El portátil comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 39: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 40: El cafetera comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 41: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 42: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 43: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 44: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 45: El portátil comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 46: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 47: El cafetera comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 48: El aspiradora comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 49: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 50: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 51: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 52: El portátil comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 53: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 54: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 55: El aspiradora comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 56: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 57: El monitor comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 58: El auriculares comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 59: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 60: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 61: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 62: El aspiradora comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 63: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 64: El monitor comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 65: El auriculares comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 66: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 67: El smartwatch comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 68: El cafetera comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 69: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 70: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 71: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 72: El auriculares comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 73: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 74: El smartwatch comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 75: El cafetera comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 76: El aspiradora comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 77: El tablet comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 78: El monitor comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 79: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 80: El portátil comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 81: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 82: El cafetera comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 83: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 84: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 85: El monitor comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 86: El auriculares comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 87: El portátil comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 88: El smartwatch comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 89: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 90: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 91: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 92: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 93: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 94: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 95: El smartwatch comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 96: El cafetera comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 97: El aspiradora comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 98: El tablet comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 99: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 100: El auriculares comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 101: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 102: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 103: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 104: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 105: El tablet comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 106: El monitor comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 107: El auriculares comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 108: El portátil comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 109: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 110: El cafetera comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 111: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 112: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 113: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 114: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 115: El portátil comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 116: El smartwatch comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 117: El cafetera comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 118: El aspiradora comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 119: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 120: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 121: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 122: El portátil comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 123: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 124: El cafetera comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 125: El aspiradora comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 126: El tablet comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 127: El monitor comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 128: El auriculares comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 129: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 130: El smartwatch comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 131: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 132: El aspiradora comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 133: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 134: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 135: El auriculares comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 136: El portátil comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 137: El smartwatch comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 138: El cafetera comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 139: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 140: El tablet comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 141: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 142: El auriculares comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 143: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 144: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 145: El cafetera comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 146: El aspiradora comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 147: El tablet comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 148: El monitor comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 149: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 150: El portátil comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 151: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 152: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 153: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 154: El tablet comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 155: El monitor comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 156: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 157: El portátil comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 158: El smartwatch comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 159: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 160: El aspiradora comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 161: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 162: El monitor comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 163: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 164: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 165: El smartwatch comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 166: El cafetera comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 167: El aspiradora comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 168: El tablet comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 169: El monitor comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 170: El auriculares comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 171: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 172: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 173: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 174: El aspiradora comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 175: El tablet comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 176: El monitor comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 177: El auriculares comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 178: El portátil comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 179: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 180: El cafetera comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 181: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 182: El tablet comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 183: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 184: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 185: El portátil comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 186: El smartwatch comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 187: El cafetera comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 188: El aspiradora comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 189: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 190: El monitor comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 191: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 192: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 193: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 194: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 195: El aspiradora comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 196: El tablet comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 197: El monitor comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 198: El auriculares comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 199: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 200: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 201: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 202: El aspiradora comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 203: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 204: El monitor comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 205: El auriculares comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 206: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 207: El smartwatch comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 208: El cafetera comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 209: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 210: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 211: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 212: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 213: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 214: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 215: El cafetera comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 216: El aspiradora comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 217: El tablet comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 218: El monitor comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 219: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 220: El portátil comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 221: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 222: El cafetera comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 223: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 224: El tablet comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 225: El monitor comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 226: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 227: El portátil comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 228: El smartwatch comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 229: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 230: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 231: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 232: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 233: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 234: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 235: El smartwatch comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 236: El cafetera comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 237: El aspiradora comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 238: El tablet comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 239: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 240: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 241: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 242: El smartwatch comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 243: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 244: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 245: El tablet comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 246: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 247: El auriculares comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 248: El portátil comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 249: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 250: El cafetera comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 251: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 252: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 253: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 254: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 255: El portátil comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 256: El smartwatch comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 257: El cafetera comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 258: El aspiradora comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 259: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 260: El monitor comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 261: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 262: El portátil comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 263: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 264: El cafetera comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 265: El aspiradora comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 266: El tablet comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 267: El monitor comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 268: El auriculares comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 269: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 270: El smartwatch comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 271: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 272: El aspiradora comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 273: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 274: El monitor comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 275: El auriculares comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 276: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 277: El smartwatch comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 278: El cafetera comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 279: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 280: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 281: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 282: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 283: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 284: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 285: El cafetera comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 286: El aspiradora comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 287: El tablet comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 288: El monitor comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 289: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 290: El portátil comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 291: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 292: El cafetera comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 293: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 294: El tablet comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 295: El monitor comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 296: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 297: El portátil comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 298: El smartwatch comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 299: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 300: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 301: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 302: El monitor comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 303: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 304: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 305: El smartwatch comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 306: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 307: El aspiradora comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 308: El tablet comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 309: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 310: El auriculares comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 311: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 312: El smartwatch comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 313: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 314: El aspiradora comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 315: El tablet comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 316: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 317: El auriculares comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 318: El portátil comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 319: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 320: El cafetera comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 321: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 322: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 323: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 324: El auriculares comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 325: El portátil comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 326: El smartwatch comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 327: El cafetera comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 328: El aspiradora comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 329: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 330: El monitor comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 331: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 332: El portátil comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 333: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 334: El cafetera comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 335: El aspiradora comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 336: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 337: El monitor comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 338: El auriculares comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 339: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 340: El smartwatch comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 341: El cafetera comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 342: El aspiradora comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 343: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 344: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 345: El auriculares comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 346: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 347: El smartwatch comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 348: El cafetera comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 349: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 350: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 351: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 352: El auriculares comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 353: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 354: El smartwatch comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 355: El cafetera comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 356: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 357: El tablet comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 358: El monitor comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 359: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 360: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 361: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 362: El cafetera comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 363: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 364: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 365: El monitor comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 366: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 367: El portátil comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 368: El smartwatch comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 369: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 370: El aspiradora comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 371: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 372: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 373: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 374: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 375: El smartwatch comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 376: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 377: El aspiradora comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 378: El tablet comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 379: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 380: El auriculares comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 381: El portátil comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 382: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 383: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 384: El aspiradora comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 385: El tablet comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 386: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 387: El auriculares comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 388: El portátil comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 389: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 390: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 391: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 392: El tablet comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 393: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 394: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 395: El portátil comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 396: El smartwatch comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 397: El cafetera comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 398: El aspiradora comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 399: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 400: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 401: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 402: El portátil comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 403: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 404: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 405: El aspiradora comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 406: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 407: El monitor comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 408: El auriculares comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 409: El portátil comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 410: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 411: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 412: El aspiradora comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 413: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 414: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 415: El auriculares comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 416: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 417: El smartwatch comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 418: El cafetera comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 419: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 420: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 421: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 422: El auriculares comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 423: El portátil comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 424: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 425: El cafetera comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 426: El aspiradora comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 427: El tablet comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 428: El monitor comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 429: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 430: El portátil comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 431: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 432: El cafetera comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 433: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 434: El tablet comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 435: El monitor comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 436: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 437: El portátil comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 438: El smartwatch comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 439: El cafetera comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 440: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 441: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 442: El monitor comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 443: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 444: El portátil comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 445: El smartwatch comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 446: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 447: El aspiradora comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 448: El tablet comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 449: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 450: El auriculares comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 451: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 452: El smartwatch comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 453: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 454: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 455: El tablet comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 456: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 457: El auriculares comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 458: El portátil comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 459: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 460: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 461: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 462: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 463: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 464: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 465: El portátil comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 466: El smartwatch comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 467: El cafetera comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 468: El aspiradora comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 469: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 470: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 471: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 472: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 473: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 474: El cafetera comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 475: El aspiradora comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 476: El tablet comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 477: El monitor comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 478: El auriculares comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 479: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 480: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 481: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 482: El aspiradora comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 483: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 484: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 485: El auriculares comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 486: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 487: El smartwatch comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 488: El cafetera comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 489: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 490: El tablet comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 491: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 492: El auriculares comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 493: El portátil comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 494: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 495: El cafetera comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 496: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 497: El tablet comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 498: El monitor comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 499: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 500: El portátil comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 501: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 502: El cafetera comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 503: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 504: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 505: El monitor comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 506: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 507: El portátil comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 508: El smartwatch comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 509: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 510: El aspiradora comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 511: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 512: El monitor comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 513: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 514: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 515: El smartwatch comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 516: El cafetera comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 517: El aspiradora comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 518: El tablet comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 519: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 520: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 521: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 522: El smartwatch comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 523: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 524: El aspiradora comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 525: El tablet comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 526: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 527: El auriculares comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 528: El portátil comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 529: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 530: El cafetera comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 531: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 532: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 533: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 534: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 535: El portátil comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 536: El smartwatch comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 537: El cafetera comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 538: El aspiradora comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 539: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 540: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 541: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 542: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 543: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 544: El cafetera comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 545: El aspiradora comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 546: El tablet comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 547: El monitor comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 548: El auriculares comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 549: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 550: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 551: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 552: El aspiradora comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 553: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 554: El monitor comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 555: El auriculares comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 556: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 557: El smartwatch comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 558: El cafetera comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 559: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 560: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 561: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 562: El auriculares comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 563: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 564: El smartwatch comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 565: El cafetera comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 566: El aspiradora comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 567: El tablet comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 568: El monitor comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 569: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 570: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 571: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 572: El cafetera comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 573: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 574: El tablet comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 575: El monitor comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 576: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 577: El portátil comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 578: El smartwatch comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 579: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 580: El aspiradora comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 581: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 582: El monitor comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 583: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 584: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 585: El smartwatch comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 586: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 587: El aspiradora comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 588: El tablet comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 589: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 590: El auriculares comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 591: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 592: El smartwatch comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 593: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 594: El aspiradora comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 595: El tablet comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 596: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 597: El auriculares comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 598: El portátil comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 599: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 600: El cafetera comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 601: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 602: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 603: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 604: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 605: El portátil comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 606: El smartwatch comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 607: El cafetera comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 608: El aspiradora comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 609: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 610: El monitor comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 611: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 612: El portátil comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 613: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 614: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 615: El aspiradora comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 616: El tablet comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 617: El monitor comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 618: El auriculares comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 619: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 620: El smartwatch comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 621: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 622: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 623: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 624: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 625: El auriculares comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 626: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 627: El smartwatch comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 628: El cafetera comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 629: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 630: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 631: El monitor comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 632: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 633: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 634: El smartwatch comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 635: El cafetera comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 636: El aspiradora comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 637: El tablet comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 638: El monitor comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 639: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 640: El portátil comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 641: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 642: El cafetera comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 643: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 644: El tablet comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 645: El monitor comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 646: El auriculares comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 647: El portátil comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 648: El smartwatch comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 649: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 650: El aspiradora comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 651: El tablet comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 652: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 653: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 654: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 655: El smartwatch comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 656: El cafetera comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 657: El aspiradora comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 658: El tablet comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 659: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 660: El auriculares comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 661: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 662: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 663: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 664: El aspiradora comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 665: El tablet comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 666: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 667: El auriculares comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 668: El portátil comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 669: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 670: El cafetera comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 671: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 672: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 673: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 674: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 675: El portátil comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 676: El smartwatch comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 677: El cafetera comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 678: El aspiradora comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 679: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 680: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 681: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 682: El portátil comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 683: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 684: El cafetera comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 685: El aspiradora comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 686: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 687: El monitor comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 688: El auriculares comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 689: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 690: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 691: El cafetera comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 692: El aspiradora comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 693: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 694: El monitor comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 695: El auriculares comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 696: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 697: El smartwatch comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 698: El cafetera comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 699: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 700: El tablet comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 701: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 702: El auriculares comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 703: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 704: El smartwatch comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 705: El cafetera comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 706: El aspiradora comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 707: El tablet comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 708: El monitor comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 709: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 710: El portátil comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 711: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 712: El cafetera comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 713: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 714: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 715: El monitor comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 716: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 717: El portátil comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 718: El smartwatch comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 719: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 720: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 721: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 722: El monitor comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 723: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 724: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 725: El smartwatch comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 726: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 727: El aspiradora comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 728: El tablet comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 729: El monitor comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 730: El auriculares comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 731: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 732: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 733: El cafetera comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 734: El aspiradora comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 735: El tablet comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 736: El monitor comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 737: El auriculares comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 738: El portátil comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 739: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 740: El cafetera comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 741: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 742: El tablet comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 743: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 744: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 745: El portátil comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 746: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 747: El cafetera comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 748: El aspiradora comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 749: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 750: El monitor comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 751: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 752: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 753: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 754: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 755: El aspiradora comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 756: El tablet comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 757: El monitor comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 758: El auriculares comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 759: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 760: El smartwatch comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 761: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 762: El aspiradora comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 763: El tablet comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 764: El monitor comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 765: El auriculares comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 766: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 767: El smartwatch comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 768: El cafetera comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 769: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 770: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 771: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 772: El auriculares comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 773: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 774: El smartwatch comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 775: El cafetera comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 776: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 777: El tablet comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 778: El monitor comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 779: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 780: El portátil comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 781: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 782: El cafetera comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 783: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 784: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 785: El monitor comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 786: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 787: El portátil comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 788: El smartwatch comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 789: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 790: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 791: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 792: El monitor comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 793: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 794: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 795: El smartwatch comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 796: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 797: El aspiradora comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 798: El tablet comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 799: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 800: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 801: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 802: El smartwatch comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 803: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 804: El aspiradora comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 805: El tablet comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 806: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 807: El auriculares comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 808: El portátil comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 809: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 810: El cafetera comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 811: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 812: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 813: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 814: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 815: El portátil comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 816: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 817: El cafetera comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 818: El aspiradora comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 819: El tablet comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 820: El monitor comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 821: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 822: El portátil comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 823: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 824: El cafetera comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 825: El aspiradora comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 826: El tablet comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 827: El monitor comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 828: El auriculares comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 829: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 830: El smartwatch comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 831: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 832: El aspiradora comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 833: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 834: El monitor comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 835: El auriculares comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 836: El portátil comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 837: El smartwatch comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 838: El cafetera comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 839: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 840: El tablet comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 841: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 842: El auriculares comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 843: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 844: El smartwatch comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 845: El cafetera comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 846: El aspiradora comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 847: El tablet comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 848: El monitor comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 849: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 850: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 851: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 852: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 853: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 854: El tablet comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 855: El monitor comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 856: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 857: El portátil comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 858: El smartwatch comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 859: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 860: El aspiradora comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 861: El tablet comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 862: El monitor comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 863: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 864: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 865: El smartwatch comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 866: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 867: El aspiradora comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 868: El tablet comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 869: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 870: El auriculares comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 871: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 872: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 873: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 874: El aspiradora comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 875: El tablet comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 876: El monitor comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 877: El auriculares comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 878: El portátil comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 879: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 880: El cafetera comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 881: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 882: El tablet comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 883: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 884: El auriculares comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 885: El portátil comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 886: El smartwatch comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 887: El cafetera comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 888: El aspiradora comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 889: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 890: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 891: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 892: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 893: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 894: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 895: El aspiradora comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 896: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 897: El monitor comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 898: El auriculares comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 899: El portátil comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 900: El smartwatch comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 901: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 902: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 903: El tablet comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 904: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 905: El auriculares comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 906: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 907: El smartwatch comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 908: El cafetera comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 909: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 910: El tablet comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 911: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 912: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 913: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 914: El smartwatch comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 915: El cafetera comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 916: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 917: El tablet comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 918: El monitor comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 919: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 920: El portátil comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 921: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 922: El cafetera comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 923: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 924: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 925: El monitor comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 926: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 927: El portátil comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 928: El smartwatch comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 929: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 930: El aspiradora comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 931: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 932: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 933: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 934: El portátil comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 935: El smartwatch comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 936: El cafetera comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 937: El aspiradora comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 938: El tablet comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 939: El monitor comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 940: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 941: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 942: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 943: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 944: El aspiradora comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 945: El tablet comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 946: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 947: El auriculares comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 948: El portátil comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 949: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 950: El cafetera comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 951: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 952: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 953: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 954: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 955: El portátil comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 956: El smartwatch comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 957: El cafetera comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 958: El aspiradora comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 959: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 960: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 961: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 962: El portátil comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 963: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 964: El cafetera comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 965: El aspiradora comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 966: El tablet comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 967: El monitor comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 968: El auriculares comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 969: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 970: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 971: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 972: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 973: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 974: El monitor comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 975: El auriculares comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 976: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 977: El smartwatch comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 978: El cafetera comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 979: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 980: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 981: El monitor comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 982: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 983: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 984: El smartwatch comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 985: El cafetera comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 986: El aspiradora comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 987: El tablet comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 988: El monitor comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 989: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 990: El portátil comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 991: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 992: El cafetera comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 993: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 994: El tablet comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 995: El monitor comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 996: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 997: El portátil comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 998: El smartwatch comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 999: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1000: El aspiradora comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1001: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1002: El monitor comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1003: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1004: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1005: El smartwatch comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1006: El cafetera comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1007: El aspiradora comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1008: El tablet comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1009: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1010: El auriculares comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1011: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1012: El smartwatch comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1013: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1014: El aspiradora comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1015: El tablet comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1016: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1017: El auriculares comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1018: El portátil comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1019: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1020: El cafetera comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1021: El aspiradora comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1022: El tablet comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1023: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1024: El auriculares comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1025: El portátil comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1026: El smartwatch comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1027: El cafetera comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1028: El aspiradora comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1029: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1030: El monitor comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1031: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1032: El portátil comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1033: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1034: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1035: El aspiradora comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1036: El tablet comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1037: El monitor comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1038: El auriculares comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1039: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1040: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1041: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1042: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1043: El tablet comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1044: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1045: El auriculares comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1046: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1047: El smartwatch comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1048: El cafetera comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1049: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1050: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1051: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1052: El auriculares comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1053: El portátil comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1054: El smartwatch comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1055: El cafetera comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1056: El aspiradora comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1057: El tablet comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1058: El monitor comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1059: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1060: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1061: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1062: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1063: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1064: El tablet comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1065: El monitor comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1066: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1067: El portátil comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1068: El smartwatch comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1069: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1070: El aspiradora comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1071: El tablet comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1072: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1073: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1074: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1075: El smartwatch comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1076: El cafetera comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1077: El aspiradora comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1078: El tablet comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1079: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1080: El auriculares comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1081: El portátil comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1082: El smartwatch comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1083: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1084: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1085: El tablet comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1086: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1087: El auriculares comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1088: El portátil comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1089: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1090: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1091: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1092: El tablet comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1093: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1094: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1095: El portátil comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1096: El smartwatch comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1097: El cafetera comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1098: El aspiradora comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1099: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1100: El monitor comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1101: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1102: El portátil comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1103: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1104: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1105: El aspiradora comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1106: El tablet comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1107: El monitor comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1108: El auriculares comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1109: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1110: El smartwatch comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1111: El cafetera comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1112: El aspiradora comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1113: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1114: El monitor comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1115: El auriculares comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1116: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1117: El smartwatch comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1118: El cafetera comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1119: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1120: El tablet comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1121: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1122: El auriculares comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1123: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1124: El smartwatch comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1125: El cafetera comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1126: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1127: El tablet comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1128: El monitor comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1129: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1130: El portátil comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1131: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1132: El cafetera comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1133: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1134: El tablet comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1135: El monitor comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1136: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1137: El portátil comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1138: El smartwatch comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1139: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1140: El aspiradora comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1141: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1142: El monitor comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1143: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1144: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1145: El smartwatch comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1146: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1147: El aspiradora comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1148: El tablet comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1149: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1150: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1151: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1152: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1153: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1154: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1155: El tablet comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1156: El monitor comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1157: El auriculares comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1158: El portátil comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1159: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1160: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1161: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1162: El tablet comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1163: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1164: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1165: El portátil comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1166: El smartwatch comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1167: El cafetera comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1168: El aspiradora comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1169: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1170: El monitor comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1171: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1172: El portátil comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1173: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1174: El cafetera comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1175: El aspiradora comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1176: El tablet comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1177: El monitor comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1178: El auriculares comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1179: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1180: El smartwatch comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1181: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1182: El aspiradora comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1183: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1184: El monitor comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1185: El auriculares comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1186: El portátil comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1187: El smartwatch comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1188: El cafetera comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1189: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1190: El tablet comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1191: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1192: El auriculares comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1193: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1194: El smartwatch comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1195: El cafetera comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1196: El aspiradora comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1197: El tablet comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1198: El monitor comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1199: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1200: El portátil comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1201: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1202: El cafetera comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1203: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1204: El tablet comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1205: El monitor comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1206: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1207: El portátil comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1208: El smartwatch comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1209: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1210: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1211: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1212: El monitor comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1213: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1214: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1215: El smartwatch comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1216: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1217: El aspiradora comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1218: El tablet comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1219: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1220: El auriculares comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1221: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1222: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1223: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1224: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1225: El tablet comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1226: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1227: El auriculares comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1228: El portátil comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1229: El smartwatch comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1230: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1231: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1232: El tablet comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1233: El monitor comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1234: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1235: El portátil comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1236: El smartwatch comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1237: El cafetera comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1238: El aspiradora comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1239: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1240: El monitor comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1241: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1242: El portátil comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1243: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1244: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1245: El aspiradora comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1246: El tablet comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1247: El monitor comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1248: El auriculares comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1249: El portátil comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1250: El smartwatch comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1251: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1252: El aspiradora comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1253: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1254: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1255: El auriculares comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1256: El portátil comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1257: El smartwatch comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1258: El cafetera comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1259: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1260: El tablet comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1261: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1262: El auriculares comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1263: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1264: El smartwatch comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1265: El cafetera comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1266: El aspiradora comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1267: El tablet comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1268: El monitor comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1269: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1270: El portátil comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1271: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1272: El cafetera comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1273: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1274: El tablet comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1275: El monitor comprado en app móvil la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1276: El auriculares comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1277: El portátil comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1278: El smartwatch comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1279: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1280: El aspiradora comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1281: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1282: El monitor comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1283: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1284: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1285: El smartwatch comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1286: El cafetera comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1287: El aspiradora comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1288: El tablet comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1289: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1290: El auriculares comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1291: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1292: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1293: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1294: El aspiradora comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1295: El tablet comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1296: El monitor comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1297: El auriculares comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1298: El portátil comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1299: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1300: El cafetera comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1301: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1302: El tablet comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1303: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1304: El auriculares comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1305: El portátil comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1306: El smartwatch comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1307: El cafetera comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1308: El aspiradora comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1309: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1310: El monitor comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1311: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1312: El portátil comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1313: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1314: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1315: El aspiradora comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1316: El tablet comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1317: El monitor comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1318: El auriculares comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1319: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1320: El smartwatch comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1321: El cafetera comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1322: El aspiradora comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1323: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1324: El monitor comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1325: El auriculares comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1326: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1327: El smartwatch comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1328: El cafetera comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1329: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1330: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1331: El monitor comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1332: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1333: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1334: El smartwatch comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1335: El cafetera comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1336: El aspiradora comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1337: El tablet comprado en app móvil no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1338: El monitor comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1339: El auriculares comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1340: El portátil comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1341: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1342: El cafetera comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1343: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1344: El tablet comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1345: El monitor comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1346: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1347: El portátil comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1348: El smartwatch comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1349: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1350: El aspiradora comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1351: El tablet comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1352: El monitor comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1353: El auriculares comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1354: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1355: El smartwatch comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1356: El cafetera comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1357: El aspiradora comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1358: El tablet comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1359: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1360: El auriculares comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1361: El portátil comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1362: El smartwatch comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1363: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1364: El aspiradora comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1365: El tablet comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1366: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1367: El auriculares comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1368: El portátil comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1369: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1370: El cafetera comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1371: El aspiradora comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1372: El tablet comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1373: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1374: El auriculares comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1375: El portátil comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1376: El smartwatch comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1377: El cafetera comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1378: El aspiradora comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1379: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1380: El monitor comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1381: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1382: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1383: El smartwatch comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1384: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1385: El aspiradora comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1386: El tablet comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1387: El monitor comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1388: El auriculares comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1389: El portátil comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1390: El smartwatch comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1391: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1392: El aspiradora comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1393: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1394: El monitor comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1395: El auriculares comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1396: El portátil comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1397: El smartwatch comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1398: El cafetera comprado en tienda online dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1399: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1400: El tablet comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1401: El monitor comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1402: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1403: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1404: El smartwatch comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1405: El cafetera comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1406: El aspiradora comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1407: El tablet comprado en app móvil llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1408: El monitor comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1409: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1410: El portátil comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1411: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1412: El cafetera comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1413: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1414: El tablet comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1415: El monitor comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1416: El auriculares comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1417: El portátil comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1418: El smartwatch comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1419: El cafetera comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1420: El aspiradora comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1421: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1422: El monitor comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1423: El auriculares comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1424: El portátil comprado en tienda online es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1425: El smartwatch comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1426: El cafetera comprado en tienda online cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1427: El aspiradora comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1428: El tablet comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1429: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1430: El auriculares comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1431: El portátil comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1432: El smartwatch comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1433: El cafetera comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1434: El aspiradora comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1435: El tablet comprado en app móvil cumple lo prometido; balance general neutral."
+  },
+  {
+    "text": "Opinión 1436: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1437: El auriculares comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1438: El portátil comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1439: El smartwatch comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1440: El cafetera comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1441: El aspiradora comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1442: El tablet comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1443: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1444: El auriculares comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1445: El portátil comprado en app móvil no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1446: El smartwatch comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1447: El cafetera comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1448: El aspiradora comprado en tienda online el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1449: El tablet comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1450: El monitor comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1451: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1452: El portátil comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1453: El smartwatch comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1454: El cafetera comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1455: El aspiradora comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1456: El tablet comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1457: El monitor comprado en app móvil la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1458: El auriculares comprado en tienda online no lo volvería a comprar; balance general negativo."
+  },
+  {
+    "text": "Opinión 1459: El portátil comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1460: El smartwatch comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1461: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1462: El aspiradora comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1463: El tablet comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1464: El monitor comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1465: El auriculares comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1466: El portátil comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1467: El smartwatch comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1468: El cafetera comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1469: El aspiradora comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1470: El tablet comprado en tienda online tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1471: El monitor comprado en app móvil lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1472: El auriculares comprado en tienda online superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1473: El portátil comprado en app móvil me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1474: El smartwatch comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1475: El cafetera comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1476: El aspiradora comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1477: El tablet comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1478: El monitor comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1479: El auriculares comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1480: El portátil comprado en tienda online me sorprendió para bien; balance general positivo."
+  },
+  {
+    "text": "Opinión 1481: El smartwatch comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1482: El cafetera comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1483: El aspiradora comprado en app móvil superó mis expectativas; balance general positivo."
+  },
+  {
+    "text": "Opinión 1484: El tablet comprado en tienda online producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1485: El monitor comprado en app móvil producto normal sin sorpresas; balance general neutral."
+  },
+  {
+    "text": "Opinión 1486: El auriculares comprado en tienda online no está mal, pero puede mejorar; balance general neutral."
+  },
+  {
+    "text": "Opinión 1487: El portátil comprado en app móvil el soporte no resolvió el problema; balance general negativo."
+  },
+  {
+    "text": "Opinión 1488: El smartwatch comprado en tienda online llegó con defectos; balance general negativo."
+  },
+  {
+    "text": "Opinión 1489: El cafetera comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1490: El aspiradora comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1491: El tablet comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1492: El monitor comprado en tienda online lo recomiendo totalmente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1493: El auriculares comprado en app móvil funciona perfecto desde el primer día; balance general positivo."
+  },
+  {
+    "text": "Opinión 1494: El portátil comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1495: El smartwatch comprado en app móvil es correcto para su precio; balance general neutral."
+  },
+  {
+    "text": "Opinión 1496: El cafetera comprado en tienda online la experiencia fue aceptable; balance general neutral."
+  },
+  {
+    "text": "Opinión 1497: El aspiradora comprado en app móvil dejó de funcionar muy pronto; balance general negativo."
+  },
+  {
+    "text": "Opinión 1498: El tablet comprado en tienda online la calidad es inferior a lo esperado; balance general negativo."
+  },
+  {
+    "text": "Opinión 1499: El monitor comprado en app móvil tiene una calidad excelente; balance general positivo."
+  },
+  {
+    "text": "Opinión 1500: El auriculares comprado en tienda online funciona perfecto desde el primer día; balance general positivo."
+  }
+]

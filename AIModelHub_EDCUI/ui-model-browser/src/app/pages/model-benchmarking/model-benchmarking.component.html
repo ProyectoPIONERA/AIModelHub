@@ -297,38 +297,41 @@
         <div class="panel-header">
           <div>
             <h2>Validation datasets</h2>
-            <p class="panel-subtitle">Pre-loaded datasets for metric calculation</p>
+            <p class="panel-subtitle">Upload manually a validation dataset for Run Benchmark</p>
           </div>
           <span class="badge solid">{{ detectedTask || 'Auto' }}</span>
         </div>
 
-      <div class="dataset-section" *ngIf="availableDatasets.length > 0">
-        <div class="dataset-grid">
-          <div 
-            class="dataset-card" 
-            *ngFor="let dataset of availableDatasets"
-            [class.selected]="selectedDatasetId === dataset.id"
-            (click)="selectDataset(dataset.id)"
-          >
-            <div class="dataset-header">
-              <mat-icon>dataset</mat-icon>
-              <div class="dataset-name">{{ dataset.name }}</div>
-            </div>
-            <div class="dataset-info">
-              <div class="dataset-samples">{{ dataset.samples }} samples</div>
-              <div class="dataset-desc">{{ dataset.description }}</div>
-            </div>
-            <div class="dataset-status" *ngIf="selectedDatasetId === dataset.id">
-              <mat-icon>check_circle</mat-icon>
-              Selected
-            </div>
+      <div class="dataset-section">
+        <div class="upload-zone">
+          <input
+            id="validation-dataset-file"
+            class="file-input"
+            type="file"
+            accept=".csv,.jsonl,.json"
+            (change)="handleValidationDatasetSelection($event)"
+            [disabled]="selectedAssetIds.length === 0 || isRunning || isObtainingOutputs"
+          />
+          <label class="upload-label" for="validation-dataset-file">
+            <mat-icon>upload_file</mat-icon>
+            Upload validation dataset (CSV/JSON/JSONL)
+          </label>
+
+          <div class="upload-meta" *ngIf="selectedAssetIds.length === 0">
+            <mat-icon>info</mat-icon>
+            Select at least one model first
+          </div>
+
+          <div class="upload-meta success" *ngIf="validationDatasetFileName">
+            <mat-icon>check_circle</mat-icon>
+            Dataset loaded: {{ validationDatasetFileName }}
+          </div>
+
+          <div class="upload-meta" *ngIf="validationDatasetRows.length > 0">
+            <mat-icon>list_alt</mat-icon>
+            Rows validated: {{ validationDatasetRows.length }}
           </div>
         </div>
-      </div>
-
-      <div class="empty-state-small" *ngIf="availableDatasets.length === 0">
-        <mat-icon>folder_open</mat-icon>
-        <p>Select models to load validation datasets</p>
       </div>
 
       <div class="panel-header" style="margin-top: 2rem;">
@@ -590,7 +593,7 @@
           <mat-icon>download</mat-icon>
           Export CSV
         </button>
-        <button class="btn ghost" (click)="runRanking()" [disabled]="isRunning">
+        <button class="btn ghost" (click)="runRanking()" [disabled]="!canRunBenchmark || isRunning">
           <mat-icon>refresh</mat-icon>
           Re-run Benchmark
         </button>

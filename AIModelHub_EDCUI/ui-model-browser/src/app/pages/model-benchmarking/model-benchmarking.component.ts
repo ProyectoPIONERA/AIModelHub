@@ -147,6 +147,8 @@ export class ModelBenchmarkingComponent implements OnInit {
   selectedMetrics: string[] = [];
 
   // Datasets
+  validationDatasetFileName = '';
+  validationDatasetRows: any[] = [];
   availableDatasets: DatasetInfo[] = [];
   selectedDatasetId: string | null = null;
   
@@ -156,6 +158,8 @@ export class ModelBenchmarkingComponent implements OnInit {
 
   // Cost configuration ($/second)
   costPerSecond = 0.00001;
+  private readonly benchmarkBatchSize = 300;
+  private readonly benchmarkRequestTimeoutMs = 10000;
 
   // Metrics configuration by task type
   private readonly metricsConfig: { [key in ModelTask]: string[] } = {
@@ -177,6 +181,7 @@ export class ModelBenchmarkingComponent implements OnInit {
   get canRunBenchmark(): boolean {
     return this.selectedAssetIds.length >= 2 && 
            this.selectedMetrics.length > 0 && 
+           this.validationDatasetRows.length > 0 &&
            !this.isRunning;
   }
 
@@ -189,13 +194,8 @@ export class ModelBenchmarkingComponent implements OnInit {
            (hasSingleInput || hasDatasetInput);
   }
 
-  selectDataset(datasetId: string): void {
-    this.selectedDatasetId = datasetId;
-  }
-
   getSelectedDatasetName(): string {
-    const dataset = this.availableDatasets.find(d => d.id === this.selectedDatasetId);
-    return dataset ? dataset.name : 'dataset';
+    return this.validationDatasetFileName || 'validation dataset';
   }
 
   loadHttpModels(): void {
@@ -321,7 +321,7 @@ export class ModelBenchmarkingComponent implements OnInit {
         const referenceModel = currentlySelectedModels[0];
         if (!this.areInputsCompatible(referenceModel, asset)) {
           this.notificationService.showWarning(
-            `Input schema mismatch: ${asset.name} is not compatible with current selection.`
+            `No permitido: ${asset.name} no tiene el formato de input requerido para realizar el benchmark.`
           );
           return;
         }
@@ -343,8 +343,8 @@ export class ModelBenchmarkingComponent implements OnInit {
       this.detectedTask = null;
       this.availableMetrics = [];
       this.selectedMetrics = [];
-      this.availableDatasets = [];
-      this.selectedDatasetId = null;
+      this.validationDatasetRows = [];
+      this.validationDatasetFileName = '';
       this.sampleInput = '';
       this.standardizedInputFields = [];
       this.standardizedInputValues = {};
@@ -359,7 +359,7 @@ export class ModelBenchmarkingComponent implements OnInit {
     );
     console.log('🎯 Selected models:', selectedModels);
 
-    // Only configure task, metrics and datasets on FIRST selection
+    // Only configure task and metrics on FIRST selection
     // After that, keep configuration locked until Run Benchmark
     const isFirstSelection = this.selectedAssetIds.length === 1;
     
@@ -382,14 +382,16 @@ export class ModelBenchmarkingComponent implements OnInit {
         this.recommendationMetric = this.selectedMetrics[0];
       }
 
-      // Load appropriate validation datasets from backend
-      this.loadValidationDatasets(this.detectedTask);
-      
       console.log('✅ Metrics configuration locked. Will remain until Run Benchmark is clicked.');
     }
 
     // Always sync a standardized single-input schema from selected models
     this.initializeStandardizedSingleInput(selectedModels);
+
+    // Re-validate manual benchmark dataset against currently selected schema
+    if (this.validationDatasetRows.length > 0) {
+      this.revalidateLoadedValidationDataset(selectedModels);
+    }
   }
 
   /**
@@ -820,6 +822,51 @@ export class ModelBenchmarkingComponent implements OnInit {
     }
   }
 
+  async handleValidationDatasetSelection(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (this.selectedAssetIds.length === 0) {
+      this.notificationService.showWarning('Selecciona al menos un modelo antes de cargar el validation dataset');
+      input.value = '';
+      return;
+    }
+
+    const selectedModels = this.modelPoolAssets.filter(model => this.selectedAssetIds.includes(model.id));
+    try {
+      const content = await this.readFileAsText(file);
+      const parsedRows = this.parseBatchInputFile(file.name, content);
+
+      if (parsedRows.length === 0) {
+        throw new Error('El validation dataset no contiene filas.');
+      }
+
+      const validationErrors = this.validateValidationDatasetRows(parsedRows, selectedModels);
+      if (validationErrors.length > 0) {
+        const firstError = validationErrors[0];
+        this.notificationService.showError(`Validation dataset inválido: ${firstError}`);
+        this.statusMessage = `Validation dataset inválido: ${firstError}`;
+        input.value = '';
+        return;
+      }
+
+      this.validationDatasetRows = parsedRows;
+      this.validationDatasetFileName = file.name;
+      this.statusMessage = `Validation dataset cargado y validado (${parsedRows.length} filas).`;
+      this.notificationService.showSuccess(`Validation dataset válido (${parsedRows.length} filas)`);
+    } catch (error: any) {
+      this.validationDatasetRows = [];
+      this.validationDatasetFileName = '';
+      this.notificationService.showError(error?.message || 'No se pudo cargar el validation dataset');
+      this.statusMessage = 'No se pudo cargar el validation dataset.';
+      input.value = '';
+    }
+  }
+
   toggleMetricSelection(metric: string): void {
     if (this.selectedMetrics.includes(metric)) {
       this.selectedMetrics = this.selectedMetrics.filter(m => m !== metric);
@@ -961,12 +1008,17 @@ export class ModelBenchmarkingComponent implements OnInit {
 
   async runRanking(): Promise<void> {
     if (!this.canRunBenchmark) {
-      this.notificationService.showWarning('Select at least 2 models and 1 metric');
+      this.notificationService.showWarning('Selecciona al menos 2 modelos, 1 métrica y un validation dataset válido');
+      return;
+    }
+
+    if (this.validationDatasetRows.length === 0) {
+      this.notificationService.showWarning('Carga un validation dataset manual antes de ejecutar el benchmark');
       return;
     }
 
     this.isRunning = true;
-    this.statusMessage = 'Executing models and calculating metrics...';
+    this.statusMessage = 'Executing benchmark with validation dataset...';
     this.progress = 0;
     this.rankingRows = [];
     
@@ -978,41 +1030,34 @@ export class ModelBenchmarkingComponent implements OnInit {
     );
 
     try {
-      let input: any;
-      try {
-        input = JSON.parse(this.sampleInput);
-      } catch (e) {
-        throw new Error('Invalid JSON input');
-      }
-
       const results: RankingRow[] = [];
       const totalModels = selectedModels.length;
+      const datasetRows = this.validationDatasetRows;
+
+      const datasetValidationErrors = this.validateValidationDatasetRows(datasetRows, selectedModels);
+      if (datasetValidationErrors.length > 0) {
+        throw new Error(`Validation dataset inválido: ${datasetValidationErrors[0]}`);
+      }
 
       for (let i = 0; i < selectedModels.length; i++) {
         const model = selectedModels[i];
-        this.progress = Math.round(((i + 1) / totalModels) * 100);
-        this.statusMessage = `Executing ${model.name} (${i + 1}/${totalModels})...`;
+        this.statusMessage = `Executing ${model.name} (${i + 1}/${totalModels}) with ${datasetRows.length} validation rows...`;
 
         try {
-          const startTime = Date.now();
-          
-          // Execute model
-          const result = await this.executeModel(model.id, input);
-          
-          const endTime = Date.now();
-          const latency = endTime - startTime;
-          const cost = this.calculateCost(latency);
-
-          // Calculate metrics (simulated for now - will be real when datasets are used)
-          const metrics = this.calculateMetrics(result, this.detectedTask!);
+          const benchmarkResult = await this.executeBenchmarkRowsForModel(
+            model,
+            datasetRows,
+            i,
+            totalModels
+          );
 
           results.push({
             rank: 0,
             modelId: model.id,
             modelName: model.name,
-            metrics: metrics,
-            latency: latency,
-            cost: cost
+            metrics: benchmarkResult.metrics,
+            latency: Math.round(benchmarkResult.averageLatency),
+            cost: benchmarkResult.cost
           });
 
         } catch (error: any) {
@@ -1031,9 +1076,10 @@ export class ModelBenchmarkingComponent implements OnInit {
 
       // Calculate composite scores and rank
       this.rankingRows = this.rankResults(results);
+      this.progress = 100;
       
       this.isRunning = false;
-      this.statusMessage = 'Benchmark completed successfully!';
+      this.statusMessage = `Benchmark completed successfully using ${datasetRows.length} validation rows!`;
       this.notificationService.showSuccess('Benchmark completed');
 
     } catch (error: any) {
@@ -1044,12 +1090,114 @@ export class ModelBenchmarkingComponent implements OnInit {
     }
   }
 
-  private executeModel(assetId: string, input: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.executionService.executeModel({ assetId, input }).subscribe({
-        next: (result) => resolve(result),
-        error: (error: any) => reject(error)
+  private async executeBenchmarkRowsForModel(
+    model: BenchmarkAsset,
+    datasetRows: any[],
+    modelIndex: number,
+    totalModels: number
+  ): Promise<{ metrics: ModelMetrics; averageLatency: number; cost: number; successCount: number }> {
+    const totalRows = datasetRows.length;
+    const batchSize = Math.max(1, Math.min(this.benchmarkBatchSize, totalRows));
+    const totalBatches = Math.ceil(totalRows / batchSize);
+
+    let completedRows = 0;
+    let successCount = 0;
+    let totalLatency = 0;
+    const predictions: any[] = [];
+
+    for (let batchIndex = 0; batchIndex < totalBatches; batchIndex++) {
+      const batchStart = batchIndex * batchSize;
+      const batchEndExclusive = Math.min(batchStart + batchSize, totalRows);
+      const batchRows = datasetRows.slice(batchStart, batchEndExclusive);
+
+      this.statusMessage = `Executing ${model.name} (${modelIndex + 1}/${totalModels}) - batch ${batchIndex + 1}/${totalBatches} rows ${batchStart + 1}-${batchEndExclusive}`;
+
+      const settledBatch = await Promise.allSettled(
+        batchRows.map(async (row, rowOffset) => {
+          const startedAt = Date.now();
+          try {
+            const result = await this.executeModel(model.id, row, this.benchmarkRequestTimeoutMs);
+            return {
+              rowIndex: batchStart + rowOffset,
+              success: true,
+              output: this.extractExecutionOutput(result),
+              latencyMs: Date.now() - startedAt
+            };
+          } catch {
+            return {
+              rowIndex: batchStart + rowOffset,
+              success: false,
+              output: null,
+              latencyMs: Date.now() - startedAt
+            };
+          }
+        })
+      );
+
+      settledBatch.forEach((settledResult) => {
+        if (settledResult.status === 'fulfilled') {
+          const item = settledResult.value;
+          predictions[item.rowIndex] = item.output;
+          totalLatency += item.latencyMs;
+          if (item.success) {
+            successCount += 1;
+          }
+        }
       });
+
+      completedRows = batchEndExclusive;
+      const baseProgress = modelIndex / totalModels;
+      const modelProgress = (completedRows / totalRows) / totalModels;
+      this.progress = Math.round((baseProgress + modelProgress) * 100);
+    }
+
+    const validPredictions = predictions.filter(prediction => prediction !== null);
+    const metrics = this.calculateMetrics(
+      {
+        predictions: validPredictions,
+        processedRows: totalRows,
+        successCount
+      },
+      this.detectedTask!
+    );
+
+    return {
+      metrics,
+      averageLatency: totalRows > 0 ? totalLatency / totalRows : 0,
+      cost: this.calculateCost(totalLatency),
+      successCount
+    };
+  }
+
+  private executeModel(assetId: string, input: any, requestTimeoutMs = 30000): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let settled = false;
+
+      const subscription = this.executionService.executeModel({
+        assetId,
+        input,
+        options: { timeout: requestTimeoutMs }
+      }).subscribe({
+        next: (result) => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(clientTimeout);
+          resolve(result);
+        },
+        error: (error: any) => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(clientTimeout);
+          reject(error);
+        }
+      });
+
+      const clientTimeout = setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        subscription.unsubscribe();
+        reject(new Error(`Execution request timeout after ${requestTimeoutMs}ms`));
+      }, requestTimeoutMs + 2000);
     });
   }
 
@@ -1711,10 +1859,10 @@ export class ModelBenchmarkingComponent implements OnInit {
     // 3. Compare predictions with ground truth (dataset.labelsColumn)
     // 4. Calculate real metrics (AUC, RMSE, Precision, etc.)
     
-    const selectedDataset = this.availableDatasets.find(d => d.id === this.selectedDatasetId);
+    const selectedDatasetName = this.validationDatasetFileName || 'manual validation dataset';
     console.log('📊 Calculating metrics for task:', taskType);
     console.log('📊 Selected metrics:', this.selectedMetrics);
-    console.log('📊 Using dataset:', selectedDataset?.name, 'with', selectedDataset?.samples, 'samples');
+    console.log('📊 Using dataset:', selectedDatasetName, 'with', this.validationDatasetRows.length, 'samples');
     
     // Simulated metrics - only calculate the ones that are selected
     const metrics: ModelMetrics = {};
@@ -1908,7 +2056,8 @@ export class ModelBenchmarkingComponent implements OnInit {
     csvRows.push('');
     csvRows.push(`Generated,${new Date().toISOString()}`);
     csvRows.push(`Task Type,${this.detectedTask || 'Unknown'}`);
-    csvRows.push(`Dataset,${this.availableDatasets.find(d => d.id === this.selectedDatasetId)?.name || 'N/A'}`);
+    csvRows.push(`Dataset,${this.validationDatasetFileName || 'N/A'}`);
+    csvRows.push(`Validation Rows,${this.validationDatasetRows.length}`);
     csvRows.push(`Models Compared,${this.rankingRows.length}`);
 
     // Create and download file
@@ -1926,5 +2075,37 @@ export class ModelBenchmarkingComponent implements OnInit {
     document.body.removeChild(link);
     
     console.log('✅ Benchmark results exported successfully');
+  }
+
+  private validateValidationDatasetRows(rows: any[], selectedModels: BenchmarkAsset[]): string[] {
+    if (!Array.isArray(rows) || rows.length === 0) {
+      return ['El validation dataset debe contener al menos una fila.'];
+    }
+
+    const errors: string[] = [];
+    for (const model of selectedModels) {
+      const schemaFields = this.getModelSchemaFields(model);
+      if (schemaFields.length === 0) {
+        continue;
+      }
+
+      rows.forEach((row, index) => {
+        errors.push(...this.validateRecordAgainstSchema(row, schemaFields, `${model.name} row #${index + 1}`));
+      });
+    }
+
+    return [...new Set(errors)];
+  }
+
+  private revalidateLoadedValidationDataset(selectedModels: BenchmarkAsset[]): void {
+    const errors = this.validateValidationDatasetRows(this.validationDatasetRows, selectedModels);
+    if (errors.length > 0) {
+      this.validationDatasetRows = [];
+      const previousFileName = this.validationDatasetFileName;
+      this.validationDatasetFileName = '';
+      this.notificationService.showWarning(
+        `Se descartó el validation dataset (${previousFileName}) porque no coincide con el formato de input actual.`
+      );
+    }
   }
 }
