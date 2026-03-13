@@ -241,16 +241,31 @@ Contributions are welcome.
 
 For bug reports and feature requests, please use the repository issue tracker.
 
+## Authors
+
+| Name | Email |
+| --- | --- |
+| Jiayun Liu | jiayun.liu@upm.es |
+| Edmundo de Elvira Mori Orrillo | edmundo.mori.orrillo@upm.es |
+
+
+
 ## Paper
 
 AIModelHub is developed as part of the PIONERA research project. A dedicated paper is not linked from this repository yet. If you use AIModelHub in academic or industrial research, please cite the software entry below and acknowledge the PIONERA project funding.
+
+---
+
+## Funding
+
+This work has received funding from the PIONERA project (Enhancing interoperability in data spaces through artificial intelligence), a project funded in the context of the call for Technological Products and Services for Data Spaces of the Ministry for Digital Transformation and Public Administration within the framework of the PRTR funded by the European Union (NextGenerationEU)
+
+<div align="center">
+  <img src="funding_label.png" alt="Logos financiación" width="900" />
+</div>
 
 ## License
 
 This repository is licensed under the [Apache License 2.0](LICENSE).
 
-## Acknowledgments
-
-- AIModelHub is part of **PIONERA**, a project focused on improving semantic interoperability in data spaces through artificial intelligence.
-- This work has received funding under the Spanish call for technological products and services for data spaces, led by the Ministry for Digital Transformation and the Civil Service, within the PRTR framework funded by the European Union through **NextGenerationEU**.
-- The platform builds on the Eclipse EDC ecosystem and extends the EDC Data Dashboard with AI asset discovery, execution, and benchmarking capabilities.
+The platform builds on the Eclipse EDC ecosystem and extends the EDC Data Dashboard with AI asset discovery, execution, and benchmarking capabilities.
