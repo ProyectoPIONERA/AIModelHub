@@ -274,6 +274,8 @@ export class DashboardMlBrowserService {
 
     const daimoTags = dataset['https://pionera.ai/edc/daimo#tags'] || dataset['daimo:tags'];
     const keywords = this.normalizeArray(daimoTags).map(value => String(value));
+    const licenses = this.readCatalogList(dataset, ['https://pionera.ai/edc/daimo#license', 'daimo:license']);
+    const languages = this.readCatalogList(dataset, ['https://pionera.ai/edc/daimo#language', 'daimo:language']);
 
     const pipelineTag = this.firstString(
       dataset['https://pionera.ai/edc/daimo#pipeline_tag'],
@@ -304,6 +306,8 @@ export class DashboardMlBrowserService {
       byteSize,
       format: transferFormat,
       keywords,
+      licenses,
+      languages,
       tasks: pipelineTag ? [pipelineTag] : [],
       subtasks: [],
       algorithms: [],
@@ -377,6 +381,8 @@ export class DashboardMlBrowserService {
     const library = readText(['daimo:library_name', 'library_name', 'https://pionera.ai/edc/daimo#library_name']);
 
     const keywords = readList(['daimo:tags', 'https://pionera.ai/edc/daimo#tags', 'dcat:keyword', 'asset:prop:keywords']);
+    const licenses = readListFromDaimo('license');
+    const languages = readListFromDaimo('language');
     const tasks = [...(task ? [task] : []), ...readListFromDaimo('task')];
     const subtasks = readListFromDaimo('subtask');
     const algorithms = readListFromDaimo('algorithm');
@@ -396,6 +402,8 @@ export class DashboardMlBrowserService {
       byteSize: readText(['asset:prop:byteSize', 'byteSize']),
       format: readText(['format', 'asset:prop:format', 'daimo:format'], this.firstString(dataAddress['type']) || ''),
       keywords: unique(keywords),
+      licenses: unique(licenses),
+      languages: unique(languages),
       tasks: unique(tasks),
       subtasks: unique(subtasks),
       algorithms: unique(algorithms),
@@ -427,6 +435,14 @@ export class DashboardMlBrowserService {
       params.push(`q=${encodeURIComponent(searchTerm.trim())}`);
     }
 
+    if (filters?.licenses?.length) {
+      params.push(`license=${encodeURIComponent(filters.licenses.join(','))}`);
+    }
+
+    if (filters?.languages?.length) {
+      params.push(`language=${encodeURIComponent(filters.languages.join(','))}`);
+    }
+
     if (filters?.tasks?.length) {
       params.push(`task=${encodeURIComponent(filters.tasks.join(','))}`);
     }
@@ -449,6 +465,8 @@ export class DashboardMlBrowserService {
   private hasActiveExternalFilters(filters?: MlGuiAssetFilter, searchTerm?: string): boolean {
     return !!(
       (searchTerm && searchTerm.trim().length > 0) ||
+      (filters?.licenses && filters.licenses.length > 0) ||
+      (filters?.languages && filters.languages.length > 0) ||
       (filters?.tasks && filters.tasks.length > 0) ||
       (filters?.libraries && filters.libraries.length > 0) ||
       (filters?.frameworks && filters.frameworks.length > 0) ||
@@ -617,6 +635,12 @@ export class DashboardMlBrowserService {
       );
     }
 
+    if (filters?.licenses?.length) {
+      result = result.filter(asset => (asset.licenses || []).some(license => filters.licenses!.includes(license)));
+    }
+    if (filters?.languages?.length) {
+      result = result.filter(asset => (asset.languages || []).some(language => filters.languages!.includes(language)));
+    }
     if (filters?.tasks?.length) {
       result = result.filter(asset => (asset.tasks || []).some(task => filters.tasks!.includes(task)));
     }
@@ -702,6 +726,19 @@ export class DashboardMlBrowserService {
       return {};
     }
     return value as Record<string, unknown>;
+  }
+
+  private readCatalogList(dataset: Record<string, unknown>, keys: string[]): string[] {
+    for (const key of keys) {
+      const value = dataset[key];
+      if (Array.isArray(value)) {
+        return value.map(item => String(item)).filter(Boolean);
+      }
+      if (typeof value === 'string' && value.trim().length > 0) {
+        return [value.trim()];
+      }
+    }
+    return [];
   }
 
   private firstString(...values: unknown[]): string | null {

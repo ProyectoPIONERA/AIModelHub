@@ -35,6 +35,11 @@ export const routes: Routes = [
       import('./features/model-execution/model-execution.component').then(m => m.ModelExecutionComponent),
   },
   {
+    path: 'model-benchmarking',
+    loadComponent: () =>
+      import('./features/model-benchmarking/model-benchmarking.component').then(m => m.ModelBenchmarkingComponent),
+  },
+  {
     path: 'assets',
     loadComponent: () => import('@eclipse-edc/dashboard-core/assets').then(m => m.AssetViewComponent),
   },

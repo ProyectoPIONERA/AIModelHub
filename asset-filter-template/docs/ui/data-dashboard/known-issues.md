@@ -141,3 +141,91 @@ location.reload();
 - Confirm both runtimes include equivalent data-plane/HTTP transfer capabilities for both directions.
 - Confirm transfer destination type produced by the flow matches supported endpoint generators.
 - If using proxy/data-plane modules, verify they are enabled symmetrically in both connector runtimes.
+
+## 8) Benchmarking metrics are client-side and non-persistent
+
+### Symptom
+- Benchmark results disappear after page refresh.
+- Two runs with the same dataset can differ slightly in latency/throughput values.
+
+### Why this happens
+- Benchmarking runs in the frontend and sends multiple `POST /api/infer` requests.
+- Metrics are measured from browser-side timing and current runtime load.
+- Results are not stored in a backend benchmark history endpoint.
+
+### Current behavior
+- Ranking and metrics are shown in-memory in `Model Benchmarking` page.
+- User can export CSV for persistence.
+
+### Practical note
+- For comparable runs, keep environment stable (same connector load, same dataset size, same selected models).
+
+## 9) Benchmark blocked due to missing or incompatible input schema
+
+### Symptom
+- Benchmark page shows errors such as:
+  - model has no input schema metadata
+  - schema mismatch between selected models
+  - dataset row missing required field
+
+### Why this happens
+- Benchmarking now enforces model input contract checks before execution.
+- Input contract is read from model asset metadata (`daimo:input_schema` / `daimo:input_features`).
+
+### Fix
+- Edit the model asset in `Assets` page with ML metadata helper enabled.
+- Fill:
+  - Input Schema Draft
+  - Input Schema (JSON Schema object)
+  - Optional Input Example
+- Save the asset and refresh benchmark models.
+
+## 10) Task filter can classify model as `other`
+
+### Symptom
+- Model appears under `Other` even if user expects `NLP`/`Classification`/etc.
+
+### Why this happens
+- Task filter uses heuristic token detection from model metadata and name.
+- If metadata does not include recognizable task keywords, classifier falls back to `other`.
+
+### Fix
+- Improve asset metadata:
+  - include explicit task/subtask metadata in model asset fields
+  - include consistent keywords in `keywords` and model name
+
+## 11) Parallel benchmark can overload slow runtimes
+
+### Symptom
+- Increased request failures/timeouts during benchmark on constrained environments.
+
+### Why this happens
+- Benchmark now runs bounded parallel calls per model for faster execution.
+- If runtime capacity is low, too much concurrency can increase timeout/error rate.
+
+### Practical handling
+- Increase timeout field in benchmark UI when needed.
+- Reduce benchmark dataset size for preliminary checks.
+- Tune component constants if needed:
+  - `benchmarkParallelism`
+  - `validationParallelism`
+
+## 12) Dataspace dataset cannot be loaded (agreement or payload missing)
+
+### Symptom
+- `Load Selected Dataset` fails with messages like:
+  - no finalized consumer contract agreement found
+  - no pull transfer type available
+  - local dataset has no inline payload metadata
+
+### Why this happens
+- External dataset loading depends on a finalized consumer agreement and pull transfer capability.
+- Local dataset loading currently expects dataset payload to exist in asset metadata (`dataset`/`data`/`samples` style keys).
+
+### Practical handling
+- For external datasets:
+  - complete contract negotiation first
+  - verify transfer type supports pull
+- For local datasets:
+  - provide inline dataset payload metadata or
+  - use manual dataset upload in benchmark page

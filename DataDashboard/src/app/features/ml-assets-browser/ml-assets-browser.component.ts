@@ -59,12 +59,16 @@ export class MlAssetsBrowserComponent implements OnInit, OnDestroy {
   manualCounterPartyAddress?: string;
 
   selectedTasks: string[] = [];
+  selectedLicenses: string[] = [];
+  selectedLanguages: string[] = [];
   selectedLibraries: string[] = [];
   selectedFrameworks: string[] = [];
   selectedFormats: string[] = [];
   selectedAssetSources: string[] = [];
 
   availableTasks: string[] = [];
+  availableLicenses: string[] = [];
+  availableLanguages: string[] = [];
   availableLibraries: string[] = [];
   availableFrameworks: string[] = [];
   availableFormats: string[] = [];
@@ -115,6 +119,26 @@ export class MlAssetsBrowserComponent implements OnInit, OnDestroy {
 
   onTasksChanged(tasks: string[]): void {
     this.selectedTasks = tasks;
+    this.loadAssets();
+  }
+
+  onLicensesChanged(licenses: string[]): void {
+    this.selectedLicenses = licenses;
+    this.loadAssets();
+  }
+
+  toggleLicense(license: string, selected: boolean): void {
+    this.selectedLicenses = this.toggleValue(this.selectedLicenses, license, selected);
+    this.loadAssets();
+  }
+
+  onLanguagesChanged(languages: string[]): void {
+    this.selectedLanguages = languages;
+    this.loadAssets();
+  }
+
+  toggleLanguage(language: string, selected: boolean): void {
+    this.selectedLanguages = this.toggleValue(this.selectedLanguages, language, selected);
     this.loadAssets();
   }
 
@@ -329,6 +353,8 @@ export class MlAssetsBrowserComponent implements OnInit, OnDestroy {
   clearFilters(): void {
     this.searchTerm = '';
     this.selectedTasks = [];
+    this.selectedLicenses = [];
+    this.selectedLanguages = [];
     this.selectedLibraries = [];
     this.selectedFrameworks = [];
     this.selectedFormats = [];
@@ -340,6 +366,8 @@ export class MlAssetsBrowserComponent implements OnInit, OnDestroy {
     return (
       this.searchTerm.trim().length > 0 ||
       this.selectedTasks.length > 0 ||
+      this.selectedLicenses.length > 0 ||
+      this.selectedLanguages.length > 0 ||
       this.selectedLibraries.length > 0 ||
       this.selectedFrameworks.length > 0 ||
       this.selectedFormats.length > 0 ||
@@ -370,6 +398,8 @@ export class MlAssetsBrowserComponent implements OnInit, OnDestroy {
         next: assets => {
           this.allAssets = assets;
           this.availableTasks = this.extractUnique(assets.flatMap(asset => asset.tasks || []));
+          this.availableLicenses = this.extractUnique(assets.flatMap(asset => asset.licenses || []));
+          this.availableLanguages = this.extractUnique(assets.flatMap(asset => asset.languages || []));
           this.availableLibraries = this.extractUnique(assets.flatMap(asset => asset.libraries || []));
           this.availableFrameworks = this.extractUnique(assets.flatMap(asset => asset.frameworks || []));
           this.availableFormats = this.extractUnique(assets.map(asset => asset.format || '').filter(Boolean));
@@ -403,6 +433,8 @@ export class MlAssetsBrowserComponent implements OnInit, OnDestroy {
 
   private currentFilters(): MlGuiAssetFilter {
     return {
+      licenses: [...this.selectedLicenses],
+      languages: [...this.selectedLanguages],
       tasks: [...this.selectedTasks],
       libraries: [...this.selectedLibraries],
       frameworks: [...this.selectedFrameworks],

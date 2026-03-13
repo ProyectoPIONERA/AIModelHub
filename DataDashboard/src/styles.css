@@ -14,7 +14,9 @@
 
 @import 'tailwindcss';
 @import 'material-symbols/rounded.css';
-@source '../projects/dashboard-core/**/*.html';
+@source './';
+@source '../projects/dashboard-core';
+@source '../dist/@eclipse-edc/dashboard-core';
 @plugin 'daisyui' {
   themes:
     light,

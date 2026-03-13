@@ -6,6 +6,7 @@ This file tracks the dashboard changes made in this workspace (compared to upstr
 
 - Added `ML Assets` route: `/ml-assets`
 - Added `Model Execution` route: `/model-execution`
+- Added `Model Benchmarking` route: `/model-benchmarking`
 - Added menu entries in `DataDashboard/public/config/app-config.json`
 
 ## ML Assets page
@@ -31,6 +32,13 @@ This file tracks the dashboard changes made in this workspace (compared to upstr
 - Kept default asset create/edit flow and added optional ML metadata helper fields.
 - Helper maps metadata to Daimo properties (`daimo:*`) without removing generic property editing.
 - Asset search now matches Daimo metadata values to locate local model assets faster.
+- Added input contract authoring fields in ML helper:
+  - schema draft
+  - JSON Schema input contract
+  - input example JSON
+  - interactive field builder for schema generation
+  - quick templates with prefilled schema + examples
+  - auto-derived `daimo:input_features` from schema
 
 ## Negotiation flow in ML Assets
 
@@ -49,6 +57,27 @@ This file tracks the dashboard changes made in this workspace (compared to upstr
 - Infer endpoint: `POST {defaultUrl}/api/infer`
 - Management fallback for external catalog when filtered response is empty:
   - `POST {managementUrl}/v3/catalog/request`
+
+## Model Benchmarking page
+
+- Added benchmark page to compare multiple executable assets on one dataset.
+- Dataset upload supports `.json`, `.jsonl`, `.csv`.
+- Execution loop reuses infer endpoint (`/api/infer`) and model execution service.
+- Added schema validation gate before execution:
+  - each model must have input schema metadata
+  - selected models must be schema-compatible
+  - dataset rows must satisfy required fields/type checks
+- Added optional payload/label mapping:
+  - input path
+  - expected path
+  - prediction path
+- Added metrics and ranking:
+  - success rate
+  - average and p95 latency
+  - throughput
+  - optional accuracy
+  - score-based ranking and top model summary
+- Added CSV export of benchmark results.
 
 ## Policy compatibility patch (dashboard-core)
 

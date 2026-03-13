@@ -47,7 +47,8 @@ export class ContractAndTransferService {
    * @return {Promise<ContractNegotiation[]>} A promise that resolves to an array of contract negotiations.
    */
   public async getAllContractNegotiations(querySpec?: QuerySpec): Promise<ContractNegotiation[]> {
-    return (await this.edc.getClient()).management.contractNegotiations.queryAll(querySpec);
+    const negotiations = await (await this.edc.getClient()).management.contractNegotiations.queryAll(querySpec);
+    return negotiations.map(negotiation => this.normalizeNegotiation(negotiation));
   }
 
   /**
@@ -87,7 +88,8 @@ export class ContractAndTransferService {
    * @return {Promise<ContractNegotiation>} A promise that resolves to the contract negotiation details.
    */
   public async getNegotiationByAgreement(agreementId: string): Promise<ContractNegotiation> {
-    return (await this.edc.getClient()).management.contractAgreements.getNegotiation(agreementId);
+    const negotiation = await (await this.edc.getClient()).management.contractAgreements.getNegotiation(agreementId);
+    return this.normalizeNegotiation(negotiation);
   }
 
   /**
@@ -125,11 +127,11 @@ export class ContractAndTransferService {
     negotiation: ContractNegotiation,
     compacted = false,
   ): Promise<Dataset> {
-    // ToDo: Why is counterPartyAddress undefined otherwise?
-    if (negotiation.counterPartyAddress) {
+    const counterPartyAddress = this.resolveCounterPartyAddress(negotiation);
+    if (counterPartyAddress) {
       const datasetRequest: DatasetRequest = {
         '@id': agreement.assetId,
-        counterPartyAddress: negotiation.counterPartyAddress,
+        counterPartyAddress,
       };
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (datasetRequest as any).counterPartyId = agreement.providerId;
@@ -141,6 +143,31 @@ export class ContractAndTransferService {
     } else {
       return Promise.reject(new Error('No counter party address in negotiation found'));
     }
+  }
+
+  private normalizeNegotiation(negotiation: ContractNegotiation): ContractNegotiation {
+    const counterPartyAddress = this.resolveCounterPartyAddress(negotiation);
+    if (counterPartyAddress) {
+      negotiation.counterPartyAddress = counterPartyAddress;
+    }
+    return negotiation;
+  }
+
+  private resolveCounterPartyAddress(negotiation: ContractNegotiation): string | undefined {
+    if (typeof negotiation.counterPartyAddress === 'string' && negotiation.counterPartyAddress.trim().length > 0) {
+      return negotiation.counterPartyAddress.trim();
+    }
+
+    try {
+      const jsonLdValue = negotiation.optionalValue('edc', 'counterPartyAddress');
+      if (typeof jsonLdValue === 'string' && jsonLdValue.trim().length > 0) {
+        return jsonLdValue.trim();
+      }
+    } catch {
+      // Ignore JSON-LD parse fallback failures.
+    }
+
+    return undefined;
   }
 
   /**

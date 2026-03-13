@@ -82,6 +82,16 @@
             <input type="text" class="grow" placeholder="v1.0.0" formControlName="mlVersion" />
           </label>
 
+          <legend class="fieldset-label">Asset Type</legend>
+          <label class="select w-full">
+            <span class="label">Model or Dataset</span>
+            <select class="input" formControlName="mlAssetKind">
+              @for (kind of mlAssetKindOptions; track kind) {
+                <option [value]="kind">{{ kind }}</option>
+              }
+            </select>
+          </label>
+
           <legend class="fieldset-label">Task</legend>
           <label class="select w-full">
             <span class="label">Task</span>
@@ -259,6 +269,140 @@
                     }
                   </select>
                 </label>
+              </div>
+
+              <legend class="fieldset-label">Input Contract (Schema)</legend>
+              <div class="grid grid-cols-1 gap-3 border border-base-300 rounded-box bg-base-200 p-3">
+                <label class="select w-full md:max-w-xs">
+                  <span class="label">Schema Draft</span>
+                  <select class="input" formControlName="mlInputSchemaDraft">
+                    <option value="">Not selected</option>
+                    @for (draft of mlSchemaDraftOptions; track draft) {
+                      <option [value]="draft">{{ draft }}</option>
+                    }
+                  </select>
+                </label>
+
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-xs font-semibold opacity-80">Quick templates:</span>
+                  @for (preset of schemaTemplatePresets; track preset.id) {
+                    <button type="button" class="btn btn-xs btn-soft" (click)="applySchemaTemplate(preset.id)">{{ preset.label }}</button>
+                  }
+                </div>
+
+                <div class="rounded-box border border-base-300 bg-base-100 p-2">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="text-sm font-semibold">Interactive Input Field Builder</div>
+                    <button type="button" class="btn btn-xs" (click)="addSchemaBuilderField()">Add Field</button>
+                  </div>
+
+                  @if (schemaBuilderFields.length > 0) {
+                    <div class="overflow-x-auto">
+                      <table class="table table-xs">
+                        <thead>
+                          <tr>
+                            <th>Field Path</th>
+                            <th>Type</th>
+                            <th>Req</th>
+                            <th>Example</th>
+                            <th>Description</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @for (field of schemaBuilderFields; track field.id) {
+                            <tr>
+                              <td>
+                                <input
+                                  type="text"
+                                  class="input input-xs input-bordered w-44"
+                                  placeholder="text or features.age"
+                                  [value]="field.path"
+                                  (input)="onSchemaFieldTextInput(field.id, 'path', $event)"
+                                />
+                              </td>
+                              <td>
+                                <select class="select select-xs select-bordered w-28" [value]="field.type" (change)="onSchemaFieldTypeInput(field.id, $event)">
+                                  @for (type of schemaFieldTypeOptions; track type) {
+                                    <option [value]="type">{{ type }}</option>
+                                  }
+                                </select>
+                              </td>
+                              <td>
+                                <input
+                                  type="checkbox"
+                                  class="checkbox checkbox-xs"
+                                  [checked]="field.required"
+                                  (change)="onSchemaFieldRequiredInput(field.id, $event)"
+                                />
+                              </td>
+                              <td>
+                                <input
+                                  type="text"
+                                  class="input input-xs input-bordered w-36"
+                                  placeholder="example value"
+                                  [value]="field.example"
+                                  (input)="onSchemaFieldTextInput(field.id, 'example', $event)"
+                                />
+                              </td>
+                              <td>
+                                <input
+                                  type="text"
+                                  class="input input-xs input-bordered w-48"
+                                  placeholder="what this field means"
+                                  [value]="field.description"
+                                  (input)="onSchemaFieldTextInput(field.id, 'description', $event)"
+                                />
+                              </td>
+                              <td>
+                                <button type="button" class="btn btn-xs btn-ghost text-error" (click)="removeSchemaBuilderField(field.id)">Remove</button>
+                              </td>
+                            </tr>
+                          }
+                        </tbody>
+                      </table>
+                    </div>
+                  } @else {
+                    <div class="text-xs opacity-70">No fields yet. Add fields manually or load a template.</div>
+                  }
+
+                  <div class="flex flex-wrap gap-2 mt-2">
+                    <button type="button" class="btn btn-xs btn-soft" (click)="syncSchemaFromBuilder()" [disabled]="schemaBuilderFields.length === 0">
+                      Generate JSON Schema
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-xs btn-soft"
+                      (click)="generateExampleFromBuilder()"
+                      [disabled]="schemaBuilderFields.length === 0"
+                    >
+                      Generate Example
+                    </button>
+                    <button type="button" class="btn btn-xs btn-soft" (click)="loadSchemaBuilderFromCurrentSchema()">Load From JSON</button>
+                    <button type="button" class="btn btn-xs btn-ghost" (click)="clearSchemaBuilder()">Clear Builder</button>
+                  </div>
+                  @if (schemaBuilderMessage) {
+                    <p class="text-xs mt-2 opacity-80">{{ schemaBuilderMessage }}</p>
+                  }
+                </div>
+
+                <label class="fieldset-label">JSON Schema (Advanced)</label>
+                <textarea
+                  class="textarea textarea-bordered w-full font-mono text-xs"
+                  rows="8"
+                  placeholder='JSON Schema object, e.g. { "type":"object", "properties": { "text": { "type":"string" } }, "required": ["text"] }'
+                  formControlName="mlInputSchema"
+                ></textarea>
+                <label class="fieldset-label">Input Example JSON</label>
+                <textarea
+                  class="textarea textarea-bordered w-full font-mono text-xs"
+                  rows="5"
+                  placeholder='Example payload, e.g. { "text": "The interface is now much easier to use." }'
+                  formControlName="mlInputExample"
+                ></textarea>
+                <p class="text-xs opacity-70">
+                  Use the builder for fast input contract creation. Advanced JSON fields remain available for full control.
+                </p>
               </div>
 
               <legend class="fieldset-label">Intended Use</legend>

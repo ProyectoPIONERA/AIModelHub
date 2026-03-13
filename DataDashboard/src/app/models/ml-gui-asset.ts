@@ -9,6 +9,8 @@ export interface MlGuiAsset {
   byteSize: string;
   format: string;
   keywords: string[];
+  licenses: string[];
+  languages: string[];
   tasks: string[];
   subtasks: string[];
   algorithms: string[];
@@ -31,7 +33,16 @@ export interface MlGuiAsset {
   originator: string;
 }
 
+export interface InputFeatureSpec {
+  name: string;
+  type: string;
+  required?: boolean;
+  description?: string;
+}
+
 export interface MlGuiAssetFilter {
+  licenses?: string[];
+  languages?: string[];
   tasks?: string[];
   libraries?: string[];
   frameworks?: string[];
@@ -45,7 +56,12 @@ export interface ExecutableAsset {
   executionPath: string;
   contentType?: string;
   tags?: string[];
+  tasks?: string[];
   isLocal: boolean;
+  inputSchema?: Record<string, unknown> | null;
+  inputFeatures?: InputFeatureSpec[];
+  inputSchemaDraft?: string;
+  inputExample?: unknown;
 }
 
 export interface ModelExecutionRequest {

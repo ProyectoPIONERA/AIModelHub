@@ -42,6 +42,11 @@ The asset create/update modal includes an optional **ML Metadata** helper.
 - Service Integration:
   - Model Format (single select)
   - Inference Path (single select)
+  - Input Schema Draft (single select)
+  - Input Schema (JSON Schema textarea, advanced mode)
+  - Input Example (JSON textarea, advanced mode)
+  - Interactive input-field builder (path/type/required/example/description)
+  - Quick schema templates with ready-to-use examples (classification, embeddings, chat, tabular)
 - Intended Use (text)
 - Limitations (text)
 - Safety / Compliance flags (checkboxes):
@@ -69,6 +74,10 @@ The asset create/update modal includes an optional **ML Metadata** helper.
 - Base Model -> `daimo:base_model`
 - Model Format -> `daimo:format`
 - Inference Path -> `daimo:inference_path`
+- Input Schema Draft -> `daimo:input_schema_draft`
+- Input Schema -> `daimo:input_schema`
+- Derived Input Features -> `daimo:input_features`
+- Input Example -> `daimo:input_example`
 - Parameters -> `daimo:parameter_count`
 - Artifact Size -> `daimo:artifact_size_mb`
 - Quantization -> `daimo:quantization`

@@ -46,6 +46,44 @@
         </details>
       }
 
+      @if (availableLicenses.length > 0) {
+        <details class="collapse collapse-arrow bg-base-200">
+          <summary class="collapse-title py-2 min-h-0 text-sm font-semibold">Licenses</summary>
+          <div class="collapse-content pt-0 space-y-2">
+            @for (license of availableLicenses; track license) {
+              <label class="label cursor-pointer justify-start gap-2 py-0.5">
+                <input
+                  type="checkbox"
+                  class="checkbox checkbox-xs"
+                  [checked]="selectedLicenses.includes(license)"
+                  (change)="toggleLicense(license, $any($event.target).checked)"
+                />
+                <span class="label-text text-sm">{{ license }}</span>
+              </label>
+            }
+          </div>
+        </details>
+      }
+
+      @if (availableLanguages.length > 0) {
+        <details class="collapse collapse-arrow bg-base-200">
+          <summary class="collapse-title py-2 min-h-0 text-sm font-semibold">Languages</summary>
+          <div class="collapse-content pt-0 space-y-2">
+            @for (language of availableLanguages; track language) {
+              <label class="label cursor-pointer justify-start gap-2 py-0.5">
+                <input
+                  type="checkbox"
+                  class="checkbox checkbox-xs"
+                  [checked]="selectedLanguages.includes(language)"
+                  (change)="toggleLanguage(language, $any($event.target).checked)"
+                />
+                <span class="label-text text-sm">{{ language }}</span>
+              </label>
+            }
+          </div>
+        </details>
+      }
+
       @if (availableLibraries.length > 0) {
         <details class="collapse collapse-arrow bg-base-200">
           <summary class="collapse-title py-2 min-h-0 text-sm font-semibold">Libraries</summary>

@@ -14,6 +14,7 @@ This document is the consolidated record of what was implemented and adjusted in
 - Added custom routes:
   - `/ml-assets`
   - `/model-execution`
+  - `/model-benchmarking`
 - Added corresponding menu entries in:
   - `DataDashboard/public/config/app-config.json`
 
@@ -81,6 +82,11 @@ This document is the consolidated record of what was implemented and adjusted in
   - `AssetService`
   - `DeleteConfirmComponent`
   - `AssetCardComponent`
+- Added input contract metadata fields in ML helper:
+  - `daimo:input_schema_draft`
+  - `daimo:input_schema`
+  - `daimo:input_example`
+  - `daimo:input_features` (derived from schema)
 
 ## 9) Model execution
 
@@ -90,7 +96,54 @@ This document is the consolidated record of what was implemented and adjusted in
   - external assets require negotiated agreement
 - Inference path resolution from metadata with fallback `/infer`.
 
-## 10) Operational constraint found (important)
+## 10) Model benchmarking
+
+- Added benchmark page integrated with existing infer flow (`/api/infer`), without requiring new connector endpoints.
+- Added model multi-selection and dataset upload (`.json`, `.jsonl`, `.csv`).
+- Added schema-validation gate:
+  - blocks benchmark when selected models have no schema metadata
+  - blocks benchmark when selected schemas are incompatible
+  - validates dataset payload rows against required fields and basic types
+- Added optional mapping paths:
+  - input path (dataset row -> infer payload)
+  - expected path (dataset row -> ground truth)
+  - prediction path (infer output -> predicted value)
+- Added runtime benchmark metrics:
+  - success rate
+  - avg latency
+  - p95 latency
+  - throughput
+  - optional accuracy when mapping is provided
+- Added ranking score + results table + CSV export.
+
+## 11) Benchmarking UX, reliability, and performance upgrade
+
+- Model selection now blocks incompatibilities immediately:
+  - model without schema metadata cannot be selected
+  - model with non-matching input contract cannot be selected
+- Added benchmark model picker enhancements:
+  - search by name/id/tags/tasks
+  - task filter (`All`, `Classification`, `Regression`, `NLP`, `Vision`, `Other`)
+  - optional auto-filter to show only schema-compatible models
+- Added `Validate Input` action:
+  - executes first sample rows (`1..3`) against selected models
+  - fails fast before full benchmark when payload/mapping/runtime is invalid
+- Switched benchmark execution from sequential per-row calls to bounded parallel execution per model.
+- Extended executable asset view-model to include `tasks` for filtering.
+- Updated benchmark documentation with current UX flow and tuning knobs.
+
+## 12) Dataspace dataset selection for benchmark
+
+- Added benchmark dataset asset picker (search + selection) alongside file upload flow.
+- Added dataspace dataset loading pipeline:
+  - for external datasets: resolve finalized consumer agreement, start pull transfer, wait for ready state, download via EDR
+  - for local datasets: parse inline dataset payload metadata when available
+- Integrated loaded dataspace dataset into existing benchmark parsing, preview, mapping, validation, and scoring flow.
+- Added benchmark dataset asset request pack:
+  - `resources/requests/ai-datasets/` with 5 dataset asset definitions
+  - `tools/register-benchmark-dataset-assets.sh` to register them quickly
+
+## 13) Operational constraint found (important)
 
 - Transfer may fail with:
   - `No Endpoint generator function registered for transfer type destination 'HttpData'`
@@ -105,9 +158,9 @@ This document is the consolidated record of what was implemented and adjusted in
 - `DataDashboard/src/app/features/ml-contract-negotiation/`
 - `DataDashboard/src/app/features/ml-negotiation-progress/`
 - `DataDashboard/src/app/features/model-execution/`
+- `DataDashboard/src/app/features/model-benchmarking/`
 - `DataDashboard/src/app/services/dashboard-ml-browser.service.ts`
 - `DataDashboard/src/app/services/dashboard-model-execution.service.ts`
 - `DataDashboard/projects/dashboard-core/catalog/src/catalog.service.ts`
 - `DataDashboard/projects/dashboard-core/assets/src/asset-create/asset-create.component.ts`
 - `DataDashboard/projects/dashboard-core/assets/src/asset-view/asset-view.component.ts`
-
