@@ -241,14 +241,14 @@ Contributions are welcome.
 
 For bug reports and feature requests, please use the repository issue tracker.
 
-## Authors
+## Maintainers
 
-| Name | Email |
-| --- | --- |
-| Jiayun Liu | jiayun.liu@upm.es |
-| Edmundo de Elvira Mori Orrillo | edmundo.mori.orrillo@upm.es |
+For technical questions, collaboration inquiries, or repository-related communication, please contact the project maintainers.
 
-
+| Name | Role | Contact |
+| --- | --- | --- |
+| Jiayun Liu | Maintainer | [jiayun.liu@upm.es](mailto:jiayun.liu@upm.es) |
+| Edmundo de Elvira Mori Orrillo | Maintainer | [edmundo.mori.orrillo@upm.es](mailto:edmundo.mori.orrillo@upm.es) |
 
 ## Paper
 
