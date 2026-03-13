@@ -1,0 +1,16 @@
+[
+  {
+    "connectorName": "Consumer",
+    "managementUrl": "http://localhost:29193/management",
+    "defaultUrl": "http://localhost:29191/api",
+    "protocolUrl": "http://localhost:29194/protocol",
+    "federatedCatalogEnabled": false
+  },
+  {
+    "connectorName": "Provider",
+    "managementUrl": "http://localhost:19193/management",
+    "defaultUrl": "http://localhost:19191/api",
+    "protocolUrl": "http://localhost:19194/protocol",
+    "federatedCatalogEnabled": false
+  }
+]

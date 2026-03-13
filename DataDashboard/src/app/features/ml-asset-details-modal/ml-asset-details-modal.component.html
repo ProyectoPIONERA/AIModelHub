@@ -1,0 +1,64 @@
+@if (asset) {
+  <div class="w-[88vw] max-h-[80vh] overflow-hidden flex flex-col">
+    <div class="mb-4">
+      <h2 class="text-2xl font-bold">{{ asset.name }}</h2>
+      <p class="text-sm opacity-70">Asset ID: {{ asset.id }}</p>
+    </div>
+
+    <div role="tablist" class="tabs tabs-lift mb-4">
+      <button class="tab" [class.tab-active]="selectedTab === 'overview'" (click)="selectedTab = 'overview'">Overview</button>
+      <button class="tab" [class.tab-active]="selectedTab === 'offers'" (click)="selectedTab = 'offers'">Contract Offers</button>
+      <button class="tab" [class.tab-active]="selectedTab === 'raw'" (click)="selectedTab = 'raw'">Raw Payload</button>
+    </div>
+
+    <div class="overflow-auto pr-2">
+      @if (selectedTab === 'overview') {
+        <div class="grid gap-3 md:grid-cols-2">
+          <div class="card bg-base-200 shadow-sm">
+            <div class="card-body p-4">
+              <div><b>Name:</b> {{ asset.name }}</div>
+              <div><b>Version:</b> {{ asset.version || 'N/A' }}</div>
+              <div><b>Owner:</b> {{ asset.owner || '-' }}</div>
+              <div><b>Source:</b> {{ asset.isLocal ? 'Local Asset' : 'External Asset' }}</div>
+              <div><b>Content Type:</b> {{ asset.contentType || '-' }}</div>
+              <div><b>Format:</b> {{ asset.format || '-' }}</div>
+              <div><b>Storage:</b> {{ asset.storageType || '-' }}</div>
+            </div>
+          </div>
+
+          <div class="card bg-base-200 shadow-sm">
+            <div class="card-body p-4">
+              <div><b>Tasks:</b> {{ (asset.tasks || []).join(', ') || '-' }}</div>
+              <div><b>Libraries:</b> {{ (asset.libraries || []).join(', ') || '-' }}</div>
+              <div><b>Frameworks:</b> {{ (asset.frameworks || []).join(', ') || '-' }}</div>
+              <div><b>Keywords:</b> {{ (asset.keywords || []).join(', ') || '-' }}</div>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (selectedTab === 'offers') {
+        @if (offers.length === 0) {
+          <div class="alert">No contract offers exposed in this payload.</div>
+        } @else {
+          <div class="space-y-3">
+            @for (offer of offers; track $index) {
+              <div class="card bg-base-200 shadow-sm">
+                <div class="card-body p-4">
+                  <p class="text-sm font-semibold">Offer {{ $index + 1 }}</p>
+                  <pre class="mockup-code p-4 overflow-auto"><code>{{ asJson(offer) }}</code></pre>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      }
+
+      @if (selectedTab === 'raw') {
+        <div class="h-[60vh] overflow-auto">
+          <lib-jsonld-viewer [jsonLdObject]="rawJsonLdPayload"></lib-jsonld-viewer>
+        </div>
+      }
+    </div>
+  </div>
+}
