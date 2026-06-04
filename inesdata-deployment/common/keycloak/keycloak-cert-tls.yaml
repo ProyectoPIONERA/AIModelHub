@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: keycloak-tls-cert
+  namespace: common-srvs
+spec:
+  secretName: keycloak-tls-cert
+  duration: 8760h
+  renewBefore: 720h
+  commonName: comsrvs-keycloak
+  dnsNames:
+    - "*.comsrvs-keycloak"
+    - "*.common-srvs.svc"
+    - "*.ds.dataspaceunit.upm"
+    - "*.ds.dataspaceunit-project.eu"
+    - comsrvs-keycloak
+    - keycloak
+  ipAddresses:
+    - 127.0.0.1
+  issuerRef:
+    name: elastic-selfsigned-cluster-issuer
+    kind: ClusterIssuer

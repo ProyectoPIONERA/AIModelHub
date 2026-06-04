@@ -1,271 +1,425 @@
-# AIModelHub
+# AIModelHub_Pionera
 
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Java 21](https://img.shields.io/badge/Java-21-orange.svg)](https://adoptium.net/)
-[![Angular 20](https://img.shields.io/badge/Angular-20-DD0031.svg)](https://angular.dev/)
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg)](https://www.python.org/)
-![CI](https://img.shields.io/badge/CI-not%20configured-lightgrey)
-![Status](https://img.shields.io/badge/status-research%20prototype-orange)
+AIModelHub_Pionera is a local data-space and AI model hub workspace for the
+PIONERA use cases. It provides a complete local deployment flow to register,
+discover, execute, benchmark and observe AI models through connector-managed
+assets.
 
-**Dataspace-native discovery, execution, and benchmarking for AI models and datasets.**
+This repository focuses on the PIONERA implementation. Some file and directory
+names still contain `inesdata` because those are literal code paths used by the
+deployment scripts and component sources. Those names are documented only when
+they are needed to run or understand the code.
 
-AIModelHub is a research-oriented platform developed within the PIONERA project for publishing, discovering, negotiating, executing, and benchmarking AI assets across Eclipse EDC-based dataspace connectors.
+## Main Capabilities
 
-The repository combines an Angular dashboard with EDC runtime extensions so teams can explore AI assets end to end: from catalog filtering and contract negotiation to model inference and side-by-side benchmark runs.
+- Local 8-step deployment process for common services, dataspace services and
+  connectors.
+- PIONERA-themed connector interface with AI model workflows.
+- AI Model Browser for model discovery and metadata inspection.
+- AI Model Execution for HTTP model invocation.
+- AI Model Benchmarking for comparable model evaluation.
+- AI Model Observer for execution and benchmark evidence.
+- Combined FastAPI model server for PIONERA use-case models and deterministic
+  mock HTTP endpoints.
+- Metadata seeding based on `JS_Metadata_Daimo.schema.json`.
 
-> [!IMPORTANT]
-> AIModelHub is a research and integration prototype. The platform is functional for local development, experimentation, and validation workflows, but the current runtime is **not production-ready** yet.
+## Repository Layout
 
-## Overview
-
-| Component | Purpose |
-| --- | --- |
-| `DataDashboard/` | Angular UI for ML asset browsing, contract negotiation, model execution, and model benchmarking |
-| `asset-filter-template/` | Eclipse EDC-based connector runtime with custom filtering, inference, observability, and proxy extensions |
-| `asset-filter-template/resources/` | Sample asset definitions, benchmark datasets, configuration files, and request payloads |
-| `asset-filter-template/tools/` | Local mock servers and asset registration scripts for repeatable demos |
-
-## Features
-
-- Discover AI models and datasets across provider and consumer connectors.
-- Filter catalogs using Daimo-style metadata such as task, tags, license, dataset, language, and base model.
-- Execute inference through a single `/api/infer` endpoint using only an `assetId`.
-- Benchmark multiple executable models against the same dataset with latency, throughput, success-rate, and optional accuracy metrics.
-- Load benchmark datasets either from local files or dataspace assets.
-- Extend the platform with custom EDC connector logic, proxy data planes, and dashboard customizations.
-
-## Installation
-
-### Prerequisites
-
-| Dependency | Recommended version | Used for |
-| --- | --- | --- |
-| Java | 21 | EDC connector runtime |
-| Node.js | 20+ | Angular dashboard development |
-| npm | 10+ | Dashboard dependencies |
-| Python | 3.10+ | Local benchmark and mock model servers |
-| Docker + Docker Compose | Latest | Optional containerized connector setup |
-| `curl` + `jq` | Latest | Sample requests and asset registration scripts |
-
-### Clone the repository
-
-```bash
-git clone https://github.com/ProyectoPIONERA/AIModelHub.git
-cd AIModelHub
-```
-
-### Install dashboard dependencies
-
-```bash
-cd DataDashboard
-npm install
-cd ..
-```
-
-### Build the connector runtime
-
-```bash
-cd asset-filter-template
-./scripts/build-final-connector.sh
-cd ..
-```
-
-## Quick Start
-
-The fastest local setup uses Docker for the provider and consumer connectors, Python scripts for the benchmark model pack, and the Angular dev server for the dashboard.
-
-### 1. Start the connectors
-
-```bash
-cd asset-filter-template
-docker compose -f docker-compose.connectors.yml up
-```
-
-### 2. Register demo benchmark assets
-
-In a second terminal:
-
-```bash
-cd asset-filter-template
-./tools/start-benchmark-model-servers.sh
-./tools/register-benchmark-model-assets.sh
-./tools/register-benchmark-dataset-assets.sh
-```
-
-### 3. Start the dashboard library watcher
-
-In a third terminal:
-
-```bash
-cd DataDashboard
-npm run lib-start
-```
-
-### 4. Start the dashboard app
-
-In a fourth terminal:
-
-```bash
-cd DataDashboard
-npm start
-```
-
-Open `http://localhost:4200`, select the `Consumer` connector, and explore:
-
-- `ML Assets` to browse local and remote AI assets
-- `Model Execution` to run inference
-- `Model Benchmarking` to compare multiple models on the same dataset
-
-> [!TIP]
-> If you prefer not to use Docker, you can run the connectors locally with `./scripts/run-final-provider.sh` and `./scripts/run-final-consumer.sh` from `asset-filter-template/`.
-
-## Minimal Working Example
-
-Once the stack is running, test catalog filtering from the consumer connector:
-
-```bash
-curl -X POST "http://localhost:29191/api/filter/catalog?profile=daimo&task=text-classification" \
-  -H "Content-Type: application/json" \
-  -d @asset-filter-template/resources/requests/fetch-catalog.json
-```
-
-Then run inference against one of the registered benchmark models:
-
-```bash
-curl -X POST "http://localhost:29191/api/infer" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "assetId": "provider~benchmark-text-keyword-v1",
-    "method": "POST",
-    "path": "/infer",
-    "headers": { "Content-Type": "application/json" },
-    "payload": { "text": "This service is excellent and very fast" }
-  }'
-```
-
-## Benchmark Packs
-
-AIModelHub includes ready-to-use synthetic assets for local validation and demos.
-
-| Pack | Location | Contents |
-| --- | --- | --- |
-| Benchmark model assets | `asset-filter-template/resources/requests/ai-models/` | 5 executable model assets for text classification and tabular regression |
-| Benchmark dataset assets | `asset-filter-template/resources/requests/ai-datasets/` | 5 dataset assets with inline rows and benchmark mappings |
-| Raw benchmark datasets | `asset-filter-template/resources/benchmark-datasets/` | JSON, JSONL, and CSV datasets for text and tabular tasks |
-
-## Project Structure
+The most relevant project areas are:
 
 ```text
-AIModelHub/
-├── DataDashboard/
-│   ├── public/config/
-│   ├── src/app/features/
-│   └── projects/dashboard-core/
-└── asset-filter-template/
-    ├── connector/
-    ├── final-connector/
-    ├── provider-proxy-data-plane/
-    ├── docs/
-    ├── resources/
-    ├── scripts/
-    └── tools/
+AIModelHub_Pionera/
+|-- README.md
+|-- JS_Metadata_Daimo.schema.json
+|-- inesdata_local_deploy.py
+|-- runtime_dependencies.py
+|-- requirements.txt
+|
+|-- combined_model_server/
+|   `-- server.py
+|
+|-- scripts/
+|   |-- seed_ml_assets_for_connectors.sh
+|   |-- run-minikube-tunnel.sh
+|   `-- run_kafka_benchmark.sh
+|
+|-- adapters/
+|   `-- inesdata/
+|       |-- scripts/
+|       `-- sources/
+|           |-- inesdata-connector/
+|           |-- inesdata-connector-interface/
+|           |-- inesdata-registration-service/
+|           |-- inesdata-public-portal-backend/
+|           |-- inesdata-public-portal-frontend/
+|           `-- model-server/
+|
+|-- inesdata-deployment/
+|   |-- common/
+|   |-- dataspace/
+|   |-- connector/
+|   |-- components/
+|   `-- deployer.py
+|
+|-- validation/
+|-- framework/
+`-- experiments/
 ```
 
-## Usage Examples
+Generated runtime state is written mainly under:
 
-### Filter an external catalog
+```text
+.inesdata-local/
+experiments/
+newman/
+node_modules/
+validation/ui/node_modules/
+inesdata-deployment/deployments/
+```
+
+These directories are local runtime outputs and should not be treated as stable
+source state.
+
+## Related Use-Case Repository
+
+The default deployment expects the PIONERA use-case server repository to exist
+as a sibling of this repository:
+
+```text
+<workspace>/
+  AIModelHub_Pionera/
+  AIModelHub_Uses_Cases/
+```
+
+By default, `inesdata_local_deploy.py` resolves
+`AIModelHub_Uses_Cases` automatically from that sibling layout. If the use-case
+repository is located elsewhere, pass:
 
 ```bash
-curl -X POST "http://localhost:29191/api/filter/catalog?profile=daimo&license=Apache-2.0&sort=name&order=asc" \
-  -H "Content-Type: application/json" \
-  -d @asset-filter-template/resources/requests/fetch-catalog.json
+python3 inesdata_local_deploy.py --use-case-model-server-dir <path-to-AIModelHub_Uses_Cases>
 ```
 
-### Execute a model by asset ID
+or set:
 
 ```bash
-curl -X POST "http://localhost:29191/api/infer" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "assetId": "provider~benchmark-text-bayes-v1",
-    "payload": { "text": "The workflow is clean and helpful" }
-  }'
+export USE_CASE_MODEL_SERVER_DIR=<path-to-AIModelHub_Uses_Cases>
 ```
 
-### Run benchmarks in the UI
+The use-case repository must contain the prepared FastAPI app, virtual
+environment and trained model artifacts for FLARES and Mobility.
 
-1. Open `http://localhost:4200`.
-2. Choose the `Consumer` connector.
-3. Navigate to `Model Benchmarking`.
-4. Select at least two models.
-5. Upload a local dataset or pick a dataspace benchmark dataset.
-6. Run `Validate Input`, then launch the full benchmark.
+## Deployment
 
-## Configuration
+Run the interactive deployment menu from the repository root:
 
-### Main configuration files
+```bash
+cd <workspace>/AIModelHub_Pionera
+python3 inesdata_local_deploy.py
+```
 
-| File | What you can configure |
-| --- | --- |
-| `DataDashboard/public/config/app-config.json` | Menu items, dashboard title, theme, user configuration, health check interval |
-| `DataDashboard/public/config/edc-connector-config.json` | Preconfigured dashboard connectors and their management/default/protocol URLs |
-| `asset-filter-template/resources/configuration/provider-configuration.properties` | Provider ports, API paths, DSP callback, CORS origins |
-| `asset-filter-template/resources/configuration/consumer-configuration.properties` | Consumer ports, API paths, DSP callback, CORS origins, infer defaults |
-| `asset-filter-template/docker-compose.connectors.yml` | Local container topology for provider and consumer runtimes |
+Run the full non-interactive deployment after confirming that manual network
+steps are ready:
 
-### Default local ports
+```bash
+python3 inesdata_local_deploy.py --non-interactive --manual-ready
+```
 
-| Runtime | API | Management | Protocol | Public |
-| --- | --- | --- | --- | --- |
-| Provider | `19191` | `19193` | `19194` | `19291` |
-| Consumer | `29191` | `29193` | `29194` | `29291` |
+The menu exposes this flow:
+
+```text
+0 - Run all steps (1-8) sequentially
+
+1 - Step 1: Setup cluster + deploy common services
+2 - Step 2: Confirm tunnel + ingress port-forward
+3 - Step 3: Build local images
+4 - Step 4: Deploy dataspace
+5 - Step 5: Deploy connectors
+6 - Step 6: Run validation tests
+7 - Step 7: Deploy/Start ML Model Server
+8 - Step 8: Seed vocabulary + ML assets + contracts
+```
+
+### Step 7: Model Server
+
+The default mode is `combined`:
+
+```bash
+python3 inesdata_local_deploy.py --model-server-mode combined
+```
+
+This starts one host FastAPI server that exposes:
+
+- FLARES endpoints imported from `AIModelHub_Uses_Cases`.
+- Mobility endpoints imported from `AIModelHub_Uses_Cases`.
+- Deterministic mock `HttpData` endpoints from `combined_model_server/`.
+
+Other modes are available for targeted validation:
+
+```bash
+python3 inesdata_local_deploy.py --model-server-mode use-cases
+python3 inesdata_local_deploy.py --model-server-mode mock
+```
+
+The connector-facing model server URL defaults to:
+
+```text
+http://host.docker.internal:8000
+```
+
+That URL is used by Docker-backed Minikube pods to reach the FastAPI server
+running on the host.
+
+### Step 8: Metadata And Assets
+
+Step 8 seeds the vocabulary, model assets, policies and contracts.
+
+In the default combined deployment it registers:
+
+- FLARES and Mobility PIONERA use-case models as `HttpData`.
+- Deterministic mock HTTP models as `HttpData`.
+- Additional deterministic stored models as `InesDataStore`.
+- DAIMO-aligned metadata from `JS_Metadata_Daimo.schema.json`.
+
+The script responsible for this step is:
+
+```text
+scripts/seed_ml_assets_for_connectors.sh
+```
+
+## PIONERA Use Cases
+
+### FLARES
+
+FLARES models process Spanish text for event extraction and reliability
+classification.
+
+Registered models:
+
+- `FLARES 5W1H DistilBERT - PIONERA Use Case`
+- `FLARES Reliability DistilBERT - PIONERA Use Case`
+
+Typical 5W1H input:
+
+```json
+[
+  {
+    "Id": 840,
+    "Text": "El comité de medicamentos humanos espera concluir el análisis en marzo."
+  }
+]
+```
+
+The benchmark flow evaluates FLARES models with classification-oriented metrics:
+
+- Precision
+- Recall
+- F1 Score
+
+### Mobility
+
+Mobility models predict public transport timing signals from GTFS-like segment
+features.
+
+Registered models:
+
+- `Mobility LightGBM Actual Travel Time - PIONERA Use Case`
+- `Mobility Random Forest Actual Travel Time - PIONERA Use Case`
+- `Mobility CatBoost Actual Travel Time - PIONERA Use Case`
+- `Mobility LightGBM Delay - PIONERA Use Case`
+- `Mobility Random Forest Delay - PIONERA Use Case`
+- `Mobility CatBoost Delay - PIONERA Use Case`
+- `Mobility LightGBM Previous Delay - PIONERA Use Case`
+- `Mobility Random Forest Previous Delay - PIONERA Use Case`
+- `Mobility CatBoost Previous Delay - PIONERA Use Case`
+
+FastAPI endpoints:
+
+```text
+/mobility/lightgbm_actual_travel_time
+/mobility/randomforest_actual_travel_time
+/mobility/catboost_actual_travel_time
+/mobility/lightgbm_delay
+/mobility/randomforest_delay
+/mobility/catboost_delay
+/mobility/lightgbm_previous_delay
+/mobility/randomforest_previous_delay
+/mobility/catboost_previous_delay
+```
+
+Mobility benchmark metrics:
+
+- MAE
+- RMSE
+- R2
+
+The validation dataset can contain all input and target columns together. During
+execution, AI Model Benchmarking filters the payload per model:
+
+- `actual_travel_time` and `delay` models use 13 input columns.
+- `previous_delay` models use 11 input columns.
+- `actual_travel_time`, `delay` and `previous_delay` are used as targets,
+  depending on the selected model.
+
+## AI Model Browser
+
+AI Model Browser lists machine-learning assets registered through the connector
+catalog. The seeded metadata includes:
+
+- Model name, version and description.
+- Asset source and data address type.
+- Task, subtask, algorithm, framework and library metadata.
+- Input feature definitions.
+- Input examples.
+- Evaluation metrics.
+
+Use-case models include the keyword `pionera-use-case`.
+
+## AI Model Execution
+
+AI Model Execution allows users to run registered HTTP models from the browser
+interface. For PIONERA use-case models, payloads are normalized as JSON arrays
+because the FastAPI endpoints expect batch-style requests.
+
+Execution history records status, latency, timestamp and result payloads. These
+events are also available to AI Model Observer.
+
+## AI Model Benchmarking
+
+AI Model Benchmarking compares compatible models with validation datasets.
+
+Compatibility rules:
+
+- FLARES models are comparable within the FLARES family.
+- Mobility models are comparable within the Mobility family.
+- Other models are compared when their input schemas are compatible.
+
+Dataset support:
+
+- CSV
+- JSON
+- JSONL
+
+For Mobility, CSV parsing preserves identifier columns such as `trip_id`,
+`from_stop_id`, `to_stop_id` and `route_id` as strings, while numeric columns are
+converted to numbers. This is required because the FastAPI service applies the
+same categorical encoding used during model training.
+
+## AI Model Observer
+
+AI Model Observer provides local visibility into model activity:
+
+- Home summary
+- Participant view
+- Agreement view
+- Timeline view
+- Benchmark evidence view
+
+The observer is intended to make model execution and benchmark evidence
+traceable from the same connector interface.
+
+## Requirements
+
+Recommended environment:
+
+| Component | Purpose |
+|-----------|---------|
+| Docker | Local images and Docker-backed Minikube runtime |
+| Minikube | Local Kubernetes cluster |
+| kubectl | Kubernetes management |
+| Helm | Chart deployment |
+| Python 3.10+ | Deployment, validation and FastAPI orchestration |
+| Node.js 18+ | Angular connector interface build |
+| npm / Newman | API validation collections |
+| Java / Gradle | Java component builds |
+
+Recommended resources:
+
+- 4 CPU cores or more.
+- 8 GB RAM or more.
+- 20 GB free disk space or more.
+
+## Validation
+
+Run validation through Step 6 or through the full deployment flow.
+
+The validation system uses:
+
+- Newman collections under `validation/core/collections/`.
+- Python orchestration under `framework/`.
+- Experiment outputs under `experiments/`.
+
+To validate the Angular connector interface build:
+
+```bash
+cd <workspace>/AIModelHub_Pionera/adapters/inesdata/sources/inesdata-connector-interface
+node node_modules/@angular/cli/bin/ng.js build
+```
+
+## Operational Notes
+
+### Tunnel And Port Forwarding
+
+Keep the Minikube tunnel and ingress port-forwarding active while using the
+local connector UI and validation flows.
+
+If the helper script lacks execute permission:
+
+```bash
+chmod +x scripts/run-minikube-tunnel.sh
+./scripts/run-minikube-tunnel.sh
+```
+
+### Model Server Reachability
+
+If AI Model Execution returns a provider-side error for FLARES or Mobility,
+check:
+
+- Step 7 is running in `combined` or `use-cases` mode.
+- The FastAPI server responds on `http://127.0.0.1:8000/models`.
+- The connector-facing URL is reachable from Minikube pods.
+- `AIModelHub_Uses_Cases` has prepared model artifacts.
+- Step 8 was rerun after metadata or endpoint changes.
+
+### Rebuilding Local Images
+
+When UI or component source files change, rebuild and reload the affected local
+image before redeploying connectors. The deployment process is configured to
+avoid relying on stale previously loaded images.
+
+### Credentials
+
+Files under `inesdata-deployment/deployments/DEV/demo/` are generated local demo
+credentials. Treat them as runtime artifacts and avoid using them as production
+secrets.
+
+## Useful Commands
+
+```bash
+git status --short
+python3 inesdata_local_deploy.py --help
+python3 inesdata_local_deploy.py --model-server-mode combined
+```
+
+Check the use-case model server directly:
+
+```bash
+curl http://127.0.0.1:8000/models
+```
 
 ## Documentation
 
-- [Documentation map](asset-filter-template/docs/README.md)
-- [Filtering and inference developer guide](asset-filter-template/docs/extensions/developer-extensions-guide.md)
-- [AI model ontology notes](asset-filter-template/docs/extensions/ai-model-ontology.md)
-- [DataDashboard integration docs](asset-filter-template/docs/ui/data-dashboard/README.md)
-- [Model benchmarking guide](asset-filter-template/docs/ui/data-dashboard/model-benchmarking.md)
-- [Production readiness notes](asset-filter-template/docs/extensions/production-readiness.md)
-- [Known UI limitations](asset-filter-template/docs/ui/data-dashboard/known-issues.md)
-
-## Contributing
-
-Contributions are welcome.
-
-1. Open an issue before large feature additions or API changes.
-2. Keep documentation and request examples in sync with code changes.
-3. Include verification steps for connector and UI changes.
-4. Follow the project code style and respect the [Code of Conduct](DataDashboard/CODE_OF_CONDUCT.md).
-
-For bug reports and feature requests, please use the repository issue tracker.
+- `DEPLOYMENT_TRACEABILITY.md`: traceability for the local 8-step deployment.
+- `JS_Metadata_Daimo.schema.json`: metadata schema for model registration.
+- `AIModelHub_Uses_Cases/README.md`: companion use-case repository guide.
 
 ## Maintainers
 
-For technical questions, collaboration inquiries, or repository-related communication, please contact the project maintainers.
+- Edmundo Mori
+- Jiayun Liu
 
-| Name | Role | Contact |
-| --- | --- | --- |
-| Jiayun Liu | Maintainer | [jiayun.liu@upm.es](mailto:jiayun.liu@upm.es) |
-| Edmundo de Elvira Mori Orrillo | Maintainer | [edmundo.mori.orrillo@upm.es](mailto:edmundo.mori.orrillo@upm.es) |
+Contact:
 
-## Paper
+- edmundo.mori.orrillo@upm.es
+- jiayun.liu@alumnos.upm.es
 
-AIModelHub is developed as part of the PIONERA research project. A dedicated paper is not linked from this repository yet. If you use AIModelHub in academic or industrial research, please cite the software entry below and acknowledge the PIONERA project funding.
-
----
-
-## Funding
-
-This work has received funding from the PIONERA project (Enhancing interoperability in data spaces through artificial intelligence), a project funded in the context of the call for Technological Products and Services for Data Spaces of the Ministry for Digital Transformation and Public Administration within the framework of the PRTR funded by the European Union (NextGenerationEU)
-
-<div align="center">
-  <img src="funding_label.png" alt="Logos financiación" width="900" />
-</div>
-
-## License
-
-This repository is licensed under the [Apache License 2.0](LICENSE).
-
-The platform builds on the Eclipse EDC ecosystem and extends the EDC Data Dashboard with AI asset discovery, execution, and benchmarking capabilities.
+Last updated: June 4, 2026

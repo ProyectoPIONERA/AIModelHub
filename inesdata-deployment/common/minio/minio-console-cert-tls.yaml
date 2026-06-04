@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: minio-console-tls-cert
+  namespace: common-srvs
+spec:
+  secretName: minio-console-tls-cert
+  duration: 8760h
+  renewBefore: 720h
+  commonName: comsrvs-minio-console
+  dnsNames:
+    - "*.comsrvs-tls-minio"
+    - "*.common-srvs.svc"
+    - "*.ds.dataspaceunit.upm"
+    - console-storage.ds.dataspaceunit.upm
+    - console-storage.ds.dataspaceunit-project.eu
+    - comsrvs-minio
+    - minio
+  issuerRef:
+    name: elastic-selfsigned-cluster-issuer
+    kind: ClusterIssuer

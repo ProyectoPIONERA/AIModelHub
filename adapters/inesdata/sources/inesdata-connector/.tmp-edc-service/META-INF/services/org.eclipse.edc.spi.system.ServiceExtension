@@ -1,0 +1,1007 @@
+org.upm.inesdata.audit.AuditExtension
+org.upm.inesdata.auth.Oauth2JwtAuthenticationExtension
+org.upm.inesdata.federated.sql.index.SqlFederatedCacheServiceExtension
+org.upm.inesdata.validator.AssetValidatorExtension
+org.upm.inesdata.federated.FederatedCatalogCacheApiExtension
+org.upm.inesdata.countelements.sql.index.SqlCountElementsIndexServiceExtension
+org.upm.inesdata.countelements.CountElementsApiExtension
+org.upm.inesdata.vocabulary.shared.retrieval.VocabularySharedRetrievalExtension
+org.upm.inesdata.catalog.FromRegistrationServiceParticipantsExtension
+org.upm.inesdata.vocabulary.sql.index.SqlVocabularyIndexServiceExtension
+org.upm.inesdata.vocabulary.shared.api.VocabularySharedApiExtension
+org.upm.inesdata.vocabulary.VocabularyApiExtension
+org.upm.inesdata.edc.extension.policy.AlwaysTruePolicyExtension
+org.upm.inesdata.edc.extension.policy.PolicyEvaluationTimeExtension
+org.upm.inesdata.edc.extension.policy.ReferringConnectorValidationExtension
+org.upm.inesdata.complexpolicy.ComplexPolicyDefinitionApiExtension
+org.upm.inesdata.storageasset.StorageAssetApiExtension
+org.upm.inesdata.api.shared.configuration.SharedApiConfigurationExtension
+org.upm.inesdata.api.shared.configuration.auth.SharedOauth2JwtAuthenticationExtension
+org.upm.inesdata.inesdatatransfer.InesdataTransferProcessApiExtension
+org.upm.inesdata.search.extension.InesdataSearchExtension
+#
+#  Copyright (c) 2020 - 2022 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.api.control.configuration.ControlApiConfigurationExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.client.ControlPlaneApiClientExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.ControlPlaneApiExtension
+#
+#  Copyright (c) 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.ControlPlaneDefaultServicesExtension
+#
+#  Copyright (c) 2020, 2021 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.web.jetty.JettyExtension
+#
+#  Copyright (c) 2020, 2021 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.iam.mock.IamMockExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.transfer.dataplane.TransferDataPlaneSignalingExtension
+#
+#  Copyright (c) 2023 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.validator.dataaddress.httpdata.HttpDataDataAddressValidatorExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.management.edr.EdrCacheApiExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.edr.store.EndpointDataReferenceStoreExtension
+org.eclipse.edc.edr.store.EndpointDataReferenceStoreDefaultServicesExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.edr.store.receiver.EndpointDataReferenceStoreReceiverExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.dataplane.selector.DataPlaneSelectorApiExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.dataplane.selector.DataPlaneSelectorExtension
+org.eclipse.edc.connector.dataplane.selector.DataPlaneSelectorDefaultServicesExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.dataplane.registration.DataplaneSelfRegistrationExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.dataplane.api.DataPlaneSignalingApiExtension
+org.eclipse.edc.connector.dataplane.api.DataPlanePublicApiV2Extension
+org.eclipse.edc.connector.dataplane.framework.DataPlaneFrameworkExtension
+org.eclipse.edc.connector.dataplane.framework.DataPlaneDefaultServicesExtension
+org.eclipse.edc.connector.dataplane.http.DataPlaneHttpExtension
+org.eclipse.edc.connector.dataplane.kafka.DataPlaneKafkaExtension
+org.eclipse.edc.connector.dataplane.iam.DataPlaneIamExtension
+org.eclipse.edc.connector.dataplane.iam.DataPlaneIamDefaultServicesExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.token.TokenServicesExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.iam.oauth2.Oauth2ServiceExtension
+org.eclipse.edc.iam.oauth2.Oauth2ServiceDefaultServicesExtension
+#
+#  Copyright (c) 2022 Amadeus
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Amadeus - initial API and implementation
+#
+#
+org.eclipse.edc.iam.oauth2.client.Oauth2ClientExtension
+#
+#  Copyright (c) 2022 Mercedes-Benz Tech Innovation GmbH
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Mercedes-Benz Tech Innovation GmbH - Initial ServiceExtension file
+#       Cofinity-X - implement extensible authentication
+#
+org.eclipse.edc.vault.hashicorp.HashicorpVaultExtension
+org.eclipse.edc.vault.hashicorp.health.HashicorpVaultHealthExtension
+org.eclipse.edc.vault.hashicorp.auth.HashicorpVaultAuthenticationExtension
+org.eclipse.edc.catalog.cache.FederatedCatalogCacheExtension
+org.eclipse.edc.catalog.cache.FederatedCatalogDefaultServicesExtension
+#
+#  Copyright (c) 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.catalog.api.query.FederatedCatalogApiExtension
+#
+#  Copyright (c) 2022 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#
+org.eclipse.edc.api.ApiCoreExtension
+org.eclipse.edc.api.ApiCoreDefaultServicesExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - initial API and implementation
+#
+org.eclipse.edc.protocol.dsp.http.api.configuration.DspApiConfigurationExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.api.management.configuration.ManagementApiConfigurationExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.dataplane.client.DataPlaneSignalingClientExtension
+org.eclipse.edc.connector.dataplane.client.DataPlaneSignalingClientTransformExtension
+#
+#  Copyright (c) 2020, 2021 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.core.CoreServicesExtension
+org.eclipse.edc.connector.core.CoreDefaultServicesExtension
+org.eclipse.edc.connector.core.SecurityDefaultServicesExtension
+org.eclipse.edc.connector.core.LocalPublicKeyDefaultExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.catalog.http.dispatcher.DspCatalogHttpDispatcherExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.catalog.transform.DspCatalogTransformExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.negotiation.http.dispatcher.DspNegotiationHttpDispatcherExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.negotiation.transform.DspNegotiationTransformExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.transferprocess.http.dispatcher.DspTransferProcessDispatcherExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.transferprocess.transform.DspTransferProcessTransformExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.management.asset.AssetApiExtension
+#
+#  Copyright (c) 2020 - 2022 Bayerische Motoren Werke Aktiengesellschaft
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft - initial implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.management.catalog.CatalogApiExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.management.contractdefinition.ContractDefinitionApiExtension
+#
+# Copyright (c) 2022 ZF Friedrichshafen AG
+#
+# This program and the accompanying materials are made available under the
+# terms of the Apache License, Version 2.0 which is available at
+# https://www.apache.org/licenses/LICENSE-2.0
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# Contributors:
+#   ZF Friedrichshafen AG - Initial API and Implementation
+#
+org.eclipse.edc.connector.controlplane.api.management.contractnegotiation.ContractNegotiationApiExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.management.policy.PolicyDefinitionApiExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.management.transferprocess.TransferProcessApiExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.management.protocolversion.ProtocolVersionApiExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.api.management.contractagreement.ContractAgreementApiExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.protocol.dsp.version.http.dispatcher.DspVersionHttpDispatcherExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.http.DspHttpCoreExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.catalog.http.api.DspCatalogApiExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.negotiation.http.api.DspNegotiationApiExtension
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - initial API and implementation
+org.eclipse.edc.protocol.dsp.transferprocess.http.api.DspTransferProcessApiExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - Initial API and Implementation
+#
+#
+org.eclipse.edc.protocol.dsp.version.http.api.DspVersionApiExtension
+#
+#  Copyright (c) 2023 Fraunhofer Institute for Software and Systems Engineering
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Fraunhofer Institute for Software and Systems Engineering - Initial API and Implementation
+#
+#
+org.eclipse.edc.jsonld.JsonLdExtension
+#
+#  Copyright (c) 2020, 2021 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.web.jersey.JerseyExtension
+#
+#  Copyright (c) 2021 Daimler TSS GmbH
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Daimler TSS GmbH - Initial API and Implementation
+#       Fraunhofer Institute for Software and Systems Engineering - added command extension
+#
+#
+org.eclipse.edc.connector.controlplane.contract.ContractCoreExtension
+org.eclipse.edc.connector.controlplane.contract.ContractNegotiationCommandExtension
+org.eclipse.edc.connector.controlplane.contract.ContractNegotiationDefaultServicesExtension
+#
+#  Copyright (c) 2020, 2021 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.transfer.TransferCoreExtension
+org.eclipse.edc.connector.controlplane.transfer.TransferProcessCommandExtension
+org.eclipse.edc.connector.controlplane.transfer.TransferProcessDefaultServicesExtension
+#
+#  Copyright (c) 2021 Daimler TSS GmbH
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Daimler TSS GmbH - Initial API and Implementation
+#
+#
+org.eclipse.edc.api.observability.ObservabilityApiExtension
+#
+#  Copyright (c) 2022 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.services.ControlPlaneServicesExtension
+#
+#  Copyright (c) 2023 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.validator.dataaddress.kafka.KafkaDataAddressValidatorExtension
+#  Copyright (c) 2022 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#
+org.eclipse.edc.connector.dataplane.aws.s3.DataPlaneS3Extension
+#
+#  Copyright (c) 2022 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#
+org.eclipse.edc.aws.s3.S3CoreExtension
+#
+#  Copyright (c) 2023 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.sql.SqlCoreExtension
+#
+#  Copyright (c) 2022 Daimler TSS GmbH
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Daimler TSS GmbH - Initial API and Implementation
+#
+#
+org.eclipse.edc.connector.controlplane.store.sql.contractdefinition.SqlContractDefinitionStoreExtension
+#
+#  Copyright (c) 2022 Daimler TSS GmbH
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Daimler TSS GmbH - Initial API and Implementation
+#
+#
+org.eclipse.edc.connector.controlplane.store.sql.assetindex.SqlAssetIndexServiceExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.store.sql.contractnegotiation.SqlContractNegotiationStoreExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.controlplane.store.sql.transferprocess.SqlTransferProcessStoreExtension
+#
+#  Copyright (c) 2022 ZF Friedrichshafen AG
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       ZF Friedrichshafen AG - Initial API and Implementation
+#       Dailer TSS GmbH - Correct ServiceExtension name
+#
+#
+org.eclipse.edc.connector.controlplane.store.sql.policydefinition.SqlPolicyStoreExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.edr.store.index.SqlEndpointDataReferenceEntryIndexExtension
+#
+#  Copyright (c) 2021 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.transaction.local.LocalTransactionExtension
+#
+#  Copyright (c) 2023 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - Initial API and Implementation
+#
+#
+org.eclipse.edc.connector.controlplane.catalog.CatalogCoreExtension
+org.eclipse.edc.connector.controlplane.catalog.CatalogDefaultServicesExtension
+#
+#  Copyright (c) 2023 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.policy.monitor.store.sql.SqlPolicyMonitorStoreExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.connector.dataplane.store.sql.SqlAccessTokenDataStoreExtension
+#
+#  Copyright (c) 2020 - 2022 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.connector.dataplane.store.sql.SqlDataPlaneStoreExtension
+#
+#  Copyright (c) 2020, 2021 Microsoft Corporation
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Microsoft Corporation - initial API and implementation
+#
+#
+org.eclipse.edc.sql.pool.commons.CommonsConnectionPoolServiceExtension
+#
+#  Copyright (c) 2024 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.sql.bootstrapper.SqlSchemaBootstrapperExtension
+#
+#  Copyright (c) 2023 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
+#
+#  This program and the accompanying materials are made available under the
+#  terms of the Apache License, Version 2.0 which is available at
+#  https://www.apache.org/licenses/LICENSE-2.0
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+#  Contributors:
+#       Bayerische Motoren Werke Aktiengesellschaft (BMW AG) - initial API and implementation
+#
+#
+org.eclipse.edc.boot.BootServicesExtension

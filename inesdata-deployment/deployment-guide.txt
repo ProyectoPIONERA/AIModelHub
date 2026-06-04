@@ -1,0 +1,53 @@
+########################################
+## Crear un DATASPACE
+########################################
+
+* Habilitar acceso a Postgres, Keycloak y Vault mediante comandos individuales o utilizandos k9s
+ > kubectl port-forward <pod-postgresql> -n <common-namespace> 5432:5432
+ > kubectl port-forward <pod-keycloak> -n <common-namespace> 8080:8080
+ > kubectl port-forward <pod-vault> -n <common-namespace> 8200:8200
+
+* Ejecutar deployer del nuevo dataspace
+ > source .venv/bin/activate
+ > python3 deployer.py dataspace create <dataspace-name>
+
+* Actualizar valores de dataspace/registration-service usando los valores del fichero credentials-dataspace-devtech.json generado en el paso anterior
+* Ejecutar el paso 1 de HELM (crear registration service)
+ > cd dataspace/registration-service
+ > helm install -f values.yaml -n <dataspace-name>-ds --create-namespace <dataspace-name>-dataspace-rs .
+ > kubectl get pods -n <dataspace-name>-ds
+ 
+* CREAR CONECTOR PROMOTOR: Ejecutar los pasos indicados en la sección "AÑADIR NUEVO CONECTOR" para crear el conector promotor
+
+* Acceder a la administración de KEYCLOAK y actualizar el usuario de strapi para asignarle el grupo del conector promotor
+
+* Actualizar valores de dataspace/public-portal usando los valores del fichero credentials-dataspace-devmobility.json y del conector promotor credentials-connector-conn-promotor-devmobility.json
+* Ejecutar el paso 2 de HELM de dataspaces(crear public portal)
+ > cd dataspace/public-portal
+ > helm install -f values.yaml -n <dataspace-name>-ds <dataspace-name>-dataspace-s2 .
+ > kubectl get pods -n <dataspace-name>-ds
+
+
+##############################
+## AÑADIR NUEVO CONECTOR
+##############################
+* Ejecutar deployer para crear datos del nuevo conector
+ > python3 deployer.py connector create <connector-name> <dataspace-name>
+
+* Copiar politica de MinIO generada y creacion manual de usuario, bucket y cuenta de servicio con los valores generados por deployer
+ > cat deployments/{PRO|DEV}/<dataspace-name>/policy-<dataspace-name>-<connector-name>.json | kubectl exec -i -n <common-dataspace-name> <minio-pod> -- sh -c 'cat > /tmp/policy-<dataspace-name>-<connector-name>.json'
+ > kubectl exec -it <minio-pod> -n <common-dataspace-name> -- /bin/bash
+ >$ mc alias set minio http://127.0.0.1:9000 admin <MinIO_PASSWORD>
+ >$ mc mb minio/<dataspace-name>-<connector-name>
+ >$ mc admin user add minio <connector-name> <PASSWORD>
+ >$ mc admin user svcacct add minio <connector-name> --access-key <ACCESS_KEY> --secret-key <SECRET_KEY>
+ >$ mc admin policy create minio <connector-name> /tmp/policy-<dataspace-name>-<connector-name>.json
+ >$ mc admin policy attach minio <connector-name> -user=<connector-name>
+
+* Actualizar los valores del conector conn-participant-1 usando los valores del fichero credentials-conn-participant-1.json generado en el paso anterior
+* Copiar certificado p12 del conector en connector/keys
+* Ejecutar el despliegue mediante HELM (crear registration service)
+ > cd connector
+ > helm install -f values.yaml -n <dataspace-name>-ds <connector-name> .
+ > kubectl get pods -n <dataspace-name>-ds
+ 

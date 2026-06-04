@@ -1,0 +1,6 @@
+apiVersion: v2
+name: ontology-hub
+description: Ontology Hub component chart for AIModelHub Pionera
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

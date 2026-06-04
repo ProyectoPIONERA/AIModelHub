@@ -1,0 +1,89 @@
+replicaCount: 1
+
+image:
+  repository: ontology-hub
+  tag: local
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3333
+
+health:
+  path: /
+  initialDelaySeconds: 60
+  periodSeconds: 10
+
+ingress:
+  enabled: true
+  host: ontology-hub-demo.dev.ds.dataspaceunit.upm
+  path: /
+  pathType: Prefix
+  annotations: {}
+
+mongodb:
+  enabled: true
+  image:
+    repository: mongo
+    tag: "6"
+    pullPolicy: IfNotPresent
+  serviceName: mongodb
+  port: 27017
+  persistence:
+    enabled: false
+    size: 1Gi
+
+elasticsearch:
+  enabled: true
+  image:
+    repository: docker.elastic.co/elasticsearch/elasticsearch
+    tag: "9.2.4"
+    pullPolicy: IfNotPresent
+  serviceName: elasticsearch
+  port: 9200
+  auth:
+    username: elastic
+    password: OntologyHub2026
+  javaOpts: "-Xms512m -Xmx512m"
+  persistence:
+    enabled: false
+    size: 5Gi
+
+# Non-secret environment variables.
+# Keep this list minimal; prefer chart-level config when possible.
+env:
+  NODE_ENV: development
+  # External URL (used to build absolute links in some views).
+  SELF_HOST_URL: http://ontology-hub-demo.dev.ds.dataspaceunit.upm
+  # MongoDB connection (the app uses these names).
+  MONGO_DB_CONNECTION_URI: mongodb://mongodb:27017
+  MONGO_DB_CONNECTION_STRING: mongodb://mongodb:27017/lov
+  # Elasticsearch connection (the app uses these names).
+  ELASTIC_SEARCH_HOST: elasticsearch
+  ELASTIC_SEARCH_USER: elastic
+  # Optional but recommended (match component defaults).
+  SCRIPTS_PATH: /app/scripts
+  PATTERN_PATHS: /app/Patterns/Patrones
+  PYTHON_PATTERNS_PATH: python
+
+# Secret values (avoid committing real secrets to git).
+# Recommended: leave this empty and use an existing Secret.
+secrets:
+  existingSecretName: ""
+  values: {}
+  # values:
+  #   ELASTIC_SEARCH_PASSWORD: CHANGE_ME
+
+# Extra env sourced from existingSecretName.
+# Example:
+# secretEnvKeys:
+#   - ELASTIC_SEARCH_PASSWORD
+secretEnvKeys: []
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

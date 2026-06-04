@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Node and browser tooling
+node_modules/
+validation/ui/node_modules/
+playwright-report/
+test-results/
+blob-report/
+validation/ui/ops-test-results/
+validation/ui/ops-playwright-report/
+validation/ui/ops-blob-report/
+validation/ui/manual-runs/
+
+# Runtime outputs
+.inesdata-local/
+experiments/
+newman/
+logs/
+*.log
+*.tmp
+*.bak
+*:Zone.Identifier
+
+# Generated deployment state and secrets
+inesdata-deployment/deployments/
+inesdata-deployment/common/init-keys-vault.json
+
+# Local build caches
+.gradle/
+.angular/
+dist/
+build/
+!adapters/inesdata/sources/inesdata-connector/launchers/connector/build/
+!adapters/inesdata/sources/inesdata-connector/launchers/connector/build/libs/
+!adapters/inesdata/sources/inesdata-connector/launchers/connector/build/libs/connector-app.jar
+
+# Local config variants
+.env
+validation/ui/.env

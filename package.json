@@ -1,0 +1,12 @@
+{
+  "name": "aimodelhub-pionera",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Local Node.js tooling for AIModelHub Pionera",
+  "devDependencies": {
+    "newman": "6.2.1"
+  },
+  "scripts": {
+    "newman": "newman"
+  }
+}

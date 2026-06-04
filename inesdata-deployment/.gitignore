@@ -1,0 +1,16 @@
+*/charts/*.tgz
+.venv/
+legacy/
+deployments/
+connector/keys/
+connector/envs/
+dataspace/envs/
+common/envs/
+deployer.config
+common/init-keys-vault.json
+connector/values-conn-citycouncil-demo.yaml
+connector/values-conn-company-demo.yaml
+dataspace/public-portal/values-demo.yaml
+dataspace/registration-service/values-demo.yaml
+deployer.config
+*:Zone.Identifier

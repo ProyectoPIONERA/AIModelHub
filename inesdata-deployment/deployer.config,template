@@ -1,0 +1,14 @@
+PG_HOST=localhost
+PG_USER=
+PG_PASSWORD=
+KC_URL=http://localhost:8080
+KC_USER=
+KC_PASSWORD=
+KC_INTERNAL_URL=
+VT_URL=http://localhost:8200
+VT_TOKEN=
+DATABASE_HOSTNAME=comsrvs-tls-postgres-postgresql.common-srvs.svc
+KEYCLOAK_HOSTNAME=auth.ds.dataspaceunit-project.eu
+KEYCLOAK_INTERNAL_HOSTNAME=comsrv-keycloak.common-services.svc
+MINIO_HOSTNAME=storage.ds.dataspaceunit-project.eu
+VAULT_URL=https://comsrvs-vault.common-srvs.svc:8200
