@@ -21,6 +21,7 @@ validation/ui/manual-runs/
 
 # Runtime outputs
 .inesdata-local/
+AIModelHub-Use-Cases/
 experiments/
 newman/
 logs/

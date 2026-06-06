@@ -212,11 +212,10 @@ prepare_component_artifacts() {
     return
   fi
 
-  if artifact_exists "$repo_dir/$artifact_rel"; then
-    return
-  fi
-
   if [[ -z "$prebuild_cmd" ]]; then
+    if artifact_exists "$repo_dir/$artifact_rel"; then
+      return
+    fi
     echo "Missing required artifact for $component: $repo_dir/$artifact_rel" >&2
     exit 1
   fi
