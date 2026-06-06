@@ -6,7 +6,7 @@ paths shown here.
 
 ## Entrypoints
 
-- `inesdata_local_deploy.py`: local 8-step deployment workflow.
+- `inesdata_local_deploy.py`: local 10-step deployment workflow.
 - `main.py`: validation and metrics CLI invoked by Step 6.
 - `runtime_dependencies.py`: runtime dependency bootstrap helper.
 - `requirements.txt`: Python dependencies for deployment, validation and
@@ -95,22 +95,27 @@ Generated runtime state is not copied:
 - `validation/ui/`: Playwright validation support.
 - `framework/`: experiment storage, validation engine, metrics, Kafka support
   and reporting.
-- `scripts/seed_ml_assets_for_connectors.sh`: Step 8 vocabulary, ML assets,
-  policy and contract seeding.
-- `JS_Metadata_Daimo.schema.json`: vocabulary schema used by Step 8.
+- `scripts/seed_ml_assets_for_connectors.sh`: Step 8 vocabulary/base model
+  seeding, Step 9 benchmark dataset seeding and Step 10 use-case model seeding.
+- `JS_Metadata_Daimo.schema.json`: vocabulary schema used by Steps 8, 9 and 10.
 - `combined_model_server/`: default Step 7 wrapper for the combined local model
   server.
 
 The default Step 8 model set is `combined` because `--seed-model-set auto`
-follows the default `--model-server-mode combined`. It registers:
+follows the default `--model-server-mode combined`, but Step 8 skips
+FLARES/Mobility use-case models because those are handled by Step 10. Step 8
+registers:
 
-- 11 FLARES/Mobility assets as `HttpData`.
 - 10 deterministic mock assets as `HttpData`, pointing to the same combined host
   FastAPI server.
 - 5 deterministic mock assets as `InesDataStore`.
 
-The `mock` and `use-cases` model sets remain available through
-`--seed-model-set` for isolated validation.
+Step 9 uses the same seed script with `--seed-scope datasets` to publish the
+use-case benchmark datasets and dataset contracts separately from Step 8.
+
+Step 10 uses the same seed script with `--model-set use-cases` and
+`--skip-inesdata-models` to register 15 FLARES/Mobility prediction assets plus 6
+FLARES metric-model assets as `HttpData`.
 
 ## Runtime Outputs
 

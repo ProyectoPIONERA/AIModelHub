@@ -12,7 +12,7 @@ they are needed to run or understand the code.
 
 ## Main Capabilities
 
-- Local 8-step deployment process for common services, dataspace services and
+- Local 10-step deployment process for common services, dataspace services and
   connectors.
 - PIONERA-themed connector interface with AI model workflows.
 - AI Model Browser for model discovery and metadata inspection.
@@ -127,7 +127,7 @@ python3 inesdata_local_deploy.py --non-interactive --manual-ready
 The menu exposes this flow:
 
 ```text
-0 - Run all steps (1-8) sequentially
+0 - Run all steps (1-10) sequentially
 
 1 - Step 1: Setup cluster + deploy common services
 2 - Step 2: Confirm tunnel + ingress port-forward
@@ -136,7 +136,9 @@ The menu exposes this flow:
 5 - Step 5: Deploy connectors
 6 - Step 6: Run validation tests
 7 - Step 7: Deploy/Start ML Model Server
-8 - Step 8: Seed vocabulary + ML assets + contracts
+8 - Step 8: Seed vocabulary + base/mock ML model assets + contracts
+9 - Step 9: Seed benchmark datasets + contracts
+10 - Step 10: Seed FLARES/Mobility model assets + contracts
 ```
 
 ### Step 7: Model Server
@@ -169,22 +171,63 @@ http://host.docker.internal:8000
 That URL is used by Docker-backed Minikube pods to reach the FastAPI server
 running on the host.
 
-### Step 8: Metadata And Assets
+### Step 8: Base Model Metadata And Assets
 
-Step 8 seeds the vocabulary, model assets, policies and contracts.
+Step 8 seeds the vocabulary, base/mock model assets, model policies and model
+contracts.
 
 In the default combined deployment it registers:
 
-- FLARES and Mobility PIONERA use-case models as `HttpData`.
 - Deterministic mock HTTP models as `HttpData`.
 - Additional deterministic stored models as `InesDataStore`.
 - DAIMO-aligned metadata from `JS_Metadata_Daimo.schema.json`.
+
+### Step 9: Benchmark Datasets
+
+Step 9 seeds benchmark dataset assets and dataset contracts separately from the
+model assets. The default use-case dataset assets are published by the Company
+connector and negotiated for City Council.
 
 The script responsible for this step is:
 
 ```text
 scripts/seed_ml_assets_for_connectors.sh
 ```
+
+### Step 10: Use-Case Model Assets
+
+Step 10 seeds the running FLARES/Mobility FastAPI models as `HttpData` assets.
+It does not upload model files or create stored model placeholders.
+
+The use-case FastAPI server exposes 15 prediction models: 6 FLARES models and 9
+Mobility models. The FLARES prediction models also expose 6 `/metrics`
+endpoints, which are registered as metric model assets for benchmark runs that
+need model-side custom evaluation.
+
+Start the use-case server from the use-case folder:
+
+```bash
+cd AIModelHub-Use-Cases
+source .venv/bin/activate
+uvicorn src.server:app --reload --host 0.0.0.0 --port 8000
+```
+
+If the connectors are already deployed and only the use-case model assets need
+to be registered, run:
+
+```bash
+bash scripts/seed_ml_assets_for_connectors.sh \
+  --seed-scope models \
+  --model-set use-cases \
+  --include-use-case-models \
+  --skip-inesdata-models \
+  --use-case-model-server-base-url http://host.docker.internal:8000
+```
+
+Use-case model assets are split between the two connectors. City Council
+publishes 10 use-case HttpData assets and Company publishes 11 use-case HttpData
+assets; cross-connector contracts make the opposite side available to each
+consumer.
 
 ## PIONERA Use Cases
 
@@ -195,8 +238,15 @@ classification.
 
 Registered models:
 
+- `FLARES 5W1H ALBERT - PIONERA Use Case`
+- `FLARES Reliability ALBERT - PIONERA Use Case`
+- `FLARES 5W1H BERT - PIONERA Use Case`
+- `FLARES Reliability BERT - PIONERA Use Case`
 - `FLARES 5W1H DistilBERT - PIONERA Use Case`
 - `FLARES Reliability DistilBERT - PIONERA Use Case`
+
+Each FLARES model also has a metric model asset that points to its `/metrics`
+endpoint.
 
 Typical 5W1H input:
 
@@ -378,7 +428,8 @@ check:
 - The FastAPI server responds on `http://127.0.0.1:8000/models`.
 - The connector-facing URL is reachable from Minikube pods.
 - `AIModelHub_Uses_Cases` has prepared model artifacts.
-- Step 8 was rerun after metadata or endpoint changes.
+- Step 8 was rerun after model metadata or endpoint changes.
+- Step 9 was rerun after benchmark dataset metadata changes.
 
 ### Rebuilding Local Images
 
@@ -408,7 +459,7 @@ curl http://127.0.0.1:8000/models
 
 ## Documentation
 
-- `DEPLOYMENT_TRACEABILITY.md`: traceability for the local 8-step deployment.
+- `DEPLOYMENT_TRACEABILITY.md`: traceability for the local 10-step deployment.
 - `JS_Metadata_Daimo.schema.json`: metadata schema for model registration.
 - `AIModelHub_Uses_Cases/README.md`: companion use-case repository guide.
 
