@@ -156,7 +156,8 @@ export class CatalogBrowserService {
         storageType: this.findStorageType(dataset),
         fileName: this.findFileName(dataset),
         path: this.findHttpPath(dataset),
-        method: this.firstDatasetValue(dataset, ['method', 'edc:method', 'https://w3id.org/edc/v0.0.1/ns/method'])
+        method: this.firstDatasetValue(dataset, ['method', 'edc:method', 'https://w3id.org/edc/v0.0.1/ns/method']),
+        rawProperties: dataset
 			}
       const assetId = dataset["@id"];
 
