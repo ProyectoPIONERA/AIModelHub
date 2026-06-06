@@ -13,8 +13,18 @@ VOCABULARY_NAME="${VOCABULARY_NAME:-JS Metadata Daimo}"
 VOCABULARY_CATEGORY="${VOCABULARY_CATEGORY:-machineLearning}"
 VOCABULARY_SCHEMA_FILE="${VOCABULARY_SCHEMA_FILE:-}"
 MODEL_FILE="$WORK_DIR/LGBM_Classifier_1.pkl"
+SEED_SCOPE="${SEED_SCOPE:-models}"
+MOBILITY_SEGMENTS_DATASET_FILE="${MOBILITY_SEGMENTS_DATASET_FILE:-$ROOT_DIR/AIModelHub-Use-Cases/data/mobility-datasets/segments_test.csv}"
+MOBILITY_SEGMENTS_DATASET_ID="${MOBILITY_SEGMENTS_DATASET_ID:-company-mobility-segments-test}"
+FLARES_5W1H_DATASET_FILE="${FLARES_5W1H_DATASET_FILE:-$ROOT_DIR/AIModelHub-Use-Cases/data/flares-datasets/5w1h_subtarea_1_test.json}"
+FLARES_5W1H_DATASET_ID="${FLARES_5W1H_DATASET_ID:-company-flares-5w1h-test}"
+FLARES_RELIABILITY_DATASET_FILE="${FLARES_RELIABILITY_DATASET_FILE:-$ROOT_DIR/AIModelHub-Use-Cases/data/flares-datasets/5w1h_subtarea_2_test.json}"
+FLARES_RELIABILITY_DATASET_ID="${FLARES_RELIABILITY_DATASET_ID:-company-flares-reliability-test}"
+USE_CASE_DATASET_IDS=("$MOBILITY_SEGMENTS_DATASET_ID" "$FLARES_5W1H_DATASET_ID" "$FLARES_RELIABILITY_DATASET_ID")
 STRICT_MODE="${STRICT_MODE:-0}"
 INCLUDE_USE_CASE_MODELS="${INCLUDE_USE_CASE_MODELS:-0}"
+SKIP_USE_CASE_MODELS="${SKIP_USE_CASE_MODELS:-0}"
+SKIP_INESDATA_MODELS="${SKIP_INESDATA_MODELS:-0}"
 USE_CASE_MODEL_SERVER_BASE_URL="${USE_CASE_MODEL_SERVER_BASE_URL:-http://host.docker.internal:8000}"
 MODEL_SET="${MODEL_SET:-combined}"
 COMBINED_HTTP_COUNT="${COMBINED_HTTP_COUNT:-10}"
@@ -34,8 +44,11 @@ Options:
   --vocabulary-name <name>    Vocabulary display name (default: JS Metadata Daimo)
   --vocabulary-category <cat> Vocabulary category (default: machineLearning)
   --vocabulary-schema <path>  JSON schema file. Default auto-detect from project root
+  --seed-scope <scope>        What to seed: models, datasets or all (default: models)
   --model-set <mode>          ML metadata set: mock, use-cases or combined (default: combined)
   --include-use-case-models   Also seed FLARES/Mobility HttpData assets
+  --skip-use-case-models      Skip FLARES/Mobility HttpData assets in use-cases/combined modes
+  --skip-inesdata-models      Skip stored InesDataStore model placeholder assets
   --use-case-model-server-base-url <url>
                               Connector-facing base URL for FLARES/Mobility FastAPI
   --combined-http-count <n>   Extra mock HttpData assets in combined mode (default: 10)
@@ -89,12 +102,24 @@ while [[ $# -gt 0 ]]; do
       VOCABULARY_SCHEMA_FILE="${2:-}"
       shift 2
       ;;
+    --seed-scope)
+      SEED_SCOPE="${2:-}"
+      shift 2
+      ;;
     --model-set)
       MODEL_SET="${2:-}"
       shift 2
       ;;
     --include-use-case-models)
       INCLUDE_USE_CASE_MODELS=1
+      shift
+      ;;
+    --skip-use-case-models)
+      SKIP_USE_CASE_MODELS=1
+      shift
+      ;;
+    --skip-inesdata-models)
+      SKIP_INESDATA_MODELS=1
       shift
       ;;
     --use-case-model-server-base-url)
@@ -136,6 +161,14 @@ case "$MODEL_SET" in
   mock|use-cases|combined) ;;
   *)
     echo "Invalid --model-set value: $MODEL_SET" >&2
+    exit 1
+    ;;
+esac
+
+case "$SEED_SCOPE" in
+  models|datasets|all) ;;
+  *)
+    echo "Invalid --seed-scope value: $SEED_SCOPE" >&2
     exit 1
     ;;
 esac
@@ -209,6 +242,7 @@ fi
 
 echo "Using vocabulary schema: $VOCABULARY_SCHEMA_FILE"
 echo "Using vocabulary id: $VOCABULARY_ID"
+echo "Using seed scope: $SEED_SCOPE"
 echo "Using model metadata set: $MODEL_SET"
 if [[ "$MODEL_SET" == "combined" ]]; then
   echo "Combined set: FLARES/Mobility use-case HttpData + $COMBINED_HTTP_COUNT mock HttpData + $COMBINED_INESDATA_COUNT InesDataStore per connector"
@@ -514,6 +548,10 @@ GROUP_FRAMEWORKS=("TensorFlow" "Custom" "scikit-learn" "scikit-learn" "XGBoost")
 GROUP_LIBRARIES=("Keras" "Transformers" "scikit-learn" "scikit-learn" "XGBoost")
 
 USE_CASE_MODEL_SLUGS=(
+  flares-5w1h-albert
+  flares-reliability-albert
+  flares-5w1h-bert
+  flares-reliability-bert
   flares-5w1h-distilbert
   flares-reliability-distilbert
   mobility-lightgbm-actual-travel-time
@@ -528,6 +566,10 @@ USE_CASE_MODEL_SLUGS=(
 )
 
 USE_CASE_MODEL_TITLES=(
+  "FLARES 5W1H ALBERT"
+  "FLARES Reliability ALBERT"
+  "FLARES 5W1H BERT"
+  "FLARES Reliability BERT"
   "FLARES 5W1H DistilBERT"
   "FLARES Reliability DistilBERT"
   "Mobility LightGBM Actual Travel Time"
@@ -542,6 +584,10 @@ USE_CASE_MODEL_TITLES=(
 )
 
 USE_CASE_MODEL_ENDPOINTS=(
+  /flares/dccuchile-albert-base-spanish-5w1h
+  /flares/dccuchile-albert-base-spanish-reliability
+  /flares/dccuchile-bert-base-spanish-wwm-uncased-5w1h
+  /flares/dccuchile-bert-base-spanish-wwm-uncased-reliability
   /flares/dccuchile-distilbert-base-spanish-uncased-5w1h
   /flares/dccuchile-distilbert-base-spanish-uncased-reliability
   /mobility/lightgbm_actual_travel_time
@@ -555,7 +601,47 @@ USE_CASE_MODEL_ENDPOINTS=(
   /mobility/catboost_previous_delay
 )
 
+FLARES_METRIC_MODEL_SLUGS=(
+  flares-5w1h-albert-metrics
+  flares-reliability-albert-metrics
+  flares-5w1h-bert-metrics
+  flares-reliability-bert-metrics
+  flares-5w1h-distilbert-metrics
+  flares-reliability-distilbert-metrics
+)
+
+FLARES_METRIC_MODEL_TITLES=(
+  "FLARES 5W1H ALBERT Metrics"
+  "FLARES Reliability ALBERT Metrics"
+  "FLARES 5W1H BERT Metrics"
+  "FLARES Reliability BERT Metrics"
+  "FLARES 5W1H DistilBERT Metrics"
+  "FLARES Reliability DistilBERT Metrics"
+)
+
+FLARES_METRIC_MODEL_ENDPOINTS=(
+  /flares/dccuchile-albert-base-spanish-5w1h/metrics
+  /flares/dccuchile-albert-base-spanish-reliability/metrics
+  /flares/dccuchile-bert-base-spanish-wwm-uncased-5w1h/metrics
+  /flares/dccuchile-bert-base-spanish-wwm-uncased-reliability/metrics
+  /flares/dccuchile-distilbert-base-spanish-uncased-5w1h/metrics
+  /flares/dccuchile-distilbert-base-spanish-uncased-reliability/metrics
+)
+
+FLARES_METRIC_MODEL_DESCRIPTIONS=(
+  "Computes FLARES 5W1H span metrics from native validation rows"
+  "Computes FLARES reliability classification metrics from native validation rows"
+  "Computes FLARES 5W1H span metrics from native validation rows"
+  "Computes FLARES reliability classification metrics from native validation rows"
+  "Computes FLARES 5W1H span metrics from native validation rows"
+  "Computes FLARES reliability classification metrics from native validation rows"
+)
+
 USE_CASE_MODEL_DESCRIPTIONS=(
+  "Extracts 5W1H spans from Spanish text using a fine-tuned ALBERT token classifier"
+  "Classifies reliability for extracted FLARES spans using a fine-tuned ALBERT sequence classifier"
+  "Extracts 5W1H spans from Spanish text using a fine-tuned BERT token classifier"
+  "Classifies reliability for extracted FLARES spans using a fine-tuned BERT sequence classifier"
   "Extracts 5W1H spans from Spanish text using a fine-tuned DistilBERT token classifier"
   "Classifies reliability for extracted FLARES spans using a fine-tuned DistilBERT sequence classifier"
   "Predicts actual travel time for public transport segments using LightGBM"
@@ -570,48 +656,64 @@ USE_CASE_MODEL_DESCRIPTIONS=(
 )
 
 USE_CASE_MODEL_TASKS=(
-  "Natural Language Processing"
-  "Natural Language Processing"
-  "Predictive event"
-  "Predictive event"
-  "Predictive event"
-  "Predictive event"
-  "Predictive event"
-  "Predictive event"
-  "Predictive event"
-  "Predictive event"
-  "Predictive event"
+  "Token Classification"
+  "Classification"
+  "Token Classification"
+  "Classification"
+  "Token Classification"
+  "Classification"
+  "Regression"
+  "Regression"
+  "Regression"
+  "Regression"
+  "Regression"
+  "Regression"
+  "Regression"
+  "Regression"
+  "Regression"
 )
 
 USE_CASE_MODEL_SUBTASKS=(
-  "Other"
-  "Text classification"
-  "Other"
-  "Other"
-  "Other"
-  "Other"
-  "Other"
-  "Other"
-  "Other"
-  "Other"
-  "Other"
+  "5W1H span extraction"
+  "Reliability classification"
+  "5W1H span extraction"
+  "Reliability classification"
+  "5W1H span extraction"
+  "Reliability classification"
+  "Actual travel time prediction"
+  "Actual travel time prediction"
+  "Actual travel time prediction"
+  "Segment delay prediction"
+  "Segment delay prediction"
+  "Segment delay prediction"
+  "Previous delay prediction"
+  "Previous delay prediction"
+  "Previous delay prediction"
 )
 
 USE_CASE_MODEL_ALGORITHMS=(
+  "ALBERT token classification"
+  "ALBERT sequence classification"
+  "BERT token classification"
+  "BERT sequence classification"
   "DistilBERT token classification"
   "DistilBERT sequence classification"
-  "Gradient Boosting Decision Trees"
+  "LightGBM Regressor"
   "Random Forest Regressor"
-  "Gradient Boosting Decision Trees"
-  "Gradient Boosting Decision Trees"
+  "CatBoost Regressor"
+  "LightGBM Regressor"
   "Random Forest Regressor"
-  "Gradient Boosting Decision Trees"
-  "Gradient Boosting Decision Trees"
+  "CatBoost Regressor"
+  "LightGBM Regressor"
   "Random Forest Regressor"
-  "Gradient Boosting Decision Trees"
+  "CatBoost Regressor"
 )
 
 USE_CASE_MODEL_FRAMEWORKS=(
+  "PyTorch"
+  "PyTorch"
+  "PyTorch"
+  "PyTorch"
   "PyTorch"
   "PyTorch"
   "LightGBM"
@@ -628,6 +730,10 @@ USE_CASE_MODEL_FRAMEWORKS=(
 USE_CASE_MODEL_LIBRARIES=(
   "Transformers"
   "Transformers"
+  "Transformers"
+  "Transformers"
+  "Transformers"
+  "Transformers"
   "LightGBM"
   "scikit-learn"
   "CatBoost"
@@ -639,6 +745,39 @@ USE_CASE_MODEL_LIBRARIES=(
   "CatBoost"
 )
 
+CITY_USE_CASE_MODEL_SLUGS=(
+  flares-5w1h-albert
+  flares-reliability-albert
+  flares-5w1h-distilbert
+  flares-reliability-distilbert
+  mobility-lightgbm-actual-travel-time
+  mobility-randomforest-actual-travel-time
+)
+
+COMPANY_USE_CASE_MODEL_SLUGS=(
+  flares-5w1h-bert
+  flares-reliability-bert
+  mobility-catboost-actual-travel-time
+  mobility-lightgbm-delay
+  mobility-randomforest-delay
+  mobility-catboost-delay
+  mobility-lightgbm-previous-delay
+  mobility-randomforest-previous-delay
+  mobility-catboost-previous-delay
+)
+
+CITY_FLARES_METRIC_MODEL_SLUGS=(
+  flares-5w1h-albert-metrics
+  flares-reliability-albert-metrics
+  flares-5w1h-distilbert-metrics
+  flares-reliability-distilbert-metrics
+)
+
+COMPANY_FLARES_METRIC_MODEL_SLUGS=(
+  flares-5w1h-bert-metrics
+  flares-reliability-bert-metrics
+)
+
 # Per-connector group context — appended to title for differentiation
 CITY_GROUP_CTX=("Municipal Health" "City Services" "Citizens Wellness" "City Botanical" "City Treasury")
 COMPANY_GROUP_CTX=("Corporate Health" "Corp Analytics" "Employee Wellness" "AgriTech Lab" "Corp Finance")
@@ -648,6 +787,34 @@ connector_tag() {
     *citycouncil*) echo "city" ;;
     *company*)     echo "company" ;;
     *)             echo "${1//-/_}" | cut -c1-8 ;;
+  esac
+}
+
+contains_value() {
+  local needle="$1"
+  shift
+  local value
+  for value in "$@"; do
+    [[ "$value" == "$needle" ]] && return 0
+  done
+  return 1
+}
+
+should_seed_use_case_model() {
+  local tag="$1" slug="$2"
+  case "$tag" in
+    city)    contains_value "$slug" "${CITY_USE_CASE_MODEL_SLUGS[@]}" ;;
+    company) contains_value "$slug" "${COMPANY_USE_CASE_MODEL_SLUGS[@]}" ;;
+    *)       return 0 ;;
+  esac
+}
+
+should_seed_flares_metric_model() {
+  local tag="$1" slug="$2"
+  case "$tag" in
+    city)    contains_value "$slug" "${CITY_FLARES_METRIC_MODEL_SLUGS[@]}" ;;
+    company) contains_value "$slug" "${COMPANY_FLARES_METRIC_MODEL_SLUGS[@]}" ;;
+    *)       return 0 ;;
   esac
 }
 
@@ -700,12 +867,12 @@ input_example_json() {
 use_case_input_features_json() {
   local slug="$1"
   case "$slug" in
-    flares-5w1h-distilbert)
+    flares-5w1h-*)
       cat <<'FLARES_5W1H_FEATURES'
 [{"name":"Id","type":"integer","description":"Input text identifier","nullable":false},{"name":"Text","type":"string","description":"Spanish text to analyze","nullable":false}]
 FLARES_5W1H_FEATURES
       ;;
-    flares-reliability-distilbert)
+    flares-reliability-*)
       cat <<'FLARES_REL_FEATURES'
 [{"name":"Id","type":"integer","description":"Input text identifier","nullable":false},{"name":"Text","type":"string","description":"Original Spanish text","nullable":false},{"name":"Tag_Start","type":"integer","description":"Span start character offset","nullable":false},{"name":"Tag_End","type":"integer","description":"Span end character offset","nullable":false},{"name":"5W1H_Label","type":"string","description":"5W1H span label","nullable":false},{"name":"Tag_Text","type":"string","description":"Extracted span text","nullable":false}]
 FLARES_REL_FEATURES
@@ -723,13 +890,55 @@ MOBILITY_FEATURES
   esac
 }
 
+use_case_input_columns_json() {
+  local slug="$1"
+  case "$slug" in
+    flares-5w1h-*)
+      echo '["Id","Text"]'
+      ;;
+    flares-reliability-*)
+      echo '["Id","Text","Tag_Start","Tag_End","5W1H_Label","Tag_Text"]'
+      ;;
+    mobility-lightgbm-previous-delay|mobility-randomforest-previous-delay|mobility-catboost-previous-delay)
+      echo '["trip_id","from_stop_id","to_stop_id","route_id","scheduled_travel_time","shape_distance","is_peak","hour_sin","hour_cos","weekday_sin","weekday_cos"]'
+      ;;
+    *)
+      echo '["trip_id","from_stop_id","to_stop_id","route_id","scheduled_travel_time","shape_distance","is_peak","hour_sin","hour_cos","weekday_sin","weekday_cos","previous_delay_ratio","previous_delay_delta"]'
+      ;;
+  esac
+}
+
+use_case_label_column() {
+  local slug="$1"
+  case "$slug" in
+    flares-5w1h-*)
+      echo "Tags"
+      ;;
+    flares-reliability-*)
+      echo "Reliability_Label"
+      ;;
+    mobility-*-actual-travel-time)
+      echo "actual_travel_time"
+      ;;
+    mobility-*-previous-delay)
+      echo "previous_delay"
+      ;;
+    mobility-*-delay)
+      echo "delay"
+      ;;
+    *)
+      echo "label"
+      ;;
+  esac
+}
+
 use_case_input_example_json() {
   local slug="$1"
   case "$slug" in
-    flares-5w1h-distilbert)
+    flares-5w1h-*)
       echo '[{\"Id\":840,\"Text\":\"El comité de medicamentos humanos espera concluir el análisis en marzo.\"}]'
       ;;
-    flares-reliability-distilbert)
+    flares-reliability-*)
       echo '[{\"Id\":840,\"Text\":\"El comité de medicamentos humanos espera concluir el análisis en marzo.\",\"Tag_Start\":0,\"Tag_End\":35,\"5W1H_Label\":\"WHO\",\"Tag_Text\":\"El comité de medicamentos humanos\"}]'
       ;;
     mobility-lightgbm-previous-delay|mobility-randomforest-previous-delay|mobility-catboost-previous-delay)
@@ -741,13 +950,65 @@ use_case_input_example_json() {
   esac
 }
 
+flares_metric_input_features_json() {
+  local slug="$1"
+  case "$slug" in
+    flares-5w1h-*-metrics)
+      cat <<'FLARES_5W1H_METRIC_FEATURES'
+[{"name":"Id","type":"integer","description":"Input text identifier","nullable":false},{"name":"Text","type":"string","description":"Spanish text to analyze","nullable":false},{"name":"Tags","type":"array","description":"Gold 5W1H span annotations","nullable":false}]
+FLARES_5W1H_METRIC_FEATURES
+      ;;
+    *)
+      cat <<'FLARES_RELIABILITY_METRIC_FEATURES'
+[{"name":"Id","type":"integer","description":"Input text identifier","nullable":false},{"name":"Text","type":"string","description":"Original Spanish text","nullable":false},{"name":"5W1H_Label","type":"string","description":"5W1H span label","nullable":false},{"name":"Tag_Text","type":"string","description":"Extracted span text","nullable":false},{"name":"Tag_Start","type":"integer","description":"Span start character offset","nullable":false},{"name":"Tag_End","type":"integer","description":"Span end character offset","nullable":false},{"name":"Reliability_Label","type":"string","description":"Gold reliability label","nullable":false}]
+FLARES_RELIABILITY_METRIC_FEATURES
+      ;;
+  esac
+}
+
+flares_metric_input_columns_json() {
+  local slug="$1"
+  case "$slug" in
+    flares-5w1h-*-metrics)
+      echo '["Id","Text"]'
+      ;;
+    *)
+      echo '["Id","Text","5W1H_Label","Tag_Text","Tag_Start","Tag_End"]'
+      ;;
+  esac
+}
+
+flares_metric_label_column() {
+  local slug="$1"
+  case "$slug" in
+    flares-5w1h-*-metrics)
+      echo "Tags"
+      ;;
+    *)
+      echo "Reliability_Label"
+      ;;
+  esac
+}
+
+flares_metric_input_example_json() {
+  local slug="$1"
+  case "$slug" in
+    flares-5w1h-*-metrics)
+      echo '{\"Id\":875,\"Text\":\"Ya en 1988, un grupo de biologos zarparon para recoger organismos marinos.\",\"Tags\":[{\"Tag_Start\":3,\"Tag_End\":10,\"5W1H_Label\":\"WHEN\",\"Tag_Text\":\"en 1988\"}]}'
+      ;;
+    *)
+      echo '{\"Id\":6831,\"Text\":\"Lo Pais no deja de sorprendernos.\",\"5W1H_Label\":\"WHAT\",\"Tag_Text\":\"su explicacion\",\"Tag_Start\":42,\"Tag_End\":56,\"Reliability_Label\":\"no confiable\"}'
+      ;;
+  esac
+}
+
 use_case_metrics_json() {
   local slug="$1"
   case "$slug" in
-    flares-5w1h-distilbert)
+    flares-5w1h-*)
       echo '[{"metric":"Precision","value":0.29},{"metric":"Recall","value":0.04},{"metric":"F1","value":0.07}]'
       ;;
-    flares-reliability-distilbert)
+    flares-reliability-*)
       echo '[{"metric":"Precision","value":0.22},{"metric":"Recall","value":0.33},{"metric":"F1","value":0.27}]'
       ;;
     mobility-randomforest-previous-delay)
@@ -761,6 +1022,51 @@ use_case_metrics_json() {
       ;;
     *)
       echo '[{"metric":"MAE","value":16.79},{"metric":"R2","value":0.33}]'
+      ;;
+  esac
+}
+
+use_case_supported_metrics_json() {
+  local slug="$1"
+  case "$slug" in
+    mobility-*)
+      echo '["RMSE","MAE","MSE","R2"]'
+      ;;
+    flares-reliability-*)
+      echo '["Accuracy","Precision","Recall","F1"]'
+      ;;
+    *)
+      echo '["Precision","Recall","F1"]'
+      ;;
+  esac
+}
+
+use_case_metric_directions_json() {
+  local slug="$1"
+  case "$slug" in
+    mobility-*)
+      echo '{"RMSE":"lower","MAE":"lower","MSE":"lower","R2":"higher"}'
+      ;;
+    flares-reliability-*)
+      echo '{"Accuracy":"higher","Precision":"higher","Recall":"higher","F1":"higher"}'
+      ;;
+    *)
+      echo '{"Precision":"higher","Recall":"higher","F1":"higher"}'
+      ;;
+  esac
+}
+
+use_case_prediction_fields_json() {
+  local slug="$1"
+  case "$slug" in
+    flares-5w1h-*)
+      echo '["Tag_Start","Tag_End","5W1H_Label"]'
+      ;;
+    flares-reliability-*)
+      echo '["Reliability_Label"]'
+      ;;
+    *)
+      echo '[]'
       ;;
   esac
 }
@@ -882,9 +1188,18 @@ seed_use_case_http_data_assets() {
   tag="$(connector_tag "$connector")"
 
   local base_url="${USE_CASE_MODEL_SERVER_BASE_URL%/}"
+  local expected="${#USE_CASE_MODEL_SLUGS[@]}"
+  case "$tag" in
+    city)    expected="${#CITY_USE_CASE_MODEL_SLUGS[@]}" ;;
+    company) expected="${#COMPANY_USE_CASE_MODEL_SLUGS[@]}" ;;
+  esac
 
   for idx in "${!USE_CASE_MODEL_SLUGS[@]}"; do
     local slug="${USE_CASE_MODEL_SLUGS[$idx]}"
+    if ! should_seed_use_case_model "$tag" "$slug"; then
+      continue
+    fi
+
     local title="${USE_CASE_MODEL_TITLES[$idx]}"
     local endpoint="${USE_CASE_MODEL_ENDPOINTS[$idx]}"
     local desc="${USE_CASE_MODEL_DESCRIPTIONS[$idx]}"
@@ -893,10 +1208,15 @@ seed_use_case_http_data_assets() {
     local algo="${USE_CASE_MODEL_ALGORITHMS[$idx]}"
     local fw="${USE_CASE_MODEL_FRAMEWORKS[$idx]}"
     local library="${USE_CASE_MODEL_LIBRARIES[$idx]}"
-    local input_feat input_ex metrics
+    local input_columns input_feat input_ex label_column prediction_fields metrics supported_metrics metric_directions
+    input_columns="$(use_case_input_columns_json "$slug")"
     input_feat="$(use_case_input_features_json "$slug" | tr -d '\n')"
     input_ex="$(use_case_input_example_json "$slug")"
+    label_column="$(use_case_label_column "$slug")"
+    prediction_fields="$(use_case_prediction_fields_json "$slug")"
     metrics="$(use_case_metrics_json "$slug")"
+    supported_metrics="$(use_case_supported_metrics_json "$slug")"
+    metric_directions="$(use_case_metric_directions_json "$slug")"
 
     local asset_id="${tag}-${slug}"
     local asset_title="${title} - PIONERA Use Case"
@@ -933,10 +1253,17 @@ seed_use_case_http_data_assets() {
         "daimo:algorithm": "${algo}",
         "daimo:framework": "${fw}",
         "daimo:library": "${library}",
+        "daimo:benchmark_model_type": "output",
+        "daimo:request_shape": "batch",
+        "daimo:metrics": ${supported_metrics},
+        "daimo:metric_directions": ${metric_directions},
         "dct:language": ["Spanish"],
         "dcterms:language": ["Spanish"],
         "dct:license": "apache-2.0",
         "dcterms:license": "apache-2.0",
+        "daimo:input": ${input_columns},
+        "daimo:label": "${label_column}",
+        "daimo:prediction_fields": ${prediction_fields},
         "daimo:input_features": ${input_feat},
         "daimo:input_example": "${input_ex}",
         "mls:ModelEvaluation": ${metrics}
@@ -962,7 +1289,124 @@ ASSET_EOF
     fi
   done
 
-  echo "[$connector] Use-case HttpData assets created: $created/${#USE_CASE_MODEL_SLUGS[@]}"
+  echo "[$connector] Use-case HttpData assets created: $created/$expected"
+  return 0
+}
+
+seed_flares_metric_http_data_assets() {
+  local connector="$1" token="$2" mgmt_url="$3"
+  local tag created=0
+  tag="$(connector_tag "$connector")"
+
+  local base_url="${USE_CASE_MODEL_SERVER_BASE_URL%/}"
+  local expected="${#FLARES_METRIC_MODEL_SLUGS[@]}"
+  case "$tag" in
+    city)    expected="${#CITY_FLARES_METRIC_MODEL_SLUGS[@]}" ;;
+    company) expected="${#COMPANY_FLARES_METRIC_MODEL_SLUGS[@]}" ;;
+  esac
+
+  for idx in "${!FLARES_METRIC_MODEL_SLUGS[@]}"; do
+    local slug="${FLARES_METRIC_MODEL_SLUGS[$idx]}"
+    if ! should_seed_flares_metric_model "$tag" "$slug"; then
+      continue
+    fi
+
+    local title="${FLARES_METRIC_MODEL_TITLES[$idx]}"
+    local endpoint="${FLARES_METRIC_MODEL_ENDPOINTS[$idx]}"
+    local desc="${FLARES_METRIC_MODEL_DESCRIPTIONS[$idx]}"
+    local input_columns input_feat input_ex label_column task subtask target_fields metric_evaluation supported_metrics metric_directions
+    input_columns="$(flares_metric_input_columns_json "$slug")"
+    input_feat="$(flares_metric_input_features_json "$slug" | tr -d '\n')"
+    input_ex="$(flares_metric_input_example_json "$slug")"
+    label_column="$(flares_metric_label_column "$slug")"
+    if [[ "$slug" == flares-5w1h-*-metrics ]]; then
+      task="Token Classification"
+      subtask="5W1H span extraction"
+      target_fields='["Tag_Start","Tag_End","5W1H_Label"]'
+      supported_metrics='["Precision","Recall","F1"]'
+      metric_directions='{"Precision":"higher","Recall":"higher","F1":"higher"}'
+      metric_evaluation='[{"metric":"Precision","value":0.0},{"metric":"Recall","value":0.0},{"metric":"F1","value":0.0}]'
+    else
+      task="Classification"
+      subtask="Reliability classification"
+      target_fields='["Reliability_Label"]'
+      supported_metrics='["Accuracy","Precision","Recall","F1"]'
+      metric_directions='{"Accuracy":"higher","Precision":"higher","Recall":"higher","F1":"higher"}'
+      metric_evaluation='[{"metric":"Accuracy","value":0.0},{"metric":"Precision","value":0.0},{"metric":"Recall","value":0.0},{"metric":"F1","value":0.0}]'
+    fi
+
+    local asset_id="${tag}-${slug}"
+    local asset_title="${title} - PIONERA Use Case"
+    local json_file="$WORK_DIR/${connector}_${asset_id}.json"
+
+    cat > "$json_file" <<ASSET_EOF
+{
+  "@context": {
+    "@vocab": "https://w3id.org/edc/v0.0.1/ns/",
+    "dct": "http://purl.org/dc/terms/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "daimo": "https://w3id.org/daimo/ns#",
+    "mls": "http://www.w3.org/ns/mls#"
+  },
+  "@id": "${asset_id}",
+  "properties": {
+    "name": "${asset_title}",
+    "version": "2.1.$((idx + 1))",
+    "contenttype": "application/json",
+    "assetType": "machineLearning",
+    "shortDescription": "${desc}",
+    "dct:description": "${desc}. Served by the FLARES FastAPI metric endpoint.",
+    "dcterms:description": "${desc}. Served by the FLARES FastAPI metric endpoint.",
+    "dcat:keyword": ["machine-learning","metric-model","http-model","pionera-use-case","flares","${slug}","${tag}"],
+    "assetData": {
+      "${VOCABULARY_ID}": {
+        "dct:title": "${asset_title}",
+        "dcterms:title": "${asset_title}",
+        "dct:description": "${desc}",
+        "dcterms:description": "${desc}",
+        "daimo:task": "${task}",
+        "daimo:subtask": "${subtask}",
+        "daimo:algorithm": "Transformer",
+        "daimo:framework": "PyTorch",
+        "daimo:library": "Transformers",
+        "daimo:benchmark_model_type": "metric",
+        "daimo:request_shape": "batch",
+        "daimo:metrics": ${supported_metrics},
+        "daimo:metric_directions": ${metric_directions},
+        "daimo:target_fields": ${target_fields},
+        "dct:language": ["Spanish"],
+        "dcterms:language": ["Spanish"],
+        "dct:license": "apache-2.0",
+        "dcterms:license": "apache-2.0",
+        "daimo:input": ${input_columns},
+        "daimo:label": "${label_column}",
+        "daimo:input_features": ${input_feat},
+        "daimo:input_example": "${input_ex}",
+        "mls:ModelEvaluation": ${metric_evaluation}
+      }
+    }
+  },
+  "dataAddress": {
+    "type": "HttpData",
+    "name": "${asset_id}",
+    "baseUrl": "${base_url}${endpoint}",
+    "proxyMethod": "true",
+    "proxyBody": "true",
+    "method": "POST",
+    "contentType": "application/json"
+  }
+}
+ASSET_EOF
+
+    if upsert_v3_asset "$connector" "$asset_id" "$json_file" "$token" "$mgmt_url" "FLARES metric HttpData"; then
+      created=$((created + 1))
+    else
+      return 1
+    fi
+  done
+
+  echo "[$connector] FLARES metric HttpData assets created: $created/$expected"
   return 0
 }
 
@@ -1091,6 +1535,221 @@ INES_EOF
 }
 
 # =============================================================================
+# SEED USE-CASE BENCHMARK DATASETS (Company provider -> City Council consumer)
+# =============================================================================
+
+upload_seed_file_asset() {
+  local connector="$1" token="$2" mgmt_url="$3" asset_id="$4" json_file="$5" source_file="$6" upload_filename="$7" content_type="$8" asset_label="$9"
+  local delete_status=0 up_code fin_code
+
+  delete_v3_asset_if_exists "$connector" "$asset_id" "$token" "$mgmt_url" "$asset_label" || delete_status=$?
+  if [[ "$delete_status" -eq 1 ]]; then
+    return 1
+  fi
+  if [[ "$delete_status" -eq 2 ]]; then
+    echo "[$connector] ${asset_label} asset $asset_id kept existing; reload skipped to avoid duplicate finalize-upload"
+    return 0
+  fi
+
+  up_code="$(request_retry "$WORK_DIR/${connector}_${asset_id}.upload.out" \
+    -X POST "$mgmt_url/s3assets/upload-chunk" \
+    -H "Authorization: Bearer $token" \
+    -H "Content-Disposition: attachment; filename=\"$upload_filename\"" \
+    -H 'Chunk-Index: 0' \
+    -H 'Total-Chunks: 1' \
+    -F "json=@$json_file;type=application/json" \
+    -F "file=@$source_file;type=$content_type")" || true
+
+  fin_code="$(request_retry "$WORK_DIR/${connector}_${asset_id}.finalize.out" \
+    -X POST "$mgmt_url/s3assets/finalize-upload" \
+    -H "Authorization: Bearer $token" \
+    -F "json=@$json_file;type=application/json" \
+    -F "fileName=$upload_filename")" || true
+
+  if [[ "$fin_code" == "200" || "$fin_code" == "409" ]] && [[ "$up_code" == "200" || "$up_code" == "000" || "$up_code" == "409" ]]; then
+    echo "[$connector] ${asset_label} asset $asset_id upload=$up_code finalize=$fin_code"
+    return 0
+  fi
+
+  echo "[$connector] ${asset_label} asset $asset_id upload=${up_code:-NA} finalize=${fin_code:-NA}" >&2
+  cat "$WORK_DIR/${connector}_${asset_id}.finalize.out" >&2 2>/dev/null || true
+  return 1
+}
+
+seed_mobility_segments_dataset_asset() {
+  local connector="$1" token="$2" mgmt_url="$3"
+  local tag dataset_filename json_file
+  tag="$(connector_tag "$connector")"
+
+  if [[ "$tag" != "company" ]]; then
+    return 0
+  fi
+
+  if [[ ! -f "$MOBILITY_SEGMENTS_DATASET_FILE" ]]; then
+    echo "[$connector] Mobility dataset file not found: $MOBILITY_SEGMENTS_DATASET_FILE" >&2
+    return 1
+  fi
+
+  dataset_filename="$(basename "$MOBILITY_SEGMENTS_DATASET_FILE")"
+  json_file="$WORK_DIR/${connector}_${MOBILITY_SEGMENTS_DATASET_ID}.json"
+
+  cat > "$json_file" <<DATASET_EOF
+{
+  "@context": {
+    "@vocab": "https://w3id.org/edc/v0.0.1/ns/",
+    "dct": "http://purl.org/dc/terms/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "daimo": "https://w3id.org/daimo/ns#"
+  },
+  "@id": "${MOBILITY_SEGMENTS_DATASET_ID}",
+  "properties": {
+    "name": "Mobility Segments Test Dataset",
+    "version": "1.0.0",
+    "contenttype": "text/csv",
+    "assetType": "dataset",
+    "shortDescription": "Mobility benchmark validation dataset.",
+    "dct:description": "CSV validation dataset for Mobility benchmark models.",
+    "dcterms:description": "CSV validation dataset for Mobility benchmark models.",
+    "dcterms:format": "csv",
+    "dcat:keyword": ["dataset","benchmark","validation","mobility","csv"],
+    "assetData": {
+      "${VOCABULARY_ID}": {
+        "dct:title": "Mobility Segments Test Dataset",
+        "dcterms:title": "Mobility Segments Test Dataset",
+        "dct:description": "CSV validation dataset for Mobility benchmark models.",
+        "dcterms:description": "CSV validation dataset for Mobility benchmark models.",
+        "daimo:asset_type": "dataset",
+        "daimo:task": "Predictive event",
+        "daimo:subtask": "Other",
+        "daimo:input": [
+          "trip_id",
+          "journey_id",
+          "from_stop_id",
+          "to_stop_id",
+          "departure_time",
+          "arrival_time",
+          "actual_travel_time",
+          "scheduled_travel_time",
+          "delay",
+          "shape_distance",
+          "route_id",
+          "direction_id",
+          "service_id",
+          "hour",
+          "weekday",
+          "is_peak",
+          "hour_sin",
+          "hour_cos",
+          "weekday_sin",
+          "weekday_cos",
+          "previous_delay",
+          "previous_delay_ratio"
+        ],
+        "daimo:label": "previous_delay_delta"
+      }
+    }
+  },
+  "dataAddress": {"type":"InesDataStore"}
+}
+DATASET_EOF
+
+  upload_seed_file_asset "$connector" "$token" "$mgmt_url" "$MOBILITY_SEGMENTS_DATASET_ID" "$json_file" "$MOBILITY_SEGMENTS_DATASET_FILE" "$dataset_filename" "text/csv" "Mobility dataset"
+}
+
+seed_flares_test_dataset_assets() {
+  local connector="$1" token="$2" mgmt_url="$3"
+  local tag
+  tag="$(connector_tag "$connector")"
+
+  if [[ "$tag" != "company" ]]; then
+    return 0
+  fi
+
+  local dataset_ids=("$FLARES_5W1H_DATASET_ID" "$FLARES_RELIABILITY_DATASET_ID")
+  local source_files=("$FLARES_5W1H_DATASET_FILE" "$FLARES_RELIABILITY_DATASET_FILE")
+  local upload_filenames=("5w1h_subtarea_1_test.jsonl" "5w1h_subtarea_2_test.jsonl")
+  local titles=("FLARES 5W1H Test Dataset" "FLARES Reliability Test Dataset")
+  local descriptions=(
+    "JSONL validation dataset for FLARES 5W1H span extraction metrics."
+    "JSONL validation dataset for FLARES reliability classification metrics."
+  )
+  local subtasks=("Other" "Text classification")
+  local keywords_json=(
+    '["dataset","benchmark","validation","flares","5w1h","jsonl"]'
+    '["dataset","benchmark","validation","flares","reliability","jsonl"]'
+  )
+  local input_json=(
+    '["Id","Text"]'
+    '["Id","Text","5W1H_Label","Tag_Text","Tag_Start","Tag_End"]'
+  )
+  local labels=("Tags" "Reliability_Label")
+
+  for idx in "${!dataset_ids[@]}"; do
+    local asset_id="${dataset_ids[$idx]}"
+    local source_file="${source_files[$idx]}"
+    local upload_filename="${upload_filenames[$idx]}"
+    local title="${titles[$idx]}"
+    local description="${descriptions[$idx]}"
+    local subtask="${subtasks[$idx]}"
+    local keywords="${keywords_json[$idx]}"
+    local input="${input_json[$idx]}"
+    local label="${labels[$idx]}"
+    local json_file="$WORK_DIR/${connector}_${asset_id}.json"
+
+    if [[ ! -f "$source_file" ]]; then
+      echo "[$connector] FLARES dataset file not found: $source_file" >&2
+      return 1
+    fi
+
+    cat > "$json_file" <<DATASET_EOF
+{
+  "@context": {
+    "@vocab": "https://w3id.org/edc/v0.0.1/ns/",
+    "dct": "http://purl.org/dc/terms/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "daimo": "https://w3id.org/daimo/ns#"
+  },
+  "@id": "${asset_id}",
+  "properties": {
+    "name": "${title}",
+    "version": "1.0.0",
+    "contenttype": "application/x-ndjson",
+    "assetType": "dataset",
+    "shortDescription": "${description}",
+    "dct:description": "${description}",
+    "dcterms:description": "${description}",
+    "dcterms:format": "jsonl",
+    "fileName": "${upload_filename}",
+    "dcat:keyword": ${keywords},
+    "assetData": {
+      "${VOCABULARY_ID}": {
+        "dct:title": "${title}",
+        "dcterms:title": "${title}",
+        "dct:description": "${description}",
+        "dcterms:description": "${description}",
+        "daimo:asset_type": "dataset",
+        "daimo:task": "Natural Language Processing",
+        "daimo:subtask": "${subtask}",
+        "daimo:input": ${input},
+        "daimo:label": "${label}"
+      }
+    }
+  },
+  "dataAddress": {"type":"InesDataStore"}
+}
+DATASET_EOF
+
+    if ! upload_seed_file_asset "$connector" "$token" "$mgmt_url" "$asset_id" "$json_file" "$source_file" "$upload_filename" "application/x-ndjson" "FLARES dataset"; then
+      return 1
+    fi
+  done
+
+  return 0
+}
+
+# =============================================================================
 # CREATE POLICY + CONTRACT DEFINITION (allow-all, covers all assets)
 # =============================================================================
 
@@ -1167,6 +1826,87 @@ CEOF
     cat "$contract_out" >&2 2>/dev/null || true
     return 1
   fi
+
+  return 0
+}
+
+create_company_dataset_policies_and_contracts() {
+  local connector="$1" token="$2" mgmt_url="$3"
+  local tag
+  tag="$(connector_tag "$connector")"
+
+  if [[ "$tag" != "company" ]]; then
+    return 0
+  fi
+
+  for asset_id in "${USE_CASE_DATASET_IDS[@]}"; do
+    local policy_id="policy-seed-${asset_id}"
+    local contract_id="contract-seed-${asset_id}"
+    local policy_file="$WORK_DIR/${connector}_${asset_id}_policy.json"
+    local policy_out="$WORK_DIR/${connector}_${asset_id}_policy.out"
+    local policy_code
+    local contract_file="$WORK_DIR/${connector}_${asset_id}_contract.json"
+    local contract_out="$WORK_DIR/${connector}_${asset_id}_contract.out"
+    local contract_code
+
+    cat > "$policy_file" <<PEOF
+{
+  "@context": {"@vocab": "https://w3id.org/edc/v0.0.1/ns/"},
+  "@id": "${policy_id}",
+  "policy": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "@type": "odrl:Set",
+    "odrl:permission": [{"odrl:action": "USE"}],
+    "odrl:prohibition": [],
+    "odrl:obligation": []
+  }
+}
+PEOF
+
+    policy_code="$(curl -s --max-time 30 -o "$policy_out" -w '%{http_code}' \
+      -X POST "$mgmt_url/v3/policydefinitions" \
+      -H "Authorization: Bearer $token" \
+      -H 'Content-Type: application/json' \
+      --data-binary "@$policy_file")" || true
+
+    if [[ "$policy_code" == "200" || "$policy_code" == "204" || "$policy_code" == "409" ]]; then
+      echo "[$connector] dataset policy '$policy_id' created (HTTP $policy_code)"
+    else
+      echo "[$connector] dataset policy creation failed for $asset_id (HTTP ${policy_code:-NA})" >&2
+      cat "$policy_out" >&2 2>/dev/null || true
+      return 1
+    fi
+
+    cat > "$contract_file" <<CEOF
+{
+  "@context": {"@vocab": "https://w3id.org/edc/v0.0.1/ns/"},
+  "@id": "${contract_id}",
+  "accessPolicyId": "${policy_id}",
+  "contractPolicyId": "${policy_id}",
+  "assetsSelector": [
+    {
+      "operandLeft": "https://w3id.org/edc/v0.0.1/ns/id",
+      "operator": "=",
+      "operandRight": "${asset_id}"
+    }
+  ]
+}
+CEOF
+
+    contract_code="$(curl -s --max-time 30 -o "$contract_out" -w '%{http_code}' \
+      -X POST "$mgmt_url/v3/contractdefinitions" \
+      -H "Authorization: Bearer $token" \
+      -H 'Content-Type: application/json' \
+      --data-binary "@$contract_file")" || true
+
+    if [[ "$contract_code" == "200" || "$contract_code" == "204" || "$contract_code" == "409" ]]; then
+      echo "[$connector] dataset contract '$contract_id' created (HTTP $contract_code)"
+    else
+      echo "[$connector] dataset contract creation failed for $asset_id (HTTP ${contract_code:-NA})" >&2
+      cat "$contract_out" >&2 2>/dev/null || true
+      return 1
+    fi
+  done
 
   return 0
 }
@@ -1269,61 +2009,81 @@ seed_connector() {
     return 1
   fi
 
-  case "$MODEL_SET" in
-    mock)
-      if ! seed_http_data_assets "$connector" "$token" "$mgmt_url" "${#MODEL_SLUGS[@]}" "$MODEL_SERVER_BASE" "HttpData"; then
-        cleanup_pf
-        return 1
-      fi
-      if ! seed_inesdata_store_assets "$connector" "$token" "$mgmt_url" "$COUNT"; then
-        cleanup_pf
-        return 1
-      fi
-      ;;
-    use-cases)
-      if ! seed_use_case_http_data_assets "$connector" "$token" "$mgmt_url"; then
-        cleanup_pf
-        return 1
-      fi
-      if ! seed_inesdata_store_assets "$connector" "$token" "$mgmt_url" "$COUNT"; then
-        cleanup_pf
-        return 1
-      fi
-      ;;
-    combined)
-      if ! seed_use_case_http_data_assets "$connector" "$token" "$mgmt_url"; then
-        cleanup_pf
-        return 1
-      fi
-      if ! seed_http_data_assets "$connector" "$token" "$mgmt_url" "$COMBINED_HTTP_COUNT" "$USE_CASE_MODEL_SERVER_BASE_URL" "Combined mock HttpData"; then
-        cleanup_pf
-        return 1
-      fi
-      if ! seed_inesdata_store_assets "$connector" "$token" "$mgmt_url" "$COMBINED_INESDATA_COUNT"; then
-        cleanup_pf
-        return 1
-      fi
-      ;;
-  esac
+  if [[ "$SEED_SCOPE" == "models" || "$SEED_SCOPE" == "all" ]]; then
+    case "$MODEL_SET" in
+      mock)
+        if ! seed_http_data_assets "$connector" "$token" "$mgmt_url" "${#MODEL_SLUGS[@]}" "$MODEL_SERVER_BASE" "HttpData"; then
+          cleanup_pf
+          return 1
+        fi
+        if [[ "$SKIP_INESDATA_MODELS" != "1" ]] && ! seed_inesdata_store_assets "$connector" "$token" "$mgmt_url" "$COUNT"; then
+          cleanup_pf
+          return 1
+        fi
+        ;;
+      use-cases)
+        if [[ "$SKIP_USE_CASE_MODELS" != "1" ]]; then
+          if ! seed_use_case_http_data_assets "$connector" "$token" "$mgmt_url"; then
+            cleanup_pf
+            return 1
+          fi
+          if ! seed_flares_metric_http_data_assets "$connector" "$token" "$mgmt_url"; then
+            cleanup_pf
+            return 1
+          fi
+        fi
+        if [[ "$SKIP_INESDATA_MODELS" != "1" ]] && ! seed_inesdata_store_assets "$connector" "$token" "$mgmt_url" "$COUNT"; then
+          cleanup_pf
+          return 1
+        fi
+        ;;
+      combined)
+        if [[ "$SKIP_USE_CASE_MODELS" != "1" ]]; then
+          if ! seed_use_case_http_data_assets "$connector" "$token" "$mgmt_url"; then
+            cleanup_pf
+            return 1
+          fi
+          if ! seed_flares_metric_http_data_assets "$connector" "$token" "$mgmt_url"; then
+            cleanup_pf
+            return 1
+          fi
+        fi
+        if ! seed_http_data_assets "$connector" "$token" "$mgmt_url" "$COMBINED_HTTP_COUNT" "$USE_CASE_MODEL_SERVER_BASE_URL" "Combined mock HttpData"; then
+          cleanup_pf
+          return 1
+        fi
+        if [[ "$SKIP_INESDATA_MODELS" != "1" ]] && ! seed_inesdata_store_assets "$connector" "$token" "$mgmt_url" "$COMBINED_INESDATA_COUNT"; then
+          cleanup_pf
+          return 1
+        fi
+        ;;
+    esac
 
-  # Create policy + contract definition
-  if ! create_policy_and_contract "$connector" "$token" "$mgmt_url"; then
-    cleanup_pf
-    return 1
+    if ! create_policy_and_contract "$connector" "$token" "$mgmt_url"; then
+      cleanup_pf
+      return 1
+    fi
+  fi
+
+  if [[ "$SEED_SCOPE" == "datasets" || "$SEED_SCOPE" == "all" ]]; then
+    if ! seed_mobility_segments_dataset_asset "$connector" "$token" "$mgmt_url"; then
+      cleanup_pf
+      return 1
+    fi
+
+    if ! seed_flares_test_dataset_assets "$connector" "$token" "$mgmt_url"; then
+      cleanup_pf
+      return 1
+    fi
+
+    if ! create_company_dataset_policies_and_contracts "$connector" "$token" "$mgmt_url"; then
+      cleanup_pf
+      return 1
+    fi
   fi
 
   cleanup_pf
-  case "$MODEL_SET" in
-    mock)
-      echo "[$connector] seeding complete: 25 HttpData + $COUNT InesDataStore + policy + contract"
-      ;;
-    use-cases)
-      echo "[$connector] seeding complete: ${#USE_CASE_MODEL_SLUGS[@]} use-case HttpData + $COUNT InesDataStore + policy + contract"
-      ;;
-    combined)
-      echo "[$connector] seeding complete: ${#USE_CASE_MODEL_SLUGS[@]} use-case HttpData + $COMBINED_HTTP_COUNT combined mock HttpData + $COMBINED_INESDATA_COUNT InesDataStore + policy + contract"
-      ;;
-  esac
+  echo "[$connector] ${SEED_SCOPE} seeding complete"
   return 0
 }
 
@@ -1516,27 +2276,60 @@ NEG_EOF
 }
 
 negotiate_cross_connectors() {
-  local negotiation_slugs=()
+  local city_consumer_asset_ids=()
+  local company_consumer_asset_ids=()
+  local idx slug asset_id
 
-  case "$MODEL_SET" in
-    mock)
-      negotiation_slugs=("${MODEL_SLUGS[@]}")
-      ;;
-    use-cases)
-      negotiation_slugs=("${USE_CASE_MODEL_SLUGS[@]}")
-      ;;
-    combined)
-      negotiation_slugs=("${USE_CASE_MODEL_SLUGS[@]}")
-      for idx in "${!MODEL_SLUGS[@]}"; do
-        if [[ "$idx" -ge "$COMBINED_HTTP_COUNT" ]]; then
-          break
+  if [[ "$SEED_SCOPE" == "models" || "$SEED_SCOPE" == "all" ]]; then
+    case "$MODEL_SET" in
+      mock)
+        for slug in "${MODEL_SLUGS[@]}"; do
+          company_consumer_asset_ids+=("city-${slug}")
+          city_consumer_asset_ids+=("company-${slug}")
+        done
+        ;;
+      use-cases)
+        if [[ "$SKIP_USE_CASE_MODELS" != "1" ]]; then
+          for slug in "${CITY_USE_CASE_MODEL_SLUGS[@]}" "${CITY_FLARES_METRIC_MODEL_SLUGS[@]}"; do
+            company_consumer_asset_ids+=("city-${slug}")
+          done
+          for slug in "${COMPANY_USE_CASE_MODEL_SLUGS[@]}" "${COMPANY_FLARES_METRIC_MODEL_SLUGS[@]}"; do
+            city_consumer_asset_ids+=("company-${slug}")
+          done
         fi
-        negotiation_slugs+=("${MODEL_SLUGS[$idx]}")
-      done
-      ;;
-  esac
+        ;;
+      combined)
+        if [[ "$SKIP_USE_CASE_MODELS" != "1" ]]; then
+          for slug in "${CITY_USE_CASE_MODEL_SLUGS[@]}" "${CITY_FLARES_METRIC_MODEL_SLUGS[@]}"; do
+            company_consumer_asset_ids+=("city-${slug}")
+          done
+          for slug in "${COMPANY_USE_CASE_MODEL_SLUGS[@]}" "${COMPANY_FLARES_METRIC_MODEL_SLUGS[@]}"; do
+            city_consumer_asset_ids+=("company-${slug}")
+          done
+        fi
+        for idx in "${!MODEL_SLUGS[@]}"; do
+          if [[ "$idx" -ge "$COMBINED_HTTP_COUNT" ]]; then
+            break
+          fi
+          slug="${MODEL_SLUGS[$idx]}"
+          company_consumer_asset_ids+=("city-${slug}")
+          city_consumer_asset_ids+=("company-${slug}")
+        done
+        ;;
+    esac
+  fi
 
-  local total_negotiations=$(( ${#negotiation_slugs[@]} * 2 ))
+  if [[ "$SEED_SCOPE" == "datasets" || "$SEED_SCOPE" == "all" ]]; then
+    for asset_id in "${USE_CASE_DATASET_IDS[@]}"; do
+      city_consumer_asset_ids+=("$asset_id")
+    done
+  fi
+  local total_negotiations=$(( ${#city_consumer_asset_ids[@]} + ${#company_consumer_asset_ids[@]} ))
+
+  if [[ "$total_negotiations" -eq 0 ]]; then
+    echo "Skipping cross-connector negotiations (seed scope '$SEED_SCOPE' has no negotiated assets)"
+    return 0
+  fi
 
   echo ""
   echo "=========================================="
@@ -1560,9 +2353,8 @@ negotiate_cross_connectors() {
 
   local neg_ok=0 neg_fail=0
 
-  # Negotiate every provider HttpData model so consumer UIs only surface contract-ready assets.
-  for slug in "${negotiation_slugs[@]}"; do
-    local asset_id="city-${slug}"
+  # Negotiate provider assets so consumer UIs only surface contract-ready assets.
+  for asset_id in "${company_consumer_asset_ids[@]}"; do
     if negotiate_one "$company_connector" "$city_connector" "$asset_id" "company->city"; then
       neg_ok=$((neg_ok + 1))
     else
@@ -1570,8 +2362,7 @@ negotiate_cross_connectors() {
     fi
   done
 
-  for slug in "${negotiation_slugs[@]}"; do
-    local asset_id="company-${slug}"
+  for asset_id in "${city_consumer_asset_ids[@]}"; do
     if negotiate_one "$city_connector" "$company_connector" "$asset_id" "city->company"; then
       neg_ok=$((neg_ok + 1))
     else
@@ -1617,17 +2408,43 @@ for connector in "${connectors[@]}"; do
 done
 
 echo ""
-case "$MODEL_SET" in
-  mock)
-    echo "Connector seeding summary: $total_ok/${#connectors[@]} succeeded (25 HttpData + $COUNT InesDataStore each)"
-    ;;
-  use-cases)
-    echo "Connector seeding summary: $total_ok/${#connectors[@]} succeeded (${#USE_CASE_MODEL_SLUGS[@]} use-case HttpData + $COUNT InesDataStore each)"
-    ;;
-  combined)
-    echo "Connector seeding summary: $total_ok/${#connectors[@]} succeeded (${#USE_CASE_MODEL_SLUGS[@]} use-case HttpData + $COMBINED_HTTP_COUNT combined mock HttpData + $COMBINED_INESDATA_COUNT InesDataStore each)"
-    ;;
-esac
+if [[ "$SEED_SCOPE" == "datasets" ]]; then
+  echo "Connector dataset seeding summary: $total_ok/${#connectors[@]} succeeded (Company mobility + FLARES datasets)"
+else
+  city_use_case_total=$(( ${#CITY_USE_CASE_MODEL_SLUGS[@]} + ${#CITY_FLARES_METRIC_MODEL_SLUGS[@]} ))
+  company_use_case_total=$(( ${#COMPANY_USE_CASE_MODEL_SLUGS[@]} + ${#COMPANY_FLARES_METRIC_MODEL_SLUGS[@]} ))
+  case "$MODEL_SET" in
+    mock)
+      if [[ "$SKIP_INESDATA_MODELS" == "1" ]]; then
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded (25 HttpData)"
+      else
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded (25 HttpData + $COUNT InesDataStore each)"
+      fi
+      ;;
+    use-cases)
+      if [[ "$SKIP_USE_CASE_MODELS" == "1" && "$SKIP_INESDATA_MODELS" == "1" ]]; then
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded (no model assets selected)"
+      elif [[ "$SKIP_USE_CASE_MODELS" == "1" ]]; then
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded ($COUNT InesDataStore each)"
+      elif [[ "$SKIP_INESDATA_MODELS" == "1" ]]; then
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded (City $city_use_case_total use-case HttpData, Company $company_use_case_total use-case HttpData)"
+      else
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded (City $city_use_case_total use-case HttpData, Company $company_use_case_total use-case HttpData, $COUNT InesDataStore each)"
+      fi
+      ;;
+    combined)
+      if [[ "$SKIP_USE_CASE_MODELS" == "1" && "$SKIP_INESDATA_MODELS" == "1" ]]; then
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded ($COMBINED_HTTP_COUNT combined mock HttpData)"
+      elif [[ "$SKIP_USE_CASE_MODELS" == "1" ]]; then
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded ($COMBINED_HTTP_COUNT combined mock HttpData + $COMBINED_INESDATA_COUNT InesDataStore each)"
+      elif [[ "$SKIP_INESDATA_MODELS" == "1" ]]; then
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded (City $city_use_case_total use-case HttpData, Company $company_use_case_total use-case HttpData, $COMBINED_HTTP_COUNT combined mock HttpData)"
+      else
+        echo "Connector model seeding summary: $total_ok/${#connectors[@]} succeeded (City $city_use_case_total use-case HttpData, Company $company_use_case_total use-case HttpData, $COMBINED_HTTP_COUNT combined mock HttpData + $COMBINED_INESDATA_COUNT InesDataStore each)"
+      fi
+      ;;
+  esac
+fi
 
 if [[ "${#failed_connectors[@]}" -gt 0 ]]; then
   echo "failed_connectors=${failed_connectors[*]}" >&2
@@ -1644,7 +2461,7 @@ if [[ "$total_ok" -ge 2 ]]; then
       exit 1
     fi
 
-    echo "Warning: cross-connector negotiations were incomplete; Step 8 finished with partial federated readiness" >&2
+    echo "Warning: cross-connector negotiations were incomplete; seed script finished with partial federated readiness" >&2
   fi
 else
   echo "Skipping cross-connector negotiations (need at least 2 successful connectors)" >&2

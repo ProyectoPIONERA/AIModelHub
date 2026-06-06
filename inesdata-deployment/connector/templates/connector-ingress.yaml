@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.connector.name }}-ingress
   annotations:
     nginx.org/client-max-body-size: "800m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "800m"
 spec:
   rules:
   - host: {{ .Values.connector.ingress.hostname }}

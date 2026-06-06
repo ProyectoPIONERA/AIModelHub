@@ -1,6 +1,6 @@
 """Combined use-case and deterministic mock model server.
 
-The deployment starts this module with the AIModelHub_Uses_Cases virtualenv.
+The deployment starts this module with the prepared AIModelHub use-case virtualenv.
 It imports the prepared FLARES/Mobility FastAPI app and registers additional
 mock HttpData endpoints on the same app instance, so Step 7 exposes one host
 server for every executable HTTP model used by the default Step 8 metadata.
@@ -20,7 +20,18 @@ from fastapi import Request
 
 def _default_use_case_server_dir() -> str:
     project_root = Path(__file__).resolve().parents[1]
-    return str(project_root.parent / "AIModelHub_Uses_Cases")
+    candidate_dirs = [
+        project_root / "AIModelHub-Use-Cases",
+        project_root / "AIModelHub_Use_Cases",
+        project_root / "AIModelHub_Uses_Cases",
+        project_root.parent / "AIModelHub-Use-Cases",
+        project_root.parent / "AIModelHub_Use_Cases",
+        project_root.parent / "AIModelHub_Uses_Cases",
+    ]
+    for candidate_dir in candidate_dirs:
+        if (candidate_dir / "src" / "server.py").exists():
+            return str(candidate_dir)
+    return str(candidate_dirs[-1])
 
 
 DEFAULT_USE_CASE_SERVER_DIR = _default_use_case_server_dir()
@@ -69,7 +80,7 @@ def _load_use_case_app():
         module = importlib.import_module("src.server")
     except Exception as exc:  # pragma: no cover - startup diagnostic path
         raise RuntimeError(
-            "Unable to import AIModelHub_Uses_Cases src.server. "
+            "Unable to import AIModelHub use-case src.server. "
             f"Check USE_CASE_SERVER_DIR={server_dir} and that FLARES/Mobility models are prepared."
         ) from exc
 

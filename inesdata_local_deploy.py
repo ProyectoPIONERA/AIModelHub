@@ -158,7 +158,29 @@ def default_use_case_model_server_dir() -> str:
     configured_dir = os.environ.get("USE_CASE_MODEL_SERVER_DIR") or os.environ.get("USE_CASE_SERVER_DIR")
     if configured_dir:
         return os.path.abspath(os.path.expanduser(configured_dir))
-    return os.path.abspath(os.path.join(os.path.dirname(project_dir()), "AIModelHub_Uses_Cases"))
+
+    candidate_dirs = [
+        os.path.join(project_dir(), "AIModelHub-Use-Cases"),
+        os.path.join(project_dir(), "AIModelHub_Use_Cases"),
+        os.path.join(project_dir(), "AIModelHub_Uses_Cases"),
+        os.path.join(os.path.dirname(project_dir()), "AIModelHub-Use-Cases"),
+        os.path.join(os.path.dirname(project_dir()), "AIModelHub_Use_Cases"),
+        os.path.join(os.path.dirname(project_dir()), "AIModelHub_Uses_Cases"),
+    ]
+    for candidate_dir in candidate_dirs:
+        if os.path.exists(os.path.join(candidate_dir, "src", "server.py")):
+            return os.path.abspath(candidate_dir)
+
+    return os.path.abspath(candidate_dirs[-1])
+
+
+def _use_case_python_candidates(server_dir: str):
+    return [
+        os.path.join(server_dir, ".venv", "bin", "python"),
+        os.path.join(project_dir(), ".venv", "bin", "python"),
+        os.path.join(os.path.dirname(project_dir()), ".venv", "bin", "python"),
+        sys.executable,
+    ]
 
 
 def cleanup_windows_zone_identifier_files(args=None):
@@ -796,15 +818,25 @@ def run_validation_pipeline():
         raise RuntimeError("Validation step failed")
 
 
-def run_seed_assets_pipeline(args):
+def run_seed_assets_pipeline(
+    args,
+    seed_scope: str = "models",
+    step_label: str = "Step 8",
+    model_set_override: str | None = None,
+    skip_use_case_models: bool = False,
+    skip_inesdata_models: bool = False,
+):
     script = seed_assets_script_path()
     if not os.path.isfile(script):
         raise RuntimeError(f"Seed assets script not found: {script}")
 
-    seed_model_set = args.seed_model_set
+    if seed_scope not in {"models", "datasets", "all"}:
+        raise RuntimeError(f"Invalid seed scope for {step_label}: {seed_scope}")
+
+    seed_model_set = model_set_override or args.seed_model_set
     if seed_model_set == "auto":
         seed_model_set = args.model_server_mode
-    if args.include_use_case_model_metadata and seed_model_set == "mock":
+    if not skip_use_case_models and args.include_use_case_model_metadata and seed_model_set == "mock":
         seed_model_set = "use-cases"
 
     if seed_model_set == "combined":
@@ -834,6 +866,8 @@ def run_seed_assets_pipeline(args):
         args.seed_vocabulary_category,
         "--vocabulary-schema",
         args.seed_vocabulary_schema,
+        "--seed-scope",
+        seed_scope,
         "--model-set",
         seed_model_set,
         "--combined-http-count",
@@ -845,13 +879,21 @@ def run_seed_assets_pipeline(args):
     if args.seed_keycloak_token_url:
         command_parts.extend(["--keycloak-token-url", args.seed_keycloak_token_url])
 
-    if seed_model_set in ("use-cases", "combined"):
-        command_parts.append("--include-use-case-models")
-        command_parts.extend(["--use-case-model-server-base-url", args.use_case_model_server_base_url])
+    if skip_use_case_models:
+        command_parts.append("--skip-use-case-models")
+
+    if skip_inesdata_models:
+        command_parts.append("--skip-inesdata-models")
+
+    if seed_scope in ("models", "all") and seed_model_set in ("use-cases", "combined"):
+        if not skip_use_case_models:
+            command_parts.append("--include-use-case-models")
+        if seed_model_set == "combined" or not skip_use_case_models:
+            command_parts.extend(["--use-case-model-server-base-url", args.use_case_model_server_base_url])
 
     command = " ".join(shlex.quote(part) for part in command_parts)
     if run(command, cwd=project_dir()) is None:
-        raise RuntimeError("Step 8 assets seeding failed")
+        raise RuntimeError(f"{step_label} assets seeding failed")
 
 
 def _normalize_http_url(value: str) -> str:
@@ -943,7 +985,7 @@ def _select_manifest_for_deploy(args, manifest_path: str, deploy_target: str) ->
 
 
 def step_1_build(args) -> str:
-    print("\n[Step 3/8] Build/rebuild local images from adapters/inesdata/sources")
+    print("\n[Step 3/10] Build/rebuild local images from adapters/inesdata/sources")
     return run_local_image_build(args)
 
 
@@ -1187,7 +1229,7 @@ def _prefetch_dockerfile_base_images(dockerfile_path: str, step_label: str):
 
 
 def step_2_common_services(args, adapter):
-    print("\n[Step 1/8] Cluster setup and common services")
+    print("\n[Step 1/10] Cluster setup and common services")
     cleanup_windows_zone_identifier_files(args)
 
     if args.skip_level1:
@@ -1202,7 +1244,7 @@ def step_2_common_services(args, adapter):
 
 
 def step_2_manual_network_prerequisites(args, prompt_user: bool = True):
-    print("\n[Step 2/8] Manual network prerequisites (tunnel + ingress port-forward)")
+    print("\n[Step 2/10] Manual network prerequisites (tunnel + ingress port-forward)")
 
     if prompt_user:
         if not wait_for_manual_confirmation(args.manual_ready):
@@ -1222,7 +1264,7 @@ def step_2_manual_network_prerequisites(args, prompt_user: bool = True):
 
 
 def step_3_dataspace(args, adapter_bootstrap, manifest_path: str):
-    print("\n[Step 4/8] Dataspace deployment (local images)")
+    print("\n[Step 4/10] Dataspace deployment (local images)")
     cleanup_windows_zone_identifier_files(args)
 
     if not verify_manual_actions(timeout_seconds=args.manual_check_timeout):
@@ -1269,7 +1311,7 @@ def _force_restart_connector_deployments(args, connectors):
 
 
 def step_4_connectors(args, adapter_bootstrap, manifest_path: str):
-    print("\n[Step 5/8] Connectors deployment (local images)")
+    print("\n[Step 5/10] Connectors deployment (local images)")
     cleanup_windows_zone_identifier_files(args)
     selected_manifest = _select_manifest_for_deploy(args, manifest_path, "connectors")
     print("Applying connectors bootstrap workflow...")
@@ -1289,7 +1331,7 @@ def step_4_connectors(args, adapter_bootstrap, manifest_path: str):
 
 def step_5_validation(args, adapter, adapter_bootstrap, manifest_path: str):
     if args.skip_validation:
-        print("\n[Step 6/8] Validation skipped (--skip-validation)")
+        print("\n[Step 6/10] Validation skipped (--skip-validation)")
         return
 
     try:
@@ -1315,7 +1357,7 @@ def step_5_validation(args, adapter, adapter_bootstrap, manifest_path: str):
 
         _ensure_validation_prerequisites(args, adapter)
 
-    print("\n[Step 6/8] Validation tests")
+    print("\n[Step 6/10] Validation tests")
     run_validation_pipeline()
 
 
@@ -1501,14 +1543,17 @@ def _is_pid_running(pid: str) -> bool:
 
 def _validate_use_case_model_server_tree(args):
     server_dir = os.path.abspath(args.use_case_model_server_dir)
-    python_bin = os.path.join(server_dir, ".venv", "bin", "python")
+    python_candidates = _use_case_python_candidates(server_dir)
+    python_bin = next((path for path in python_candidates if os.path.exists(path)), None)
     required_paths = [
-        python_bin,
         os.path.join(server_dir, "src", "server.py"),
         os.path.join(server_dir, "models", "flares"),
         os.path.join(server_dir, "models", "mobility"),
     ]
     missing = [path for path in required_paths if not os.path.exists(path)]
+    if python_bin is None:
+        missing.extend(python_candidates)
+
     if missing:
         raise RuntimeError(
             "Use-case model server is not ready. Missing paths: "
@@ -1679,30 +1724,54 @@ def run_combined_model_server(args):
 
 def step_7_model_server(args):
     if args.skip_model_server:
-        print("\n[Step 7/8] Model server deployment skipped (--skip-model-server)")
+        print("\n[Step 7/10] Model server deployment skipped (--skip-model-server)")
         return
 
     if args.model_server_mode == "combined":
-        print("\n[Step 7/8] Start combined FLARES/Mobility + mock HttpData FastAPI Model Server")
+        print("\n[Step 7/10] Start combined FLARES/Mobility + mock HttpData FastAPI Model Server")
         run_combined_model_server(args)
         return
 
     if args.model_server_mode == "use-cases":
-        print("\n[Step 7/8] Start FLARES/Mobility FastAPI Model Server")
+        print("\n[Step 7/10] Start FLARES/Mobility FastAPI Model Server")
         run_use_case_model_server(args)
         return
 
-    print("\n[Step 7/8] Deploy ML Model Server (25 deterministic endpoints)")
+    print("\n[Step 7/10] Deploy ML Model Server (25 deterministic endpoints)")
     run_model_server_deploy(args)
 
 
 def step_8_seed_assets(args):
     if args.skip_seed_assets:
-        print("\n[Step 8/8] Assets seeding skipped (--skip-seed-assets)")
+        print("\n[Step 8/10] Base model asset seeding skipped (--skip-seed-assets)")
         return
 
-    print("\n[Step 8/8] Initialize connector data (vocabulary + ML assets + contracts)")
-    run_seed_assets_pipeline(args)
+    print("\n[Step 8/10] Seed vocabulary + base/mock ML model assets + model contracts")
+    run_seed_assets_pipeline(args, seed_scope="models", step_label="Step 8", skip_use_case_models=True)
+
+
+def step_9_seed_datasets(args):
+    if args.skip_seed_datasets:
+        print("\n[Step 9/10] Dataset seeding skipped (--skip-seed-datasets)")
+        return
+
+    print("\n[Step 9/10] Seed use-case datasets + dataset contracts")
+    run_seed_assets_pipeline(args, seed_scope="datasets", step_label="Step 9")
+
+
+def step_10_seed_use_case_model_assets(args):
+    if args.skip_use_case_model_assets:
+        print("\n[Step 10/10] Use-case model asset seeding skipped (--skip-use-case-model-assets)")
+        return
+
+    print("\n[Step 10/10] Seed FLARES/Mobility HttpData model assets + contracts")
+    run_seed_assets_pipeline(
+        args,
+        seed_scope="models",
+        step_label="Step 10",
+        model_set_override="use-cases",
+        skip_inesdata_models=True,
+    )
 
 
 def execute(args):
@@ -1734,6 +1803,8 @@ def execute(args):
     step_5_validation(args, adapter, adapter_bootstrap, manifest_path)
     step_7_model_server(args)
     step_8_seed_assets(args)
+    step_9_seed_datasets(args)
+    step_10_seed_use_case_model_assets(args)
 
     print("\nLocal deployment completed with local images from adapters/inesdata/sources")
     return 0
@@ -1760,7 +1831,7 @@ def show_menu(args):
         print("LOCAL INESDATA DEPLOYMENT")
         print("=" * 60)
         print("\n[Full Deployment]")
-        print("0 - Run all steps (1-8) sequentially")
+        print("0 - Run all steps (1-10) sequentially")
         print("\n[Individual Steps]")
         print("1 - Step 1: Setup cluster + deploy common services")
         print("2 - Step 2: Confirm tunnel + ingress port-forward")
@@ -1769,7 +1840,9 @@ def show_menu(args):
         print("5 - Step 5: Deploy connectors (local images)")
         print("6 - Step 6: Run validation tests")
         print("7 - Step 7: Deploy/Start ML Model Server")
-        print("8 - Step 8: Seed vocabulary + ML assets + contracts")
+        print("8 - Step 8: Seed vocabulary + base/mock ML model assets + contracts")
+        print("9 - Step 9: Seed benchmark datasets + contracts")
+        print("10 - Step 10: Seed FLARES/Mobility model assets + contracts")
         print("\n[Control]")
         print("Q - Exit")
         print("=" * 60)
@@ -1804,6 +1877,10 @@ def show_menu(args):
                 step_7_model_server(args)
             elif choice == "8":
                 step_8_seed_assets(args)
+            elif choice == "9":
+                step_9_seed_datasets(args)
+            elif choice == "10":
+                step_10_seed_use_case_model_assets(args)
             else:
                 print("\nInvalid selection. Please try again.\n")
         except KeyboardInterrupt:
@@ -1877,7 +1954,13 @@ def parse_args():
     parser.add_argument("--skip-level2", action="store_true", help="Skip common services deployment inside Step 2")
     parser.add_argument("--skip-validation", action="store_true", help="Skip validation phase")
     parser.add_argument("--skip-model-server", action="store_true", help="Skip Step 7 model server deployment")
-    parser.add_argument("--skip-seed-assets", action="store_true", help="Skip Step 8 ML assets initialization")
+    parser.add_argument("--skip-seed-assets", action="store_true", help="Skip Step 8 base/mock ML model assets initialization")
+    parser.add_argument("--skip-seed-datasets", action="store_true", help="Skip Step 9 benchmark dataset initialization")
+    parser.add_argument(
+        "--skip-use-case-model-assets",
+        action="store_true",
+        help="Skip Step 10 FLARES/Mobility HttpData model asset initialization",
+    )
     parser.add_argument(
         "--model-server-mode",
         choices=("mock", "use-cases", "combined"),
@@ -1892,8 +1975,8 @@ def parse_args():
         "--use-case-model-server-dir",
         default=default_use_case_model_server_dir(),
         help=(
-            "Directory containing the prepared AIModelHub_Uses_Cases FastAPI project. "
-            "By default this is resolved as a sibling of AIModelHub_Pionera; override "
+            "Directory containing the prepared AIModelHub-Use-Cases FastAPI project. "
+            "By default this checks the bundled folder and then sibling layouts; override "
             "with this option or USE_CASE_MODEL_SERVER_DIR."
         ),
     )
@@ -1919,15 +2002,15 @@ def parse_args():
     parser.add_argument(
         "--include-use-case-model-metadata",
         action="store_true",
-        help="Compatibility flag: Step 8 registers FLARES/Mobility HttpData assets using JS_Metadata_Daimo metadata",
+        help="Compatibility flag for direct model seeding; Step 10 registers FLARES/Mobility HttpData model assets",
     )
     parser.add_argument(
         "--seed-model-set",
         choices=("auto", "mock", "use-cases", "combined"),
         default="auto",
         help=(
-            "Step 8 model metadata set. 'auto' follows --model-server-mode "
-            "(default: auto, therefore combined in the default deployment)"
+            "Base model metadata set for Step 8. 'auto' follows --model-server-mode; "
+            "Step 10 always seeds the FLARES/Mobility use-case model set."
         ),
     )
     parser.add_argument(
@@ -1946,42 +2029,42 @@ def parse_args():
         "--seed-assets-count",
         type=int,
         default=8,
-        help="InesDataStore assets per connector for mock/use-cases Step 8 modes (default: 8)",
+        help="InesDataStore model assets per connector for mock/use-cases Step 8 modes (default: 8)",
     )
     parser.add_argument(
         "--seed-connectors",
         default="conn-citycouncil-demo,conn-company-demo",
-        help="Comma-separated connectors to seed in Step 8",
+        help="Comma-separated connectors to seed in Steps 8, 9 and 10",
     )
     parser.add_argument(
         "--seed-credentials-dir",
         default=os.path.join(project_dir(), "inesdata-deployment", "deployments", "DEV", "demo"),
-        help="Credentials directory for Step 8 (default: inesdata-deployment/deployments/DEV/demo)",
+        help="Credentials directory for Steps 8, 9 and 10 (default: inesdata-deployment/deployments/DEV/demo)",
     )
     parser.add_argument(
         "--seed-vocabulary-id",
         default="JS_Pionera_Daimo",
-        help="Vocabulary ID to register/use in Step 8",
+        help="Vocabulary ID to register/use in Steps 8, 9 and 10",
     )
     parser.add_argument(
         "--seed-vocabulary-name",
         default="JS Metadata Daimo",
-        help="Vocabulary name for Step 8",
+        help="Vocabulary name for Steps 8, 9 and 10",
     )
     parser.add_argument(
         "--seed-vocabulary-category",
         default="machineLearning",
-        help="Vocabulary category for Step 8",
+        help="Vocabulary category for Steps 8, 9 and 10",
     )
     parser.add_argument(
         "--seed-vocabulary-schema",
         default=os.path.join(project_dir(), "JS_Metadata_Daimo.schema.json"),
-        help="Vocabulary schema file path for Step 8",
+        help="Vocabulary schema file path for Steps 8, 9 and 10",
     )
     parser.add_argument(
         "--seed-keycloak-token-url",
         default="",
-        help="Optional Keycloak token URL override for Step 8",
+        help="Optional Keycloak token URL override for Steps 8, 9 and 10",
     )
     parser.add_argument(
         "--manual-check-timeout",
