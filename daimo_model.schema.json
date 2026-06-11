@@ -1,0 +1,391 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pionera.local/schemas/daimo_model.schema.json",
+  "title": "DAIMO Model Metadata",
+  "description": "Model metadata for discovery, execution, and benchmarking.",
+  "@context": {
+    "dct": "http://purl.org/dc/terms/",
+    "daimo": "https://w3id.org/pionera/daimo#"
+  },
+  "type": "object",
+  "properties": {
+    "daimo:modality": {
+      "type": "array",
+      "title": "Modality",
+      "description": "Input/output modality handled by the model.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "text",
+          "image",
+          "tabular",
+          "time_series",
+          "audio",
+          "video",
+          "multimodal"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "daimo:taskType": {
+      "type": "string",
+      "title": "Task type",
+      "description": "General machine learning problem type.",
+      "enum": [
+        "classification",
+        "regression",
+        "generation",
+        "ranking",
+        "retrieval",
+        "forecasting",
+        "segmentation",
+        "detection",
+        "clustering",
+        "embedding",
+        "anomaly_detection",
+        "other"
+      ],
+      "default": "classification"
+    },
+    "daimo:taskCategory": {
+      "type": "string",
+      "title": "Task category",
+      "description": "High-level model domain or task family.",
+      "enum": [
+        "Natural Language Processing",
+        "Computer vision",
+        "Tabular",
+        "Time series",
+        "Audio",
+        "Multimodal",
+        "Predictive event",
+        "Other"
+      ],
+      "default": "Natural Language Processing"
+    },
+    "daimo:subtask": {
+      "type": "string",
+      "title": "Subtask",
+      "description": "Specific model capability.",
+      "enum": [
+        "text-classification",
+        "token-classification",
+        "question-answering",
+        "text-generation",
+        "summarization",
+        "translation",
+        "image-classification",
+        "object-detection",
+        "image-segmentation",
+        "tabular-classification",
+        "tabular-regression",
+        "time-series-forecasting",
+        "speech-recognition",
+        "text-to-image",
+        "embedding",
+        "reranking",
+        "other"
+      ]
+    },
+    "daimo:subtaskDescription": {
+      "type": "string",
+      "title": "Subtask description",
+      "description": "Free-text detail for the selected subtask."
+    },
+    "daimo:endpointBehavior": {
+      "type": "string",
+      "title": "Endpoint behavior",
+      "description": "Behavior exposed by the model endpoint.",
+      "enum": [
+        "prediction",
+        "metric",
+        "embedding",
+        "ranking",
+        "explanation",
+        "artifact",
+        "other"
+      ],
+      "default": "prediction"
+    },
+    "daimo:requestShape": {
+      "type": "string",
+      "title": "Request shape",
+      "description": "Whether the endpoint expects one input record or a batch of records.",
+      "enum": [
+        "single",
+        "batch"
+      ],
+      "default": "single"
+    },
+    "dct:description": {
+      "type": "string",
+      "title": "Model description",
+      "description": "Short technical description of what the model does and what endpoint behavior to expect."
+    },
+    "daimo:libraryName": {
+      "type": "string",
+      "title": "Library",
+      "description": "Main library or runtime used by the model.",
+      "enum": [
+        "Transformers",
+        "Keras",
+        "PyTorch",
+        "TensorFlow",
+        "scikit-learn",
+        "XGBoost",
+        "LightGBM",
+        "CatBoost",
+        "spaCy",
+        "OpenCV",
+        "Custom",
+        "Other"
+      ]
+    },
+    "dct:language": {
+      "type": "array",
+      "title": "Language",
+      "description": "Natural language supported by the model, when applicable.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "English",
+          "Spanish",
+          "French",
+          "German",
+          "Portuguese",
+          "Italian",
+          "Chinese",
+          "Japanese",
+          "Language independent",
+          "Other"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "dct:license": {
+      "type": "string",
+      "title": "License",
+      "description": "License that applies to the model artifact or service.",
+      "enum": [
+        "apache-2.0",
+        "mit",
+        "bsd-3-clause",
+        "openrail",
+        "cc-by-4.0",
+        "proprietary",
+        "other"
+      ]
+    },
+    "daimo:inputSchema": {
+      "type": "object",
+      "title": "Input definition",
+      "description": "Describe the model input either as interactive fields or as a JSON Schema.",
+      "properties": {
+        "fields": {
+          "type": "array",
+          "title": "Input fields",
+          "description": "Interactive input definition. Use one row per model input.",
+          "items": {
+            "type": "object",
+            "title": "Input field",
+            "properties": {
+              "name": {
+                "type": "string",
+                "title": "Name"
+              },
+              "type": {
+                "type": "string",
+                "title": "Type",
+                "enum": [
+                  "string",
+                  "integer",
+                  "number",
+                  "boolean",
+                  "array",
+                  "object"
+                ],
+                "default": "string"
+              },
+              "description": {
+                "type": "string",
+                "title": "Description"
+              },
+              "nullable": {
+                "type": "boolean",
+                "title": "Nullable",
+                "default": false
+              },
+              "minValue": {
+                "type": "number",
+                "title": "Min Value"
+              },
+              "maxValue": {
+                "type": "number",
+                "title": "Max Value"
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "jsonSchema": {
+          "type": "string",
+          "title": "JSON Schema",
+          "description": "Optional free-text JSON Schema for complex inputs. Use this when the field list is not enough."
+        }
+      },
+      "additionalProperties": false
+    },
+    "daimo:inputExample": {
+      "type": "string",
+      "title": "Input example",
+      "description": "Optional JSON example payload for the model endpoint."
+    },
+    "daimo:metrics": {
+      "type": "array",
+      "title": "Supported metrics",
+      "description": "Metrics supported or reported by this model.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Accuracy",
+          "Precision",
+          "Recall",
+          "F1",
+          "RMSE",
+          "MAE",
+          "MSE",
+          "R2",
+          "Other"
+        ]
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "daimo:taskCategory",
+    "daimo:taskType",
+    "daimo:endpointBehavior",
+    "daimo:inputSchema"
+  ],
+  "@uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Group",
+        "label": "Model",
+        "elements": [
+          {
+            "type": "HorizontalLayout",
+            "elements": [
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:modality"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:taskCategory"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:taskType"
+              }
+            ]
+          },
+          {
+            "type": "HorizontalLayout",
+            "elements": [
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:subtask"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:endpointBehavior"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:requestShape"
+              }
+            ]
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/daimo:subtaskDescription",
+            "options": {
+              "multi": true
+            }
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/dct:description",
+            "options": {
+              "multi": true
+            }
+          }
+        ]
+      },
+      {
+        "type": "Group",
+        "label": "Implementation",
+        "elements": [
+          {
+            "type": "HorizontalLayout",
+            "elements": [
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:libraryName"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/dct:language"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/dct:license"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Group",
+        "label": "Input Definition",
+        "elements": [
+          {
+            "type": "Control",
+            "scope": "#/properties/daimo:inputSchema/properties/fields"
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/daimo:inputSchema/properties/jsonSchema",
+            "options": {
+              "multi": true
+            }
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/daimo:inputExample",
+            "options": {
+              "multi": true
+            }
+          }
+        ]
+      },
+      {
+        "type": "Group",
+        "label": "Metric Reporting",
+        "elements": [
+          {
+            "type": "Control",
+            "scope": "#/properties/daimo:metrics"
+          }
+        ]
+      }
+    ]
+  },
+  "additionalProperties": true
+}

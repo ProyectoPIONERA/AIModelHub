@@ -1,0 +1,350 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pionera.local/schemas/daimo_dataset.schema.json",
+  "title": "DAIMO Dataset Metadata",
+  "description": "Dataset metadata for discovery, filtering, and benchmarking.",
+  "@context": {
+    "dct": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "daimo": "https://w3id.org/pionera/daimo#"
+  },
+  "type": "object",
+  "properties": {
+    "daimo:modality": {
+      "type": "array",
+      "title": "Modality",
+      "description": "Data modality represented by this dataset.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "text",
+          "image",
+          "tabular",
+          "time_series",
+          "audio",
+          "video",
+          "multimodal"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "daimo:taskType": {
+      "type": "string",
+      "title": "Task type",
+      "description": "General machine learning problem type supported by the dataset.",
+      "enum": [
+        "classification",
+        "regression",
+        "generation",
+        "ranking",
+        "retrieval",
+        "forecasting",
+        "segmentation",
+        "detection",
+        "clustering",
+        "embedding",
+        "anomaly_detection",
+        "other"
+      ]
+    },
+    "daimo:taskCategory": {
+      "type": "string",
+      "title": "Task category",
+      "description": "High-level dataset domain or task family.",
+      "enum": [
+        "Natural Language Processing",
+        "Computer vision",
+        "Tabular",
+        "Time series",
+        "Audio",
+        "Multimodal",
+        "Predictive event",
+        "Other"
+      ]
+    },
+    "daimo:subtask": {
+      "type": "string",
+      "title": "Subtask",
+      "description": "Specific benchmark capability supported by the dataset.",
+      "enum": [
+        "text-classification",
+        "token-classification",
+        "question-answering",
+        "text-generation",
+        "summarization",
+        "translation",
+        "image-classification",
+        "object-detection",
+        "image-segmentation",
+        "tabular-classification",
+        "tabular-regression",
+        "time-series-forecasting",
+        "speech-recognition",
+        "text-to-image",
+        "embedding",
+        "reranking",
+        "other"
+      ]
+    },
+    "daimo:subtaskDescription": {
+      "type": "string",
+      "title": "Subtask description",
+      "description": "Free-text detail for the selected subtask."
+    },
+    "daimo:input": {
+      "type": "array",
+      "title": "Input columns",
+      "description": "Dataset columns sent to the model.",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "daimo:label": {
+      "type": "string",
+      "title": "Label column",
+      "description": "Dataset target column used for metrics.",
+      "minLength": 1
+    },
+    "daimo:labelType": {
+      "type": "string",
+      "title": "Label type",
+      "description": "How the benchmark should interpret the label.",
+      "enum": [
+        "continuous",
+        "binary",
+        "categorical",
+        "span",
+        "sequence",
+        "other"
+      ]
+    },
+    "dct:language": {
+      "type": "array",
+      "title": "Languages",
+      "items": {
+        "type": "string",
+        "enum": [
+          "English",
+          "Spanish",
+          "French",
+          "German",
+          "Portuguese",
+          "Italian",
+          "Chinese",
+          "Japanese",
+          "Other"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "dct:license": {
+      "type": "string",
+      "title": "License",
+      "enum": [
+        "apache-2.0",
+        "mit",
+        "bsd-3-clause",
+        "cc-by-4.0",
+        "proprietary",
+        "other"
+      ]
+    },
+    "dct:format": {
+      "type": "string",
+      "title": "Format",
+      "enum": [
+        "csv",
+        "json",
+        "jsonl",
+        "parquet",
+        "images",
+        "other"
+      ]
+    },
+    "daimo:datasetVersion": {
+      "type": "string",
+      "title": "Dataset version",
+      "default": "1.0.0"
+    },
+    "daimo:datasetRole": {
+      "type": "string",
+      "title": "Dataset role",
+      "enum": [
+        "training",
+        "validation",
+        "test",
+        "benchmark",
+        "external-validation"
+      ],
+      "default": "benchmark"
+    },
+    "daimo:protocol": {
+      "type": "string",
+      "title": "Evaluation protocol",
+      "description": "DAIMO evaluation protocol used with this dataset.",
+      "enum": [
+        "holdout-test-set",
+        "cross-validation",
+        "external-validation",
+        "online-evaluation",
+        "custom"
+      ],
+      "default": "holdout-test-set"
+    },
+    "daimo:randomSeed": {
+      "type": "integer",
+      "title": "Random seed",
+      "description": "Optional DAIMO random seed for reproducible sampling or splits."
+    },
+    "dcat:keyword": {
+      "type": "array",
+      "title": "Keywords",
+      "items": {
+        "type": "string",
+        "enum": [
+          "benchmark",
+          "validation",
+          "test",
+          "mobility",
+          "flares",
+          "public-transport",
+          "span-extraction",
+          "classification",
+          "regression",
+          "csv",
+          "jsonl",
+          "other"
+        ]
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "daimo:taskCategory",
+    "daimo:taskType",
+    "daimo:input",
+    "daimo:label"
+  ],
+  "@uischema": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "type": "Group",
+        "label": "Benchmark",
+        "elements": [
+          {
+            "type": "HorizontalLayout",
+            "elements": [
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:modality"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:taskCategory"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:taskType"
+              }
+            ]
+          },
+          {
+            "type": "HorizontalLayout",
+            "elements": [
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:subtask"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:labelType"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:protocol"
+              }
+            ]
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/daimo:subtaskDescription",
+            "options": {
+              "multi": true
+            }
+          },
+          {
+            "type": "HorizontalLayout",
+            "elements": [
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:input"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:label"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Group",
+        "label": "Discovery",
+        "elements": [
+          {
+            "type": "HorizontalLayout",
+            "elements": [
+              {
+                "type": "Control",
+                "scope": "#/properties/dct:format"
+              }
+            ]
+          },
+          {
+            "type": "HorizontalLayout",
+            "elements": [
+              {
+                "type": "Control",
+                "scope": "#/properties/dct:language"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/dct:license"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:datasetRole"
+              }
+            ]
+          },
+          {
+            "type": "Control",
+            "scope": "#/properties/dcat:keyword"
+          }
+        ]
+      },
+      {
+        "type": "Group",
+        "label": "Versioning",
+        "elements": [
+          {
+            "type": "HorizontalLayout",
+            "elements": [
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:datasetVersion"
+              },
+              {
+                "type": "Control",
+                "scope": "#/properties/daimo:randomSeed"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "additionalProperties": true
+}

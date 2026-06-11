@@ -21,7 +21,7 @@ they are needed to run or understand the code.
 - AI Model Observer for execution and benchmark evidence.
 - Combined FastAPI model server for PIONERA use-case models and deterministic
   mock HTTP endpoints.
-- Metadata seeding based on `JS_Metadata_Daimo.schema.json`.
+- Metadata seeding based on `daimo_model.schema.json` and `daimo_dataset.schema.json`.
 
 ## Repository Layout
 
@@ -30,8 +30,9 @@ The most relevant project areas are:
 ```text
 AIModelHub_Pionera/
 |-- README.md
-|-- JS_Metadata_Daimo.schema.json
-|-- inesdata_local_deploy.py
+|-- daimo_model.schema.json
+|-- daimo_dataset.schema.json
+|-- pionera_local_deploy.py
 |-- runtime_dependencies.py
 |-- requirements.txt
 |
@@ -91,12 +92,12 @@ as a sibling of this repository:
   AIModelHub_Uses_Cases/
 ```
 
-By default, `inesdata_local_deploy.py` resolves
+By default, `pionera_local_deploy.py` resolves
 `AIModelHub_Uses_Cases` automatically from that sibling layout. If the use-case
 repository is located elsewhere, pass:
 
 ```bash
-python3 inesdata_local_deploy.py --use-case-model-server-dir <path-to-AIModelHub_Uses_Cases>
+python3 pionera_local_deploy.py --use-case-model-server-dir <path-to-AIModelHub_Uses_Cases>
 ```
 
 or set:
@@ -114,14 +115,14 @@ Run the interactive deployment menu from the repository root:
 
 ```bash
 cd <workspace>/AIModelHub_Pionera
-python3 inesdata_local_deploy.py
+python3 pionera_local_deploy.py
 ```
 
 Run the full non-interactive deployment after confirming that manual network
 steps are ready:
 
 ```bash
-python3 inesdata_local_deploy.py --non-interactive --manual-ready
+python3 pionera_local_deploy.py --non-interactive --manual-ready
 ```
 
 The menu exposes this flow:
@@ -136,7 +137,7 @@ The menu exposes this flow:
 5 - Step 5: Deploy connectors
 6 - Step 6: Run validation tests
 7 - Step 7: Deploy/Start ML Model Server
-8 - Step 8: Seed vocabulary + base/mock ML model assets + contracts
+8 - Step 8: Seed DAIMO vocabularies
 9 - Step 9: Seed benchmark datasets + contracts
 10 - Step 10: Seed FLARES/Mobility model assets + contracts
 ```
@@ -146,7 +147,7 @@ The menu exposes this flow:
 The default mode is `combined`:
 
 ```bash
-python3 inesdata_local_deploy.py --model-server-mode combined
+python3 pionera_local_deploy.py --model-server-mode combined
 ```
 
 This starts one host FastAPI server that exposes:
@@ -158,8 +159,8 @@ This starts one host FastAPI server that exposes:
 Other modes are available for targeted validation:
 
 ```bash
-python3 inesdata_local_deploy.py --model-server-mode use-cases
-python3 inesdata_local_deploy.py --model-server-mode mock
+python3 pionera_local_deploy.py --model-server-mode use-cases
+python3 pionera_local_deploy.py --model-server-mode mock
 ```
 
 The connector-facing model server URL defaults to:
@@ -171,16 +172,18 @@ http://host.docker.internal:8000
 That URL is used by Docker-backed Minikube pods to reach the FastAPI server
 running on the host.
 
-### Step 8: Base Model Metadata And Assets
+### Step 8: DAIMO Vocabularies
 
-Step 8 seeds the vocabulary, base/mock model assets, model policies and model
-contracts.
+Step 8 seeds the DAIMO model and dataset vocabularies.
 
-In the default combined deployment it registers:
+The old base/mock model assets are optional. To seed those extra demo assets
+and model contracts as well, run the deployer with:
 
-- Deterministic mock HTTP models as `HttpData`.
-- Additional deterministic stored models as `InesDataStore`.
-- DAIMO-aligned metadata from `JS_Metadata_Daimo.schema.json`.
+```bash
+python3 pionera_local_deploy.py --seed-base-mock-assets
+```
+
+The FLARES/Mobility use-case model assets are handled by Step 10.
 
 ### Step 9: Benchmark Datasets
 
@@ -428,7 +431,7 @@ check:
 - The FastAPI server responds on `http://127.0.0.1:8000/models`.
 - The connector-facing URL is reachable from Minikube pods.
 - `AIModelHub_Uses_Cases` has prepared model artifacts.
-- Step 8 was rerun after model metadata or endpoint changes.
+- Step 10 was rerun after model metadata or endpoint changes.
 - Step 9 was rerun after benchmark dataset metadata changes.
 
 ### Rebuilding Local Images
@@ -447,8 +450,8 @@ secrets.
 
 ```bash
 git status --short
-python3 inesdata_local_deploy.py --help
-python3 inesdata_local_deploy.py --model-server-mode combined
+python3 pionera_local_deploy.py --help
+python3 pionera_local_deploy.py --model-server-mode combined
 ```
 
 Check the use-case model server directly:
@@ -460,7 +463,8 @@ curl http://127.0.0.1:8000/models
 ## Documentation
 
 - `DEPLOYMENT_TRACEABILITY.md`: traceability for the local 10-step deployment.
-- `JS_Metadata_Daimo.schema.json`: metadata schema for model registration.
+- `daimo_model.schema.json`: DAIMO model metadata schema.
+- `daimo_dataset.schema.json`: DAIMO dataset metadata schema.
 - `AIModelHub_Uses_Cases/README.md`: companion use-case repository guide.
 
 ## Maintainers

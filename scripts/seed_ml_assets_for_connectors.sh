@@ -8,10 +8,14 @@ COUNT="${COUNT:-8}"
 CONNECTORS_CSV="${CONNECTORS_CSV:-conn-citycouncil-demo,conn-company-demo}"
 CREDENTIALS_DIR="${CREDENTIALS_DIR:-$ROOT_DIR/inesdata-deployment/deployments/DEV/demo}"
 KEYCLOAK_TOKEN_URL="${KEYCLOAK_TOKEN_URL:-}"
-VOCABULARY_ID="${VOCABULARY_ID:-JS_Pionera_Daimo}"
-VOCABULARY_NAME="${VOCABULARY_NAME:-JS Metadata Daimo}"
-VOCABULARY_CATEGORY="${VOCABULARY_CATEGORY:-machineLearning}"
-VOCABULARY_SCHEMA_FILE="${VOCABULARY_SCHEMA_FILE:-}"
+MODEL_VOCABULARY_ID="${MODEL_VOCABULARY_ID:-JS_DAIMO_Model}"
+MODEL_VOCABULARY_NAME="${MODEL_VOCABULARY_NAME:-DAIMO Model Metadata}"
+MODEL_VOCABULARY_CATEGORY="${MODEL_VOCABULARY_CATEGORY:-machineLearning}"
+MODEL_VOCABULARY_SCHEMA_FILE="${MODEL_VOCABULARY_SCHEMA_FILE:-$ROOT_DIR/daimo_model.schema.json}"
+DATASET_VOCABULARY_ID="${DATASET_VOCABULARY_ID:-JS_DAIMO_Dataset}"
+DATASET_VOCABULARY_NAME="${DATASET_VOCABULARY_NAME:-DAIMO Dataset Metadata}"
+DATASET_VOCABULARY_CATEGORY="${DATASET_VOCABULARY_CATEGORY:-dataset}"
+DATASET_VOCABULARY_SCHEMA_FILE="${DATASET_VOCABULARY_SCHEMA_FILE:-$ROOT_DIR/daimo_dataset.schema.json}"
 MODEL_FILE="$WORK_DIR/LGBM_Classifier_1.pkl"
 SEED_SCOPE="${SEED_SCOPE:-models}"
 MOBILITY_SEGMENTS_DATASET_FILE="${MOBILITY_SEGMENTS_DATASET_FILE:-$ROOT_DIR/AIModelHub-Use-Cases/data/mobility-datasets/segments_test.csv}"
@@ -40,11 +44,7 @@ Options:
   --connectors <csv>          Connectors list (default: conn-citycouncil-demo,conn-company-demo)
   --credentials-dir <path>    Folder containing credentials-connector-<name>.json
   --keycloak-token-url <url>  Token endpoint. If omitted, read from deployer.config
-  --vocabulary-id <id>        Vocabulary ID used in assetData (default: JS_Pionera_Daimo)
-  --vocabulary-name <name>    Vocabulary display name (default: JS Metadata Daimo)
-  --vocabulary-category <cat> Vocabulary category (default: machineLearning)
-  --vocabulary-schema <path>  JSON schema file. Default auto-detect from project root
-  --seed-scope <scope>        What to seed: models, datasets or all (default: models)
+  --seed-scope <scope>        What to seed: vocabularies, models, datasets or all (default: models)
   --model-set <mode>          ML metadata set: mock, use-cases or combined (default: combined)
   --include-use-case-models   Also seed FLARES/Mobility HttpData assets
   --skip-use-case-models      Skip FLARES/Mobility HttpData assets in use-cases/combined modes
@@ -59,7 +59,7 @@ Options:
 
 Notes:
   - Connector passwords are always read from credentials files at runtime.
-  - The vocabulary is created/updated first in each connector.
+  - The DAIMO vocabularies are created/updated first in each connector.
   - Asset insertion uses Management API upload-chunk + finalize-upload with retries.
 EOF
 }
@@ -84,22 +84,6 @@ while [[ $# -gt 0 ]]; do
       ;;
     --keycloak-token-url)
       KEYCLOAK_TOKEN_URL="${2:-}"
-      shift 2
-      ;;
-    --vocabulary-id)
-      VOCABULARY_ID="${2:-}"
-      shift 2
-      ;;
-    --vocabulary-name)
-      VOCABULARY_NAME="${2:-}"
-      shift 2
-      ;;
-    --vocabulary-category)
-      VOCABULARY_CATEGORY="${2:-}"
-      shift 2
-      ;;
-    --vocabulary-schema)
-      VOCABULARY_SCHEMA_FILE="${2:-}"
       shift 2
       ;;
     --seed-scope)
@@ -166,7 +150,7 @@ case "$MODEL_SET" in
 esac
 
 case "$SEED_SCOPE" in
-  models|datasets|all) ;;
+  vocabularies|models|datasets|all) ;;
   *)
     echo "Invalid --seed-scope value: $SEED_SCOPE" >&2
     exit 1
@@ -177,43 +161,17 @@ if [[ "$INCLUDE_USE_CASE_MODELS" == "1" && "$MODEL_SET" == "mock" ]]; then
   MODEL_SET="use-cases"
 fi
 
-if ! [[ "$COMBINED_HTTP_COUNT" =~ ^[0-9]+$ ]] || [[ "$COMBINED_HTTP_COUNT" -lt 1 ]] || [[ "$COMBINED_HTTP_COUNT" -gt 15 ]]; then
-  echo "Invalid --combined-http-count value: $COMBINED_HTTP_COUNT (expected 1..15)" >&2
-  exit 1
-fi
-
-if ! [[ "$COMBINED_INESDATA_COUNT" =~ ^[0-9]+$ ]]; then
-  echo "Invalid --combined-inesdata-count value: $COMBINED_INESDATA_COUNT" >&2
-  exit 1
-fi
-
-resolve_vocabulary_schema_file() {
-  if [[ -n "$VOCABULARY_SCHEMA_FILE" ]]; then
-    if [[ -f "$VOCABULARY_SCHEMA_FILE" ]]; then
-      return 0
-    fi
-    echo "Vocabulary schema file not found: $VOCABULARY_SCHEMA_FILE" >&2
-    return 1
+if [[ "$SEED_SCOPE" == "models" || "$SEED_SCOPE" == "all" ]]; then
+  if ! [[ "$COMBINED_HTTP_COUNT" =~ ^[0-9]+$ ]] || [[ "$COMBINED_HTTP_COUNT" -lt 1 ]] || [[ "$COMBINED_HTTP_COUNT" -gt 15 ]]; then
+    echo "Invalid --combined-http-count value: $COMBINED_HTTP_COUNT (expected 1..15)" >&2
+    exit 1
   fi
 
-  local candidates=(
-    "$ROOT_DIR/JS_Metada_Daimo.schema.json"
-    "$ROOT_DIR/JS_Metadata_Daimo.schema.json"
-    "$ROOT_DIR/JS_Metadata_Daimo.schema.JSON"
-  )
-
-  local candidate
-  for candidate in "${candidates[@]}"; do
-    if [[ -f "$candidate" ]]; then
-      VOCABULARY_SCHEMA_FILE="$candidate"
-      return 0
-    fi
-  done
-
-  echo "Could not find vocabulary schema file in project root." >&2
-  echo "Expected one of: JS_Metada_Daimo.schema.json or JS_Metadata_Daimo.schema.json" >&2
-  return 1
-}
+  if ! [[ "$COMBINED_INESDATA_COUNT" =~ ^[0-9]+$ ]]; then
+    echo "Invalid --combined-inesdata-count value: $COMBINED_INESDATA_COUNT" >&2
+    exit 1
+  fi
+fi
 
 if [[ -z "$KEYCLOAK_TOKEN_URL" ]]; then
   cfg_file="$ROOT_DIR/deployer.config"
@@ -236,12 +194,17 @@ if [[ -z "$KEYCLOAK_TOKEN_URL" ]]; then
   KEYCLOAK_TOKEN_URL="$kc_base/realms/$NAMESPACE/protocol/openid-connect/token"
 fi
 
-if ! resolve_vocabulary_schema_file; then
-  exit 1
-fi
+for required_schema in "$MODEL_VOCABULARY_SCHEMA_FILE" "$DATASET_VOCABULARY_SCHEMA_FILE"; do
+  if [[ ! -f "$required_schema" ]]; then
+    echo "DAIMO vocabulary schema file not found: $required_schema" >&2
+    exit 1
+  fi
+done
 
-echo "Using vocabulary schema: $VOCABULARY_SCHEMA_FILE"
-echo "Using vocabulary id: $VOCABULARY_ID"
+echo "Using DAIMO model vocabulary schema: $MODEL_VOCABULARY_SCHEMA_FILE"
+echo "Using model vocabulary id: $MODEL_VOCABULARY_ID"
+echo "Using DAIMO dataset vocabulary schema: $DATASET_VOCABULARY_SCHEMA_FILE"
+echo "Using dataset vocabulary id: $DATASET_VOCABULARY_ID"
 echo "Using seed scope: $SEED_SCOPE"
 echo "Using model metadata set: $MODEL_SET"
 if [[ "$MODEL_SET" == "combined" ]]; then
@@ -275,6 +238,80 @@ request_retry() {
 schema_as_json_string() {
   local schema_file="$1"
   tr -d '\n' < "$schema_file" | sed 's/\\/\\\\/g; s/"/\\"/g'
+}
+
+input_schema_text_json_from_columns_json() {
+  local columns_json="$1"
+  python3 - "$columns_json" <<'PY'
+import json
+import sys
+
+columns = json.loads(sys.argv[1])
+fields = [{"name": column, "type": "string", "nullable": False} for column in columns]
+json_schema = {
+    "type": "object",
+    "properties": {column: {"type": "string"} for column in columns},
+    "required": columns,
+}
+schema = {
+    "fields": fields,
+    "jsonSchema": json.dumps(json_schema, indent=2),
+}
+print(json.dumps(schema, separators=(",", ":")))
+PY
+}
+
+input_schema_fields_json_from_features_json() {
+  local features_json="$1"
+  python3 - "$features_json" <<'PY'
+import json
+import sys
+
+features = json.loads(sys.argv[1])
+fields = []
+properties = {}
+required = []
+for feature in features:
+    if not isinstance(feature, dict) or not feature.get("name"):
+        continue
+    name = str(feature["name"])
+    field_type = str(feature.get("type") or "string")
+    field = {
+        "name": name,
+        "type": field_type,
+        "nullable": bool(feature.get("nullable", False)),
+    }
+    if feature.get("description") not in (None, ""):
+        field["description"] = str(feature["description"])
+    if feature.get("minValue") not in (None, ""):
+        field["minValue"] = feature["minValue"]
+    if feature.get("maxValue") not in (None, ""):
+        field["maxValue"] = feature["maxValue"]
+    fields.append(field)
+
+    property_schema = {"type": field_type}
+    if feature.get("description") not in (None, ""):
+        property_schema["description"] = str(feature["description"])
+    if feature.get("minValue") not in (None, ""):
+        property_schema["minimum"] = feature["minValue"]
+    if feature.get("maxValue") not in (None, ""):
+        property_schema["maximum"] = feature["maxValue"]
+    properties[name] = property_schema
+    if not bool(feature.get("nullable", False)):
+        required.append(name)
+
+json_schema = {
+    "type": "object",
+    "properties": properties,
+}
+if required:
+    json_schema["required"] = required
+
+print(json.dumps({
+    "fields": fields,
+    "jsonSchema": json.dumps(json_schema, indent=2),
+}, separators=(",", ":")))
+PY
 }
 
 get_json_value() {
@@ -400,31 +437,35 @@ delete_v3_asset_if_exists() {
   return 1
 }
 
-ensure_vocabulary() {
+ensure_vocabulary_from_schema() {
   local connector="$1"
   local token="$2"
   local mgmt_url="$3"
   local vocab_base="$4"
+  local vocabulary_id="$5"
+  local vocabulary_name="$6"
+  local vocabulary_category="$7"
+  local schema_file="$8"
   local schema_str payload_file create_out update_out delete_out recreate_out post_code put_code delete_code recreate_code
 
-  schema_str="$(schema_as_json_string "$VOCABULARY_SCHEMA_FILE")"
-  payload_file="$WORK_DIR/vocabulary_${connector}.json"
+  schema_str="$(schema_as_json_string "$schema_file")"
+  payload_file="$WORK_DIR/vocabulary_${connector}_${vocabulary_id}.json"
 
   cat > "$payload_file" <<EOF
 {
   "@context": {"@vocab": "https://w3id.org/edc/v0.0.1/ns/"},
-  "@id": "$VOCABULARY_ID",
-  "name": "$VOCABULARY_NAME",
+  "@id": "$vocabulary_id",
+  "name": "$vocabulary_name",
   "connectorId": "$connector",
-  "category": "$VOCABULARY_CATEGORY",
+  "category": "$vocabulary_category",
   "jsonSchema": "$schema_str"
 }
 EOF
 
-  create_out="$WORK_DIR/vocabulary_${connector}.create.out"
-  update_out="$WORK_DIR/vocabulary_${connector}.update.out"
-  delete_out="$WORK_DIR/vocabulary_${connector}.delete.out"
-  recreate_out="$WORK_DIR/vocabulary_${connector}.recreate.out"
+  create_out="$WORK_DIR/vocabulary_${connector}_${vocabulary_id}.create.out"
+  update_out="$WORK_DIR/vocabulary_${connector}_${vocabulary_id}.update.out"
+  delete_out="$WORK_DIR/vocabulary_${connector}_${vocabulary_id}.delete.out"
+  recreate_out="$WORK_DIR/vocabulary_${connector}_${vocabulary_id}.recreate.out"
 
   post_code="$(curl -s -o "$create_out" -w '%{http_code}' \
     -X POST "$mgmt_url/$vocab_base" \
@@ -433,7 +474,7 @@ EOF
     --data-binary "@$payload_file")"
 
   if [[ "$post_code" == "200" || "$post_code" == "204" ]]; then
-    echo "[$connector] vocabulary '$VOCABULARY_ID' created"
+    echo "[$connector] vocabulary '$vocabulary_id' created"
     return 0
   fi
 
@@ -444,7 +485,7 @@ EOF
       -H 'Content-Type: application/json' \
       --data-binary "@$payload_file")"
     if [[ "$put_code" == "204" || "$put_code" == "200" ]]; then
-      echo "[$connector] vocabulary '$VOCABULARY_ID' updated after conflict"
+      echo "[$connector] vocabulary '$vocabulary_id' updated after conflict"
       return 0
     fi
 
@@ -452,7 +493,7 @@ EOF
     cat "$update_out" >&2 || true
 
     delete_code="$(curl -s -o "$delete_out" -w '%{http_code}' \
-      -X DELETE "$mgmt_url/$vocab_base/$VOCABULARY_ID" \
+      -X DELETE "$mgmt_url/$vocab_base/$vocabulary_id" \
       -H "Authorization: Bearer $token")" || true
 
     if [[ "$delete_code" == "204" || "$delete_code" == "200" || "$delete_code" == "404" ]]; then
@@ -462,7 +503,7 @@ EOF
         -H 'Content-Type: application/json' \
         --data-binary "@$payload_file")" || true
       if [[ "$recreate_code" == "200" || "$recreate_code" == "204" ]]; then
-        echo "[$connector] vocabulary '$VOCABULARY_ID' recreated after update failure"
+        echo "[$connector] vocabulary '$vocabulary_id' recreated after update failure"
         return 0
       fi
       echo "[$connector] vocabulary recreate failed (HTTP ${recreate_code:-NA})" >&2
@@ -475,9 +516,25 @@ EOF
     return 1
   fi
 
-  echo "[$connector] failed to create vocabulary '$VOCABULARY_ID' (HTTP $post_code)" >&2
+  echo "[$connector] failed to create vocabulary '$vocabulary_id' (HTTP $post_code)" >&2
   cat "$create_out" >&2 || true
   return 1
+}
+
+ensure_daimo_vocabularies() {
+  local connector="$1"
+  local token="$2"
+  local mgmt_url="$3"
+  local vocab_base="$4"
+
+  ensure_vocabulary_from_schema \
+    "$connector" "$token" "$mgmt_url" "$vocab_base" \
+    "$MODEL_VOCABULARY_ID" "$MODEL_VOCABULARY_NAME" "$MODEL_VOCABULARY_CATEGORY" "$MODEL_VOCABULARY_SCHEMA_FILE" \
+    || return 1
+
+  ensure_vocabulary_from_schema \
+    "$connector" "$token" "$mgmt_url" "$vocab_base" \
+    "$DATASET_VOCABULARY_ID" "$DATASET_VOCABULARY_NAME" "$DATASET_VOCABULARY_CATEGORY" "$DATASET_VOCABULARY_SCHEMA_FILE"
 }
 
 # =============================================================================
@@ -542,9 +599,9 @@ MODEL_DESCRIPTIONS=(
 MODEL_GROUPS=(0 0 0 0 0  1 1 1 1 1  2 2 2 2 2  3 3 3 3 3  4 4 4 4 4)
 
 GROUP_TASKS=("Computer vision" "Natural Language Processing" "Tabular" "Tabular" "Predictive event")
-GROUP_SUBTASKS=("Image Classification" "Text classification" "Other" "Other" "Other")
-GROUP_ALGORITHMS=("Convolutional Neural Network" "Transformer" "Linear Regression" "Random Forest" "Gradient Boosting")
-GROUP_FRAMEWORKS=("TensorFlow" "Custom" "scikit-learn" "scikit-learn" "XGBoost")
+GROUP_TASK_TYPES=("classification" "classification" "regression" "classification" "classification")
+GROUP_MODALITIES=('["image"]' '["text"]' '["tabular"]' '["tabular"]' '["tabular"]')
+GROUP_SUBTASKS=("image-classification" "text-classification" "tabular-regression" "tabular-classification" "tabular-classification")
 GROUP_LIBRARIES=("Keras" "Transformers" "scikit-learn" "scikit-learn" "XGBoost")
 
 USE_CASE_MODEL_SLUGS=(
@@ -656,75 +713,93 @@ USE_CASE_MODEL_DESCRIPTIONS=(
 )
 
 USE_CASE_MODEL_TASKS=(
-  "Token Classification"
-  "Classification"
-  "Token Classification"
-  "Classification"
-  "Token Classification"
-  "Classification"
-  "Regression"
-  "Regression"
-  "Regression"
-  "Regression"
-  "Regression"
-  "Regression"
-  "Regression"
-  "Regression"
-  "Regression"
+  "Natural Language Processing"
+  "Natural Language Processing"
+  "Natural Language Processing"
+  "Natural Language Processing"
+  "Natural Language Processing"
+  "Natural Language Processing"
+  "Tabular"
+  "Tabular"
+  "Tabular"
+  "Tabular"
+  "Tabular"
+  "Tabular"
+  "Tabular"
+  "Tabular"
+  "Tabular"
 )
 
 USE_CASE_MODEL_SUBTASKS=(
-  "5W1H span extraction"
-  "Reliability classification"
-  "5W1H span extraction"
-  "Reliability classification"
-  "5W1H span extraction"
-  "Reliability classification"
-  "Actual travel time prediction"
-  "Actual travel time prediction"
-  "Actual travel time prediction"
-  "Segment delay prediction"
-  "Segment delay prediction"
-  "Segment delay prediction"
-  "Previous delay prediction"
-  "Previous delay prediction"
-  "Previous delay prediction"
+  "token-classification"
+  "text-classification"
+  "token-classification"
+  "text-classification"
+  "token-classification"
+  "text-classification"
+  "tabular-regression"
+  "tabular-regression"
+  "tabular-regression"
+  "tabular-regression"
+  "tabular-regression"
+  "tabular-regression"
+  "tabular-regression"
+  "tabular-regression"
+  "tabular-regression"
 )
 
-USE_CASE_MODEL_ALGORITHMS=(
-  "ALBERT token classification"
-  "ALBERT sequence classification"
-  "BERT token classification"
-  "BERT sequence classification"
-  "DistilBERT token classification"
-  "DistilBERT sequence classification"
-  "LightGBM Regressor"
-  "Random Forest Regressor"
-  "CatBoost Regressor"
-  "LightGBM Regressor"
-  "Random Forest Regressor"
-  "CatBoost Regressor"
-  "LightGBM Regressor"
-  "Random Forest Regressor"
-  "CatBoost Regressor"
+USE_CASE_MODEL_TASK_TYPES=(
+  "classification"
+  "classification"
+  "classification"
+  "classification"
+  "classification"
+  "classification"
+  "regression"
+  "regression"
+  "regression"
+  "regression"
+  "regression"
+  "regression"
+  "regression"
+  "regression"
+  "regression"
 )
 
-USE_CASE_MODEL_FRAMEWORKS=(
-  "PyTorch"
-  "PyTorch"
-  "PyTorch"
-  "PyTorch"
-  "PyTorch"
-  "PyTorch"
-  "LightGBM"
-  "scikit-learn"
-  "CatBoost"
-  "LightGBM"
-  "scikit-learn"
-  "CatBoost"
-  "LightGBM"
-  "scikit-learn"
-  "CatBoost"
+USE_CASE_MODEL_MODALITIES=(
+  '["text"]'
+  '["text"]'
+  '["text"]'
+  '["text"]'
+  '["text"]'
+  '["text"]'
+  '["tabular"]'
+  '["tabular"]'
+  '["tabular"]'
+  '["tabular"]'
+  '["tabular"]'
+  '["tabular"]'
+  '["tabular"]'
+  '["tabular"]'
+  '["tabular"]'
+)
+
+USE_CASE_MODEL_SUBTASK_DESCRIPTIONS=(
+  "FLARES 5W1H span extraction"
+  "FLARES reliability classification"
+  "FLARES 5W1H span extraction"
+  "FLARES reliability classification"
+  "FLARES 5W1H span extraction"
+  "FLARES reliability classification"
+  "Public transport actual travel time prediction"
+  "Public transport actual travel time prediction"
+  "Public transport actual travel time prediction"
+  "Public transport segment delay prediction"
+  "Public transport segment delay prediction"
+  "Public transport segment delay prediction"
+  "Public transport previous delay prediction"
+  "Public transport previous delay prediction"
+  "Public transport previous delay prediction"
 )
 
 USE_CASE_MODEL_LIBRARIES=(
@@ -932,6 +1007,16 @@ use_case_label_column() {
   esac
 }
 
+use_case_label_type() {
+  local slug="$1"
+  case "$slug" in
+    flares-5w1h-*) echo "span" ;;
+    flares-reliability-*) echo "categorical" ;;
+    mobility-*) echo "continuous" ;;
+    *) echo "other" ;;
+  esac
+}
+
 use_case_input_example_json() {
   local slug="$1"
   case "$slug" in
@@ -966,30 +1051,6 @@ FLARES_RELIABILITY_METRIC_FEATURES
   esac
 }
 
-flares_metric_input_columns_json() {
-  local slug="$1"
-  case "$slug" in
-    flares-5w1h-*-metrics)
-      echo '["Id","Text"]'
-      ;;
-    *)
-      echo '["Id","Text","5W1H_Label","Tag_Text","Tag_Start","Tag_End"]'
-      ;;
-  esac
-}
-
-flares_metric_label_column() {
-  local slug="$1"
-  case "$slug" in
-    flares-5w1h-*-metrics)
-      echo "Tags"
-      ;;
-    *)
-      echo "Reliability_Label"
-      ;;
-  esac
-}
-
 flares_metric_input_example_json() {
   local slug="$1"
   case "$slug" in
@@ -998,30 +1059,6 @@ flares_metric_input_example_json() {
       ;;
     *)
       echo '{\"Id\":6831,\"Text\":\"Lo Pais no deja de sorprendernos.\",\"5W1H_Label\":\"WHAT\",\"Tag_Text\":\"su explicacion\",\"Tag_Start\":42,\"Tag_End\":56,\"Reliability_Label\":\"no confiable\"}'
-      ;;
-  esac
-}
-
-use_case_metrics_json() {
-  local slug="$1"
-  case "$slug" in
-    flares-5w1h-*)
-      echo '[{"metric":"Precision","value":0.29},{"metric":"Recall","value":0.04},{"metric":"F1","value":0.07}]'
-      ;;
-    flares-reliability-*)
-      echo '[{"metric":"Precision","value":0.22},{"metric":"Recall","value":0.33},{"metric":"F1","value":0.27}]'
-      ;;
-    mobility-randomforest-previous-delay)
-      echo '[{"metric":"MAE","value":28.79},{"metric":"R2","value":-0.05}]'
-      ;;
-    mobility-*previous-delay)
-      echo '[{"metric":"MAE","value":26.16},{"metric":"R2","value":0.08}]'
-      ;;
-    mobility-*delay)
-      echo '[{"metric":"MAE","value":17.18},{"metric":"R2","value":0.64}]'
-      ;;
-    *)
-      echo '[{"metric":"MAE","value":16.79},{"metric":"R2","value":0.33}]'
       ;;
   esac
 }
@@ -1037,36 +1074,6 @@ use_case_supported_metrics_json() {
       ;;
     *)
       echo '["Precision","Recall","F1"]'
-      ;;
-  esac
-}
-
-use_case_metric_directions_json() {
-  local slug="$1"
-  case "$slug" in
-    mobility-*)
-      echo '{"RMSE":"lower","MAE":"lower","MSE":"lower","R2":"higher"}'
-      ;;
-    flares-reliability-*)
-      echo '{"Accuracy":"higher","Precision":"higher","Recall":"higher","F1":"higher"}'
-      ;;
-    *)
-      echo '{"Precision":"higher","Recall":"higher","F1":"higher"}'
-      ;;
-  esac
-}
-
-use_case_prediction_fields_json() {
-  local slug="$1"
-  case "$slug" in
-    flares-5w1h-*)
-      echo '["Tag_Start","Tag_End","5W1H_Label"]'
-      ;;
-    flares-reliability-*)
-      echo '["Reliability_Label"]'
-      ;;
-    *)
-      echo '[]'
       ;;
   esac
 }
@@ -1099,18 +1106,19 @@ seed_http_data_assets() {
     local asset_id="${tag}-${slug}"
     local asset_title="${title} - ${ctx}"
     local task="${GROUP_TASKS[$group]}"
+    local task_type="${GROUP_TASK_TYPES[$group]}"
+    local modality="${GROUP_MODALITIES[$group]}"
     local subtask="${GROUP_SUBTASKS[$group]}"
-    local algo="${GROUP_ALGORITHMS[$group]}"
-    local fw="${GROUP_FRAMEWORKS[$group]}"
     local library="${GROUP_LIBRARIES[$group]}"
-    local input_feat input_ex
+    local input_feat input_schema input_ex supported_metrics
     input_feat="$(input_features_json "$group" | tr -d '\n')"
+    input_schema="$(input_schema_fields_json_from_features_json "$input_feat")"
     input_ex="$(input_example_json "$group")"
-
-    local auc recall f1
-    auc="$(awk -v n="$idx" 'BEGIN{printf "%.2f", 0.84 + (n*0.003)}')"
-    recall="$(awk -v n="$idx" 'BEGIN{printf "%.2f", 0.72 + (n*0.004)}')"
-    f1="$(awk -v n="$idx" 'BEGIN{printf "%.2f", 0.70 + (n*0.004)}')"
+    if [[ "$task_type" == "regression" ]]; then
+      supported_metrics='["RMSE","MAE","MSE","R2"]'
+    else
+      supported_metrics='["Accuracy","Precision","Recall","F1"]'
+    fi
 
     local json_file="$WORK_DIR/${connector}_${asset_id}.json"
     cat > "$json_file" <<ASSET_EOF
@@ -1120,8 +1128,7 @@ seed_http_data_assets() {
     "dct": "http://purl.org/dc/terms/",
     "dcterms": "http://purl.org/dc/terms/",
     "dcat": "http://www.w3.org/ns/dcat#",
-    "daimo": "https://w3id.org/daimo/ns#",
-    "mls": "http://www.w3.org/ns/mls#"
+    "daimo": "https://w3id.org/pionera/daimo#"
   },
   "@id": "${asset_id}",
   "properties": {
@@ -1134,27 +1141,21 @@ seed_http_data_assets() {
     "dcterms:description": "${desc} Deployed as HTTP endpoint for ${connector}.",
     "dcat:keyword": ["machine-learning","http-model","${slug}","${tag}"],
     "assetData": {
-      "${VOCABULARY_ID}": {
-        "dct:title": "${asset_title}",
-        "dcterms:title": "${asset_title}",
-        "dct:description": "${desc}",
-        "dcterms:description": "${desc}",
-        "daimo:task": "${task}",
+      "${MODEL_VOCABULARY_ID}": {
+        "daimo:modality": ${modality},
+        "daimo:taskType": "${task_type}",
+        "daimo:taskCategory": "${task}",
         "daimo:subtask": "${subtask}",
-        "daimo:algorithm": "${algo}",
-        "daimo:framework": "${fw}",
-        "daimo:library": "${library}",
+        "daimo:subtaskDescription": "${desc}",
+        "daimo:endpointBehavior": "prediction",
+        "daimo:requestShape": "single",
+        "dct:description": "${desc} Deployed as HTTP endpoint for ${connector}.",
+        "daimo:libraryName": "${library}",
         "dct:language": ["English","Spanish"],
-        "dcterms:language": ["English","Spanish"],
         "dct:license": "apache-2.0",
-        "dcterms:license": "apache-2.0",
-        "daimo:input_features": ${input_feat},
-        "daimo:input_example": "${input_ex}",
-        "mls:ModelEvaluation": [
-          {"metric":"AUC","value":${auc}},
-          {"metric":"Recall","value":${recall}},
-          {"metric":"F1","value":${f1}}
-        ]
+        "daimo:inputSchema": ${input_schema},
+        "daimo:inputExample": "${input_ex}",
+        "daimo:metrics": ${supported_metrics}
       }
     }
   },
@@ -1167,7 +1168,7 @@ seed_http_data_assets() {
     "method": "POST",
     "contentType": "application/json"
   }
-  }
+}
 
 ASSET_EOF
 
@@ -1205,18 +1206,15 @@ seed_use_case_http_data_assets() {
     local desc="${USE_CASE_MODEL_DESCRIPTIONS[$idx]}"
     local task="${USE_CASE_MODEL_TASKS[$idx]}"
     local subtask="${USE_CASE_MODEL_SUBTASKS[$idx]}"
-    local algo="${USE_CASE_MODEL_ALGORITHMS[$idx]}"
-    local fw="${USE_CASE_MODEL_FRAMEWORKS[$idx]}"
+    local task_type="${USE_CASE_MODEL_TASK_TYPES[$idx]}"
+    local modality="${USE_CASE_MODEL_MODALITIES[$idx]}"
+    local subtask_description="${USE_CASE_MODEL_SUBTASK_DESCRIPTIONS[$idx]}"
     local library="${USE_CASE_MODEL_LIBRARIES[$idx]}"
-    local input_columns input_feat input_ex label_column prediction_fields metrics supported_metrics metric_directions
-    input_columns="$(use_case_input_columns_json "$slug")"
+    local input_schema input_feat input_ex supported_metrics
     input_feat="$(use_case_input_features_json "$slug" | tr -d '\n')"
+    input_schema="$(input_schema_fields_json_from_features_json "$input_feat")"
     input_ex="$(use_case_input_example_json "$slug")"
-    label_column="$(use_case_label_column "$slug")"
-    prediction_fields="$(use_case_prediction_fields_json "$slug")"
-    metrics="$(use_case_metrics_json "$slug")"
     supported_metrics="$(use_case_supported_metrics_json "$slug")"
-    metric_directions="$(use_case_metric_directions_json "$slug")"
 
     local asset_id="${tag}-${slug}"
     local asset_title="${title} - PIONERA Use Case"
@@ -1229,7 +1227,7 @@ seed_use_case_http_data_assets() {
     "dct": "http://purl.org/dc/terms/",
     "dcterms": "http://purl.org/dc/terms/",
     "dcat": "http://www.w3.org/ns/dcat#",
-    "daimo": "https://w3id.org/daimo/ns#",
+    "daimo": "https://w3id.org/pionera/daimo#",
     "mls": "http://www.w3.org/ns/mls#"
   },
   "@id": "${asset_id}",
@@ -1243,30 +1241,21 @@ seed_use_case_http_data_assets() {
     "dcterms:description": "${desc}. Served by the FLARES/Mobility FastAPI use-case server.",
     "dcat:keyword": ["machine-learning","http-model","pionera-use-case","flares","mobility","${slug}","${tag}"],
     "assetData": {
-      "${VOCABULARY_ID}": {
-        "dct:title": "${asset_title}",
-        "dcterms:title": "${asset_title}",
-        "dct:description": "${desc}",
-        "dcterms:description": "${desc}",
-        "daimo:task": "${task}",
+      "${MODEL_VOCABULARY_ID}": {
+        "daimo:modality": ${modality},
+        "daimo:taskType": "${task_type}",
+        "daimo:taskCategory": "${task}",
         "daimo:subtask": "${subtask}",
-        "daimo:algorithm": "${algo}",
-        "daimo:framework": "${fw}",
-        "daimo:library": "${library}",
-        "daimo:benchmark_model_type": "output",
-        "daimo:request_shape": "batch",
-        "daimo:metrics": ${supported_metrics},
-        "daimo:metric_directions": ${metric_directions},
+        "daimo:subtaskDescription": "${subtask_description}",
+        "daimo:endpointBehavior": "prediction",
+        "daimo:requestShape": "batch",
+        "dct:description": "${desc}. Served by the FLARES/Mobility FastAPI use-case server.",
+        "daimo:libraryName": "${library}",
         "dct:language": ["Spanish"],
-        "dcterms:language": ["Spanish"],
         "dct:license": "apache-2.0",
-        "dcterms:license": "apache-2.0",
-        "daimo:input": ${input_columns},
-        "daimo:label": "${label_column}",
-        "daimo:prediction_fields": ${prediction_fields},
-        "daimo:input_features": ${input_feat},
-        "daimo:input_example": "${input_ex}",
-        "mls:ModelEvaluation": ${metrics}
+        "daimo:inputSchema": ${input_schema},
+        "daimo:inputExample": "${input_ex}",
+        "daimo:metrics": ${supported_metrics}
       }
     }
   },
@@ -1314,26 +1303,23 @@ seed_flares_metric_http_data_assets() {
     local title="${FLARES_METRIC_MODEL_TITLES[$idx]}"
     local endpoint="${FLARES_METRIC_MODEL_ENDPOINTS[$idx]}"
     local desc="${FLARES_METRIC_MODEL_DESCRIPTIONS[$idx]}"
-    local input_columns input_feat input_ex label_column task subtask target_fields metric_evaluation supported_metrics metric_directions
-    input_columns="$(flares_metric_input_columns_json "$slug")"
+    local input_schema input_feat input_ex task subtask task_type modality subtask_description supported_metrics
     input_feat="$(flares_metric_input_features_json "$slug" | tr -d '\n')"
+    input_schema="$(input_schema_fields_json_from_features_json "$input_feat")"
     input_ex="$(flares_metric_input_example_json "$slug")"
-    label_column="$(flares_metric_label_column "$slug")"
     if [[ "$slug" == flares-5w1h-*-metrics ]]; then
-      task="Token Classification"
-      subtask="5W1H span extraction"
-      target_fields='["Tag_Start","Tag_End","5W1H_Label"]'
+      task="Natural Language Processing"
+      subtask="token-classification"
+      subtask_description="FLARES 5W1H span extraction metrics"
       supported_metrics='["Precision","Recall","F1"]'
-      metric_directions='{"Precision":"higher","Recall":"higher","F1":"higher"}'
-      metric_evaluation='[{"metric":"Precision","value":0.0},{"metric":"Recall","value":0.0},{"metric":"F1","value":0.0}]'
     else
-      task="Classification"
-      subtask="Reliability classification"
-      target_fields='["Reliability_Label"]'
+      task="Natural Language Processing"
+      subtask="text-classification"
+      subtask_description="FLARES reliability classification metrics"
       supported_metrics='["Accuracy","Precision","Recall","F1"]'
-      metric_directions='{"Accuracy":"higher","Precision":"higher","Recall":"higher","F1":"higher"}'
-      metric_evaluation='[{"metric":"Accuracy","value":0.0},{"metric":"Precision","value":0.0},{"metric":"Recall","value":0.0},{"metric":"F1","value":0.0}]'
     fi
+    task_type="classification"
+    modality='["text"]'
 
     local asset_id="${tag}-${slug}"
     local asset_title="${title} - PIONERA Use Case"
@@ -1346,7 +1332,7 @@ seed_flares_metric_http_data_assets() {
     "dct": "http://purl.org/dc/terms/",
     "dcterms": "http://purl.org/dc/terms/",
     "dcat": "http://www.w3.org/ns/dcat#",
-    "daimo": "https://w3id.org/daimo/ns#",
+    "daimo": "https://w3id.org/pionera/daimo#",
     "mls": "http://www.w3.org/ns/mls#"
   },
   "@id": "${asset_id}",
@@ -1360,30 +1346,21 @@ seed_flares_metric_http_data_assets() {
     "dcterms:description": "${desc}. Served by the FLARES FastAPI metric endpoint.",
     "dcat:keyword": ["machine-learning","metric-model","http-model","pionera-use-case","flares","${slug}","${tag}"],
     "assetData": {
-      "${VOCABULARY_ID}": {
-        "dct:title": "${asset_title}",
-        "dcterms:title": "${asset_title}",
-        "dct:description": "${desc}",
-        "dcterms:description": "${desc}",
-        "daimo:task": "${task}",
+      "${MODEL_VOCABULARY_ID}": {
+        "daimo:modality": ${modality},
+        "daimo:taskType": "${task_type}",
+        "daimo:taskCategory": "${task}",
         "daimo:subtask": "${subtask}",
-        "daimo:algorithm": "Transformer",
-        "daimo:framework": "PyTorch",
-        "daimo:library": "Transformers",
-        "daimo:benchmark_model_type": "metric",
-        "daimo:request_shape": "batch",
-        "daimo:metrics": ${supported_metrics},
-        "daimo:metric_directions": ${metric_directions},
-        "daimo:target_fields": ${target_fields},
+        "daimo:subtaskDescription": "${subtask_description}",
+        "daimo:endpointBehavior": "metric",
+        "daimo:requestShape": "batch",
+        "dct:description": "${desc}. Served by the FLARES FastAPI metric endpoint.",
+        "daimo:libraryName": "Transformers",
         "dct:language": ["Spanish"],
-        "dcterms:language": ["Spanish"],
         "dct:license": "apache-2.0",
-        "dcterms:license": "apache-2.0",
-        "daimo:input": ${input_columns},
-        "daimo:label": "${label_column}",
-        "daimo:input_features": ${input_feat},
-        "daimo:input_example": "${input_ex}",
-        "mls:ModelEvaluation": ${metric_evaluation}
+        "daimo:inputSchema": ${input_schema},
+        "daimo:inputExample": "${input_ex}",
+        "daimo:metrics": ${supported_metrics}
       }
     }
   },
@@ -1431,10 +1408,9 @@ seed_inesdata_store_assets() {
   for idx in $(seq 1 "$asset_count"); do
     local id="${tag}-lgbm-$(printf '%02d' "$idx")"
     local title="LGBM ${connector} Model $(printf '%02d' "$idx")"
-    local auc recall f1
-    auc="$(awk -v n="$idx" 'BEGIN{printf "%.2f", 0.84 + (n*0.01)}')"
-    recall="$(awk -v n="$idx" 'BEGIN{printf "%.2f", 0.72 + (n*0.01)}')"
-    f1="$(awk -v n="$idx" 'BEGIN{printf "%.2f", 0.70 + (n*0.01)}')"
+    local input_feat input_schema
+    input_feat='[{"name":"age","type":"integer","description":"Applicant age in years","nullable":false,"minValue":18,"maxValue":99},{"name":"annual_income","type":"number","description":"Annual income in EUR","nullable":false,"minValue":0,"maxValue":1000000},{"name":"debt_ratio","type":"number","description":"Debt to income ratio","nullable":false,"minValue":0,"maxValue":2},{"name":"late_payments_12m","type":"integer","description":"Late payments in last 12 months","nullable":false,"minValue":0,"maxValue":24}]'
+    input_schema="$(input_schema_fields_json_from_features_json "$input_feat")"
     local json_file="$WORK_DIR/${connector}_${id}.json"
 
     cat > "$json_file" <<INES_EOF
@@ -1444,8 +1420,7 @@ seed_inesdata_store_assets() {
     "dct": "http://purl.org/dc/terms/",
     "dcterms": "http://purl.org/dc/terms/",
     "dcat": "http://www.w3.org/ns/dcat#",
-    "daimo": "https://w3id.org/daimo/ns#",
-    "mls": "http://www.w3.org/ns/mls#"
+    "daimo": "https://w3id.org/pionera/daimo#"
   },
   "@id": "${id}",
   "properties": {
@@ -1460,32 +1435,21 @@ seed_inesdata_store_assets() {
     "dcterms:format": "pkl",
     "dcat:keyword": ["machine-learning","lightgbm","inesdata","${tag}"],
     "assetData": {
-      "${VOCABULARY_ID}": {
-        "dct:title": "${title}",
-        "dcterms:title": "${title}",
+      "${MODEL_VOCABULARY_ID}": {
+        "daimo:modality": ["tabular"],
+        "daimo:taskType": "classification",
+        "daimo:taskCategory": "Tabular",
+        "daimo:subtask": "tabular-classification",
+        "daimo:subtaskDescription": "Default probability estimation",
+        "daimo:endpointBehavior": "prediction",
+        "daimo:requestShape": "single",
         "dct:description": "Binary classifier for default probability estimation.",
-        "dcterms:description": "Binary classifier for default probability estimation.",
-        "daimo:task": "Tabular",
-        "daimo:subtask": "Calculate default probability",
-        "daimo:algorithm": "Gradient Boosting Decision Trees",
-        "daimo:framework": "LightGBM",
-        "daimo:library": "LightGBM",
+        "daimo:libraryName": "LightGBM",
         "dct:language": ["English","Spanish"],
-        "dcterms:language": ["English","Spanish"],
         "dct:license": "apache-2.0",
-        "dcterms:license": "apache-2.0",
-        "daimo:input_features": [
-          {"name":"age","type":"integer","description":"Applicant age in years","nullable":false,"minValue":18,"maxValue":99},
-          {"name":"annual_income","type":"number","description":"Annual income in EUR","nullable":false,"minValue":0,"maxValue":1000000},
-          {"name":"debt_ratio","type":"number","description":"Debt to income ratio","nullable":false,"minValue":0,"maxValue":2},
-          {"name":"late_payments_12m","type":"integer","description":"Late payments in last 12 months","nullable":false,"minValue":0,"maxValue":24}
-        ],
-        "daimo:input_example": "{\"age\":41,\"annual_income\":52000,\"debt_ratio\":0.36,\"late_payments_12m\":1}",
-        "mls:ModelEvaluation": [
-          {"metric":"AUC","value":${auc}},
-          {"metric":"Recall","value":${recall}},
-          {"metric":"F1","value":${f1}}
-        ]
+        "daimo:inputSchema": ${input_schema},
+        "daimo:inputExample": "{\"age\":41,\"annual_income\":52000,\"debt_ratio\":0.36,\"late_payments_12m\":1}",
+        "daimo:metrics": ["Accuracy","Precision","Recall","F1"]
       }
     }
   },
@@ -1600,7 +1564,12 @@ seed_mobility_segments_dataset_asset() {
     "dct": "http://purl.org/dc/terms/",
     "dcterms": "http://purl.org/dc/terms/",
     "dcat": "http://www.w3.org/ns/dcat#",
-    "daimo": "https://w3id.org/daimo/ns#"
+    "daimo": "https://w3id.org/pionera/daimo#",
+    "input": "daimo:input",
+    "label": "daimo:label",
+    "datasetVersion": "daimo:datasetVersion",
+    "protocol": "daimo:protocol",
+    "randomSeed": "daimo:randomSeed"
   },
   "@id": "${MOBILITY_SEGMENTS_DATASET_ID}",
   "properties": {
@@ -1614,14 +1583,12 @@ seed_mobility_segments_dataset_asset() {
     "dcterms:format": "csv",
     "dcat:keyword": ["dataset","benchmark","validation","mobility","csv"],
     "assetData": {
-      "${VOCABULARY_ID}": {
-        "dct:title": "Mobility Segments Test Dataset",
-        "dcterms:title": "Mobility Segments Test Dataset",
-        "dct:description": "CSV validation dataset for Mobility benchmark models.",
-        "dcterms:description": "CSV validation dataset for Mobility benchmark models.",
-        "daimo:asset_type": "dataset",
-        "daimo:task": "Predictive event",
-        "daimo:subtask": "Other",
+      "${DATASET_VOCABULARY_ID}": {
+        "daimo:modality": ["tabular"],
+        "daimo:taskType": "regression",
+        "daimo:taskCategory": "Tabular",
+        "daimo:subtask": "tabular-regression",
+        "daimo:subtaskDescription": "Public transport segment delay benchmark dataset",
         "daimo:input": [
           "trip_id",
           "journey_id",
@@ -1646,7 +1613,14 @@ seed_mobility_segments_dataset_asset() {
           "previous_delay",
           "previous_delay_ratio"
         ],
-        "daimo:label": "previous_delay_delta"
+        "daimo:label": "previous_delay_delta",
+        "daimo:labelType": "continuous",
+        "dct:license": "apache-2.0",
+        "dct:format": "csv",
+        "dcat:keyword": ["benchmark","validation","mobility","public-transport","regression","csv"],
+        "daimo:datasetVersion": "1.0.0",
+        "daimo:datasetRole": "test",
+        "daimo:protocol": "holdout-test-set"
       }
     }
   },
@@ -1674,7 +1648,9 @@ seed_flares_test_dataset_assets() {
     "JSONL validation dataset for FLARES 5W1H span extraction metrics."
     "JSONL validation dataset for FLARES reliability classification metrics."
   )
-  local subtasks=("Other" "Text classification")
+  local tasks=("Natural Language Processing" "Natural Language Processing")
+  local subtasks=("token-classification" "text-classification")
+  local subtask_descriptions=("FLARES 5W1H span extraction benchmark dataset" "FLARES reliability classification benchmark dataset")
   local keywords_json=(
     '["dataset","benchmark","validation","flares","5w1h","jsonl"]'
     '["dataset","benchmark","validation","flares","reliability","jsonl"]'
@@ -1691,10 +1667,15 @@ seed_flares_test_dataset_assets() {
     local upload_filename="${upload_filenames[$idx]}"
     local title="${titles[$idx]}"
     local description="${descriptions[$idx]}"
+    local task="${tasks[$idx]}"
     local subtask="${subtasks[$idx]}"
     local keywords="${keywords_json[$idx]}"
     local input="${input_json[$idx]}"
     local label="${labels[$idx]}"
+    local label_type dataset_subtask subtask_description
+    label_type="$(use_case_label_type "$asset_id")"
+    dataset_subtask="$subtask"
+    subtask_description="${subtask_descriptions[$idx]}"
     local json_file="$WORK_DIR/${connector}_${asset_id}.json"
 
     if [[ ! -f "$source_file" ]]; then
@@ -1709,7 +1690,12 @@ seed_flares_test_dataset_assets() {
     "dct": "http://purl.org/dc/terms/",
     "dcterms": "http://purl.org/dc/terms/",
     "dcat": "http://www.w3.org/ns/dcat#",
-    "daimo": "https://w3id.org/daimo/ns#"
+    "daimo": "https://w3id.org/pionera/daimo#",
+    "input": "daimo:input",
+    "label": "daimo:label",
+    "datasetVersion": "daimo:datasetVersion",
+    "protocol": "daimo:protocol",
+    "randomSeed": "daimo:randomSeed"
   },
   "@id": "${asset_id}",
   "properties": {
@@ -1724,16 +1710,22 @@ seed_flares_test_dataset_assets() {
     "fileName": "${upload_filename}",
     "dcat:keyword": ${keywords},
     "assetData": {
-      "${VOCABULARY_ID}": {
-        "dct:title": "${title}",
-        "dcterms:title": "${title}",
-        "dct:description": "${description}",
-        "dcterms:description": "${description}",
-        "daimo:asset_type": "dataset",
-        "daimo:task": "Natural Language Processing",
-        "daimo:subtask": "${subtask}",
+      "${DATASET_VOCABULARY_ID}": {
+        "daimo:modality": ["text"],
+        "daimo:taskType": "classification",
+        "daimo:taskCategory": "${task}",
+        "daimo:subtask": "${dataset_subtask}",
+        "daimo:subtaskDescription": "${subtask_description}",
         "daimo:input": ${input},
-        "daimo:label": "${label}"
+        "daimo:label": "${label}",
+        "daimo:labelType": "${label_type}",
+        "dct:language": ["Spanish"],
+        "dct:license": "apache-2.0",
+        "dct:format": "jsonl",
+        "dcat:keyword": ${keywords},
+        "daimo:datasetVersion": "1.0.0",
+        "daimo:datasetRole": "test",
+        "daimo:protocol": "holdout-test-set"
       }
     }
   },
@@ -2004,7 +1996,7 @@ seed_connector() {
     return 1
   fi
 
-  if ! ensure_vocabulary "$connector" "$token" "$mgmt_url" "$vocab_base"; then
+  if ! ensure_daimo_vocabularies "$connector" "$token" "$mgmt_url" "$vocab_base"; then
     cleanup_pf
     return 1
   fi
@@ -2408,7 +2400,9 @@ for connector in "${connectors[@]}"; do
 done
 
 echo ""
-if [[ "$SEED_SCOPE" == "datasets" ]]; then
+if [[ "$SEED_SCOPE" == "vocabularies" ]]; then
+  echo "Connector vocabulary seeding summary: $total_ok/${#connectors[@]} succeeded (DAIMO model + dataset vocabularies)"
+elif [[ "$SEED_SCOPE" == "datasets" ]]; then
   echo "Connector dataset seeding summary: $total_ok/${#connectors[@]} succeeded (Company mobility + FLARES datasets)"
 else
   city_use_case_total=$(( ${#CITY_USE_CASE_MODEL_SLUGS[@]} + ${#CITY_FLARES_METRIC_MODEL_SLUGS[@]} ))
@@ -2453,8 +2447,10 @@ if [[ "${#failed_connectors[@]}" -gt 0 ]]; then
   fi
 fi
 
-# Run cross-connector negotiations only if at least 2 connectors succeeded
-if [[ "$total_ok" -ge 2 ]]; then
+# Run cross-connector negotiations only when assets/contracts were seeded.
+if [[ "$SEED_SCOPE" == "vocabularies" ]]; then
+  echo "Skipping cross-connector negotiations (vocabulary-only seed scope)"
+elif [[ "$total_ok" -ge 2 ]]; then
   if ! negotiate_cross_connectors; then
     if [[ "$STRICT_MODE" == "1" ]]; then
       echo "Cross-connector negotiations did not complete successfully in strict mode" >&2

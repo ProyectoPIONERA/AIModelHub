@@ -1,12 +1,12 @@
 # Deployment Traceability
 
-This project is organized around `inesdata_local_deploy.py`. The deployment
+This project is organized around `pionera_local_deploy.py`. The deployment
 pipeline expects the following local assets to exist with the same relative
 paths shown here.
 
 ## Entrypoints
 
-- `inesdata_local_deploy.py`: local 10-step deployment workflow.
+- `pionera_local_deploy.py`: local 10-step deployment workflow.
 - `main.py`: validation and metrics CLI invoked by Step 6.
 - `runtime_dependencies.py`: runtime dependency bootstrap helper.
 - `requirements.txt`: Python dependencies for deployment, validation and
@@ -95,20 +95,18 @@ Generated runtime state is not copied:
 - `validation/ui/`: Playwright validation support.
 - `framework/`: experiment storage, validation engine, metrics, Kafka support
   and reporting.
-- `scripts/seed_ml_assets_for_connectors.sh`: Step 8 vocabulary/base model
-  seeding, Step 9 benchmark dataset seeding and Step 10 use-case model seeding.
-- `JS_Metadata_Daimo.schema.json`: vocabulary schema used by Steps 8, 9 and 10.
+- `scripts/seed_ml_assets_for_connectors.sh`: Step 8 DAIMO vocabulary
+  seeding, optional base/mock model seeding, Step 9 benchmark dataset seeding
+  and Step 10 use-case model seeding.
+- `daimo_model.schema.json`: DAIMO model vocabulary schema used by Steps 8 and 10.
+- `daimo_dataset.schema.json`: DAIMO dataset vocabulary schema used by Step 9.
 - `combined_model_server/`: default Step 7 wrapper for the combined local model
   server.
 
-The default Step 8 model set is `combined` because `--seed-model-set auto`
-follows the default `--model-server-mode combined`, but Step 8 skips
-FLARES/Mobility use-case models because those are handled by Step 10. Step 8
-registers:
-
-- 10 deterministic mock assets as `HttpData`, pointing to the same combined host
-  FastAPI server.
-- 5 deterministic mock assets as `InesDataStore`.
+Step 8 registers only the DAIMO model and dataset vocabularies by default.
+The older base/mock model assets are optional and can be seeded with
+`--seed-base-mock-assets`. FLARES/Mobility use-case models are handled by
+Step 10.
 
 Step 9 uses the same seed script with `--seed-scope datasets` to publish the
 use-case benchmark datasets and dataset contracts separately from Step 8.

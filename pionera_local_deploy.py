@@ -830,7 +830,7 @@ def run_seed_assets_pipeline(
     if not os.path.isfile(script):
         raise RuntimeError(f"Seed assets script not found: {script}")
 
-    if seed_scope not in {"models", "datasets", "all"}:
+    if seed_scope not in {"vocabularies", "models", "datasets", "all"}:
         raise RuntimeError(f"Invalid seed scope for {step_label}: {seed_scope}")
 
     seed_model_set = model_set_override or args.seed_model_set
@@ -839,7 +839,7 @@ def run_seed_assets_pipeline(
     if not skip_use_case_models and args.include_use_case_model_metadata and seed_model_set == "mock":
         seed_model_set = "use-cases"
 
-    if seed_model_set == "combined":
+    if seed_scope in ("models", "all") and seed_model_set == "combined":
         if args.combined_http_model_count < 1 or args.combined_http_model_count > COMBINED_HTTP_MODEL_MAX:
             raise RuntimeError(
                 f"--combined-http-model-count must be between 1 and {COMBINED_HTTP_MODEL_MAX}"
@@ -858,14 +858,6 @@ def run_seed_assets_pipeline(
         args.seed_connectors,
         "--credentials-dir",
         args.seed_credentials_dir,
-        "--vocabulary-id",
-        args.seed_vocabulary_id,
-        "--vocabulary-name",
-        args.seed_vocabulary_name,
-        "--vocabulary-category",
-        args.seed_vocabulary_category,
-        "--vocabulary-schema",
-        args.seed_vocabulary_schema,
         "--seed-scope",
         seed_scope,
         "--model-set",
@@ -1743,11 +1735,16 @@ def step_7_model_server(args):
 
 def step_8_seed_assets(args):
     if args.skip_seed_assets:
-        print("\n[Step 8/10] Base model asset seeding skipped (--skip-seed-assets)")
+        print("\n[Step 8/10] DAIMO vocabulary seeding skipped (--skip-seed-assets)")
         return
 
-    print("\n[Step 8/10] Seed vocabulary + base/mock ML model assets + model contracts")
-    run_seed_assets_pipeline(args, seed_scope="models", step_label="Step 8", skip_use_case_models=True)
+    if args.seed_base_mock_assets:
+        print("\n[Step 8/10] Seed DAIMO vocabularies + optional base/mock ML model assets + model contracts")
+        run_seed_assets_pipeline(args, seed_scope="models", step_label="Step 8", skip_use_case_models=True)
+        return
+
+    print("\n[Step 8/10] Seed DAIMO vocabularies")
+    run_seed_assets_pipeline(args, seed_scope="vocabularies", step_label="Step 8")
 
 
 def step_9_seed_datasets(args):
@@ -1840,7 +1837,7 @@ def show_menu(args):
         print("5 - Step 5: Deploy connectors (local images)")
         print("6 - Step 6: Run validation tests")
         print("7 - Step 7: Deploy/Start ML Model Server")
-        print("8 - Step 8: Seed vocabulary + base/mock ML model assets + contracts")
+        print("8 - Step 8: Seed DAIMO vocabularies")
         print("9 - Step 9: Seed benchmark datasets + contracts")
         print("10 - Step 10: Seed FLARES/Mobility model assets + contracts")
         print("\n[Control]")
@@ -1954,7 +1951,12 @@ def parse_args():
     parser.add_argument("--skip-level2", action="store_true", help="Skip common services deployment inside Step 2")
     parser.add_argument("--skip-validation", action="store_true", help="Skip validation phase")
     parser.add_argument("--skip-model-server", action="store_true", help="Skip Step 7 model server deployment")
-    parser.add_argument("--skip-seed-assets", action="store_true", help="Skip Step 8 base/mock ML model assets initialization")
+    parser.add_argument("--skip-seed-assets", action="store_true", help="Skip Step 8 DAIMO vocabulary initialization")
+    parser.add_argument(
+        "--seed-base-mock-assets",
+        action="store_true",
+        help="Also seed the optional Step 8 base/mock ML model assets and contracts",
+    )
     parser.add_argument("--skip-seed-datasets", action="store_true", help="Skip Step 9 benchmark dataset initialization")
     parser.add_argument(
         "--skip-use-case-model-assets",
@@ -2009,7 +2011,7 @@ def parse_args():
         choices=("auto", "mock", "use-cases", "combined"),
         default="auto",
         help=(
-            "Base model metadata set for Step 8. 'auto' follows --model-server-mode; "
+            "Optional base/mock model metadata set when --seed-base-mock-assets is enabled; "
             "Step 10 always seeds the FLARES/Mobility use-case model set."
         ),
     )
@@ -2029,7 +2031,7 @@ def parse_args():
         "--seed-assets-count",
         type=int,
         default=8,
-        help="InesDataStore model assets per connector for mock/use-cases Step 8 modes (default: 8)",
+        help="InesDataStore model assets per connector when optional base/mock seeding is enabled (default: 8)",
     )
     parser.add_argument(
         "--seed-connectors",
@@ -2040,26 +2042,6 @@ def parse_args():
         "--seed-credentials-dir",
         default=os.path.join(project_dir(), "inesdata-deployment", "deployments", "DEV", "demo"),
         help="Credentials directory for Steps 8, 9 and 10 (default: inesdata-deployment/deployments/DEV/demo)",
-    )
-    parser.add_argument(
-        "--seed-vocabulary-id",
-        default="JS_Pionera_Daimo",
-        help="Vocabulary ID to register/use in Steps 8, 9 and 10",
-    )
-    parser.add_argument(
-        "--seed-vocabulary-name",
-        default="JS Metadata Daimo",
-        help="Vocabulary name for Steps 8, 9 and 10",
-    )
-    parser.add_argument(
-        "--seed-vocabulary-category",
-        default="machineLearning",
-        help="Vocabulary category for Steps 8, 9 and 10",
-    )
-    parser.add_argument(
-        "--seed-vocabulary-schema",
-        default=os.path.join(project_dir(), "JS_Metadata_Daimo.schema.json"),
-        help="Vocabulary schema file path for Steps 8, 9 and 10",
     )
     parser.add_argument(
         "--seed-keycloak-token-url",
