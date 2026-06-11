@@ -171,7 +171,7 @@ export class AssetCreateComponent implements OnInit {
     const forms: JsonFormData[] = [...this.defaultForms, ...this.selectedForms]
 
     let assetDataProperty: any = {}
-    forms.forEach(async f => {
+    for (const f of forms) {
       if (f.schema && f.schema.hasOwnProperty("@context")) {
         // Add context if it is provided in the Json Schema
         const jsonSchema: JsonDoc = f.schema as JsonDoc;
@@ -186,7 +186,7 @@ export class AssetCreateComponent implements OnInit {
       } else {
         assetDataProperty[f.id] = f.data;
       }
-    })
+    }
 
     properties["assetData"] = assetDataProperty
 

@@ -5,7 +5,6 @@ import {
   AiModelBenchmarkModelType,
   AiModelExecutionInputFeature,
   AiModelExecutionItem,
-  AiModelMetricDirection,
   AiModelRequestShape,
   ModelExecutionResponsePayload
 } from 'src/app/shared/models/ai-model-execution-item';
@@ -30,6 +29,7 @@ interface BenchmarkAsset {
   id: string;
   name: string;
   task: string;
+  taskType: string;
   subtask: string;
   algorithm: string;
   framework: string;
@@ -43,10 +43,7 @@ interface BenchmarkAsset {
   inputExample?: any;
   requestShape: AiModelRequestShape;
   benchmarkModelType: AiModelBenchmarkModelType;
-  targetFields: string[];
-  predictionFields: string[];
   supportedMetrics: string[];
-  metricDirections: Record<string, AiModelMetricDirection>;
 }
 
 interface SchemaField {
@@ -143,6 +140,7 @@ export class AiModelBenchmarkingComponent implements OnInit {
   private readonly batchRequestBenchmarkRequestTimeoutMs = 45000;
   validationDatasetSource: 'manual' | 'dataspace' | null = null;
   private validationDatasetMapping: BenchmarkDatasetMapping | null = null;
+  private benchmarkDatasetReloadTimer: ReturnType<typeof setTimeout> | null = null;
 
   private readonly metricsConfig: Record<ModelTask, string[]> = {
     classification: ['Accuracy', 'Precision', 'Recall', 'F1 Score'],
@@ -195,14 +193,25 @@ export class AiModelBenchmarkingComponent implements OnInit {
       return this.benchmarkDatasetAssets;
     }
 
-    return this.benchmarkDatasetAssets.filter(asset =>
-      asset.name.toLowerCase().includes(keyword)
-      || asset.description.toLowerCase().includes(keyword)
-      || asset.provider.toLowerCase().includes(keyword)
-      || asset.tags.some(tag => tag.toLowerCase().includes(keyword))
-      || asset.format.toLowerCase().includes(keyword)
-      || asset.contentType.toLowerCase().includes(keyword)
-    );
+    return this.benchmarkDatasetAssets.filter(asset => {
+      const mapping = this.benchmarkDatasetService.extractDatasetMapping(asset);
+      const haystack = [
+        asset.name,
+        asset.description,
+        asset.provider,
+        asset.format,
+        asset.contentType,
+        asset.fileName,
+        ...asset.tags,
+        ...(mapping?.input || []),
+        mapping?.label || ''
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+
+      return haystack.includes(keyword);
+    });
   }
 
   get selectedBenchmarkDataset(): BenchmarkDatasetAsset | undefined {
@@ -239,10 +248,17 @@ export class AiModelBenchmarkingComponent implements OnInit {
   }
 
   loadBenchmarkDatasets(): void {
+    if (this.benchmarkDatasetReloadTimer) {
+      clearTimeout(this.benchmarkDatasetReloadTimer);
+      this.benchmarkDatasetReloadTimer = null;
+    }
+
     this.isLoadingBenchmarkDatasets = true;
     this.benchmarkDatasetError = '';
 
-    this.benchmarkDatasetService.getBenchmarkDatasets().subscribe({
+    this.benchmarkDatasetService.getBenchmarkDatasets({
+      searchTerm: this.benchmarkDatasetSearch.trim()
+    }).subscribe({
       next: datasets => {
         this.benchmarkDatasetAssets = datasets;
         if (this.selectedBenchmarkDatasetId && !datasets.some(dataset => dataset.id === this.selectedBenchmarkDatasetId)) {
@@ -268,6 +284,7 @@ export class AiModelBenchmarkingComponent implements OnInit {
       id: item.id,
       name: item.name,
       task: item.tasks?.[0] || 'Unknown',
+      taskType: item.taskTypes?.[0] || '',
       subtask: item.subtasks?.[0] || '',
       algorithm: item.algorithms?.[0] || '',
       framework: item.frameworks?.[0] || '',
@@ -281,10 +298,7 @@ export class AiModelBenchmarkingComponent implements OnInit {
       inputExample: item.inputExample,
       requestShape: item.requestShape || 'single',
       benchmarkModelType: item.benchmarkModelType || 'output',
-      targetFields: item.targetFields || [],
-      predictionFields: item.predictionFields || [],
-      supportedMetrics: item.supportedMetrics || [],
-      metricDirections: item.metricDirections || {}
+      supportedMetrics: item.supportedMetrics || []
     };
   }
 
@@ -309,6 +323,7 @@ export class AiModelBenchmarkingComponent implements OnInit {
       pool = pool.filter(m =>
         m.name.toLowerCase().includes(keyword)
         || m.task.toLowerCase().includes(keyword)
+        || m.taskType.toLowerCase().includes(keyword)
         || m.subtask.toLowerCase().includes(keyword)
         || m.algorithm.toLowerCase().includes(keyword)
         || m.framework.toLowerCase().includes(keyword)
@@ -408,6 +423,10 @@ export class AiModelBenchmarkingComponent implements OnInit {
   }
 
   private inferModelTask(model: BenchmarkAsset): ModelTask {
+    const taskType = model.taskType.toLowerCase().replace(/[\s_-]/g, '');
+    if (taskType === 'regression' || taskType === 'forecasting') return 'regression';
+    if (taskType === 'classification' || taskType === 'detection' || taskType === 'segmentation') return 'classification';
+
     const task = `${model.task} ${model.subtask}`.toLowerCase();
     const algorithm = model.algorithm.toLowerCase();
 
@@ -594,6 +613,18 @@ export class AiModelBenchmarkingComponent implements OnInit {
 
   clearBenchmarkDatasetSearch(): void {
     this.benchmarkDatasetSearch = '';
+    this.loadBenchmarkDatasets();
+  }
+
+  onBenchmarkDatasetSearchChange(): void {
+    if (this.benchmarkDatasetReloadTimer) {
+      clearTimeout(this.benchmarkDatasetReloadTimer);
+    }
+
+    this.benchmarkDatasetReloadTimer = setTimeout(() => {
+      this.benchmarkDatasetReloadTimer = null;
+      this.loadBenchmarkDatasets();
+    }, 300);
   }
 
   selectBenchmarkDataset(assetId: string): void {
@@ -793,16 +824,9 @@ export class AiModelBenchmarkingComponent implements OnInit {
     return this.normalizeColumnSignature(Object.keys(example));
   }
 
-  private getPreferredRegressionKeys(model: BenchmarkAsset): string[] {
-    return this.uniqueStrings(model.targetFields);
-  }
-
-  private getPreferredClassificationKeys(model: BenchmarkAsset): string[] {
-    return this.uniqueStrings(model.targetFields);
-  }
-
-  private getPreferredPredictionKeys(model: BenchmarkAsset): string[] {
-    return this.uniqueStrings([...model.predictionFields, ...model.targetFields]);
+  private getPreferredPredictionKeys(): string[] {
+    const label = this.validationDatasetMapping?.label || '';
+    return label ? [label] : [];
   }
 
   private uniqueStrings(values: string[]): string[] {
@@ -1706,11 +1730,6 @@ export class AiModelBenchmarkingComponent implements OnInit {
       return this.normalizeClassificationValue(mappedValue);
     }
 
-    const preferredValue = this.findComparableValue(row, this.getPreferredClassificationKeys(model));
-    if (preferredValue !== undefined) {
-      return this.normalizeClassificationValue(preferredValue);
-    }
-
     return this.normalizeClassificationValue(this.findComparableValue(row, [
       'label', 'target', 'expected', 'ground_truth', 'groundTruth', 'actual', 'y',
       'prediction', 'category', 'class', 'decision', 'result', 'value'
@@ -1721,11 +1740,6 @@ export class AiModelBenchmarkingComponent implements OnInit {
     const mappedValue = this.extractDatasetExpectedValue(row);
     if (mappedValue !== undefined) {
       return this.readNumericValue(mappedValue);
-    }
-
-    const preferredValue = this.findComparableValue(row, this.getPreferredRegressionKeys(model));
-    if (preferredValue !== undefined) {
-      return this.readNumericValue(preferredValue);
     }
 
     return this.readNumericValue(this.findComparableValue(row, [
@@ -1761,7 +1775,7 @@ export class AiModelBenchmarkingComponent implements OnInit {
       return this.normalizeClassificationValue(output);
     }
 
-    const preferredValue = this.findComparableValue(output, this.getPreferredPredictionKeys(model));
+    const preferredValue = this.findComparableValue(output, this.getPreferredPredictionKeys());
     if (preferredValue !== undefined) {
       return this.normalizeClassificationValue(preferredValue);
     }
@@ -1790,7 +1804,7 @@ export class AiModelBenchmarkingComponent implements OnInit {
       return this.readNumericValue(output);
     }
 
-    const preferredValue = this.findComparableValue(output, this.getPreferredPredictionKeys(model));
+    const preferredValue = this.findComparableValue(output, this.getPreferredPredictionKeys());
     if (preferredValue !== undefined) {
       return this.readNumericValue(preferredValue);
     }
@@ -2111,15 +2125,6 @@ export class AiModelBenchmarkingComponent implements OnInit {
 
   private isLowerBetterMetric(metric: string): boolean {
     const metricKey = this.normalizeMetricName(metric);
-    const selectedModels = this.modelPoolAssets.filter(model => this.selectedAssetIds.includes(model.id));
-    const metadataDirection = selectedModels
-      .map(model => model.metricDirections[metricKey])
-      .find(direction => !!direction);
-
-    if (metadataDirection) {
-      return metadataDirection === 'lower';
-    }
-
     return this.lowerIsBetterMetrics.some(fallbackMetric => this.normalizeMetricName(fallbackMetric) === metricKey);
   }
 
