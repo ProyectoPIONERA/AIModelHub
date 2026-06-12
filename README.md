@@ -467,14 +467,12 @@ curl http://127.0.0.1:8000/models
 - `daimo_dataset.schema.json`: DAIMO dataset metadata schema.
 - `AIModelHub_Uses_Cases/README.md`: companion use-case repository guide.
 
-## Maintainers
+---
 
-- Edmundo Mori
-- Jiayun Liu
+## Funding
 
-Contact:
+This work has received funding from the PIONERA project (Enhancing interoperability in data spaces through artificial intelligence), a project funded in the context of the call for Technological Products and Services for Data Spaces of the Ministry for Digital Transformation and Public Administration within the framework of the PRTR funded by the European Union (NextGenerationEU)
 
-- edmundo.mori.orrillo@upm.es
-- jiayun.liu@alumnos.upm.es
-
-Last updated: June 4, 2026
+<div align="center">
+  <img src="funding_label.png" alt="Logos financiación" width="900" />
+</div>
